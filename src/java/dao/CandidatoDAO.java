@@ -26,9 +26,15 @@ public class CandidatoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM candidatos");
+            ResultSet rs = comando.executeQuery("SELECT * FROM candidatos, pessoas WHERE pessoas.id = candidatos.pessoa");
             while (rs.next()) {
                 Candidato candidato = new Candidato(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("dataNascimento"),
+                        rs.getString("estadoCivil"),
+                        rs.getString("CPF"),
+                        rs.getString("identidade"),
                         rs.getString("matricula"),
                         rs.getString("genero"),
                         rs.getString("telefoneResidencial"),

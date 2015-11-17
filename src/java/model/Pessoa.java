@@ -25,10 +25,6 @@ public class Pessoa {
         this.identidade = identidade;
     }
     
-    public Pessoa(){
-        
-    }
-    
     public int getId() {
         return id;
     }

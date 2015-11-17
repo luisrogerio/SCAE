@@ -12,18 +12,18 @@ public class Familiar extends Pessoa{
     private int id;
     private String nacionalidade;
     private String parentesco;
-    private Pessoa pessoa;
     private FormularioSocioeconomico formularioSocioeconomico; 
     
     private int codigoPessoa;
     private int codigoFormularioSocioeconomico;
 
-    public Familiar(int id, String nacionalidade, String parentesco, Pessoa pessoa, 
+    public Familiar(int codigoPessoa, String nome, String dataNascimento, String estadoCivil, String CPF, 
+            String identidade, int id, String nacionalidade, String parentesco, 
             FormularioSocioeconomico formularioSocioeconomico) {
+        super(codigoPessoa, nome, dataNascimento, estadoCivil, CPF, identidade);
         this.id = id;
         this.nacionalidade = nacionalidade;
         this.parentesco = parentesco;
-        this.pessoa = pessoa;
         this.formularioSocioeconomico = formularioSocioeconomico;
     }
     public int getId() {
@@ -50,25 +50,10 @@ public class Familiar extends Pessoa{
         this.parentesco = parentesco;
     }
 
-    public Pessoa getPessoa() {
-        if(this.codigoPessoa != 0 && this.pessoa == null){
-            try {
-                this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
-            } catch (ClassNotFoundException){
-                
-            }
-        }
-        return this.pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
     public FormularioSocioeconomico getFormularioSocioeconomico() {
         if(this.codigoFormularioSocioeconomico != 0 && this.formularioSocioeconomico == null){
             try {
-                this.pessoa = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
+                this.formularioSocioeconomico = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
             } catch (ClassNotFoundException){
                 
             }

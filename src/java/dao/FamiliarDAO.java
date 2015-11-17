@@ -26,17 +26,21 @@ public class FamiliarDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM familiares");
+            ResultSet rs = comando.executeQuery("SELECT * FROM familiares, pessoas WHERE familiares.pessoa = pessoas.id");
             while (rs.next()) {
                 Familiar familiar = new Familiar(
-                        rs.getInt("id"),
+                        rs.getInt("pessoas.id"),
+                        rs.getString("nome"),
+                        rs.getString("dataNascimento"),
+                        rs.getString("estadoCivil"),
+                        rs.getString("CPF"),
+                        rs.getString("identidade"),
+                        rs.getInt("familiares.id"),
                         rs.getString("nacionalidade"),
                         rs.getString("parentesco"),
-                        null,
                         null
                 );
                 familiar.setCodigoFormularioSocioeconomico(rs.getInt("formularioSocioeconomico"));
-                familiar.setCodigoPessoa(rs.getInt("pessoa"));
                 familiares.add(familiar);
             }
         } catch (SQLException e) {

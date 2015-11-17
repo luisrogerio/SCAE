@@ -20,8 +20,9 @@ public class Candidato extends Pessoa {
 
     private int codigoCurso;
 
-    public Candidato(String matricula, String genero, String telefoneResidencial, String telefoneCelular,
+    public Candidato(int id, String nome, String dataNascimento, String estadoCivil, String CPF, String identidade, String matricula, String genero, String telefoneResidencial, String telefoneCelular,
             String instituicaoFundamental, String instituicaoMedio, Curso curso) {
+        super(id, nome, dataNascimento, estadoCivil, CPF, identidade);
         this.matricula = matricula;
         this.genero = genero;
         this.telefoneResidencial = telefoneResidencial;
@@ -113,6 +114,10 @@ public class Candidato extends Pessoa {
     
     public static List<Candidato> obterCandidatos() throws ClassNotFoundException{
         return CandidatoDAO.obterCandidatos();
+    }
+    
+    public static Candidato obterCandidato(int matricula) throws ClassNotFoundException{
+        return CandidatoDAO.obterCandidato(matricula);
     }
 
 }
