@@ -20,7 +20,7 @@ public class Candidato extends Pessoa {
 
     private int codigoCurso;
 
-    public Candidato(int id, String nome, String dataNascimento, String estadoCivil, String CPF, String identidade, String matricula, String genero, String telefoneResidencial, String telefoneCelular,
+    public Candidato(String id, String nome, String dataNascimento, String estadoCivil, String CPF, String identidade, String matricula, String genero, String telefoneResidencial, String telefoneCelular,
             String instituicaoFundamental, String instituicaoMedio, Curso curso) {
         super(id, nome, dataNascimento, estadoCivil, CPF, identidade);
         this.matricula = matricula;

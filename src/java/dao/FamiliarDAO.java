@@ -29,13 +29,13 @@ public class FamiliarDAO {
             ResultSet rs = comando.executeQuery("SELECT * FROM familiares, pessoas WHERE familiares.pessoa = pessoas.id");
             while (rs.next()) {
                 Familiar familiar = new Familiar(
-                        rs.getInt("pessoas.id"),
+                        rs.getString("pessoas.id"),
                         rs.getString("nome"),
                         rs.getString("dataNascimento"),
                         rs.getString("estadoCivil"),
                         rs.getString("CPF"),
                         rs.getString("identidade"),
-                        rs.getInt("familiares.id"),
+                        rs.getInt("codigo"),
                         rs.getString("nacionalidade"),
                         rs.getString("parentesco"),
                         null

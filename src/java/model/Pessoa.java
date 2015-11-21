@@ -9,14 +9,14 @@ import java.util.List;
  */
 public class Pessoa {
     
-    private int id;
+    private String id;
     private String nome;
     private String dataNascimento;
     private String estadoCivil;
     private String CPF;
     private String identidade;
 
-    public Pessoa(int id, String nome, String dataNascimento, String estadoCivil, String CPF, String identidade) {
+    public Pessoa(String id, String nome, String dataNascimento, String estadoCivil, String CPF, String identidade) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -25,11 +25,11 @@ public class Pessoa {
         this.identidade = identidade;
     }
     
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

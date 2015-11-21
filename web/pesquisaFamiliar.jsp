@@ -19,10 +19,10 @@
 
             <c:forEach items="${familiares}" var="familiar">
                 <tr>
-                    <td><c:out value="${familiar.id}"/></td>
+                    <td><c:out value="${familiar.codigo}"/></td>
                     <td><c:out value="${familiar.nome}"/></td>
-                    <td><a href="ManterFamiliarController?acao=prepararEditar&codigoFamiliar=<c:out value="${familiar.id}"/>">Editar</a></td>
-                    <td><a href="ManterFamiliarController?acao=prepararExcluir&codigoFamiliar=<c:out value="${familiar.id}"/>">Excluir</a></td>
+                    <td><a href="ManterFamiliarController?acao=prepararEditar&codigoFamiliar=<c:out value="${familiar.codigo}"/>">Editar</a></td>
+                    <td><a href="ManterFamiliarController?acao=prepararExcluir&codigoFamiliar=<c:out value="${familiar.codigo}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
         </table>

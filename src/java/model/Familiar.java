@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Familiar extends Pessoa{
     
-    private int id;
+    private String codigo;
     private String nacionalidade;
     private String parentesco;
     private FormularioSocioeconomico formularioSocioeconomico; 
@@ -17,21 +17,22 @@ public class Familiar extends Pessoa{
     private int codigoPessoa;
     private int codigoFormularioSocioeconomico;
 
-    public Familiar(int codigoPessoa, String nome, String dataNascimento, String estadoCivil, String CPF, 
-            String identidade, int id, String nacionalidade, String parentesco, 
+    public Familiar(String codigoPessoa, String nome, String dataNascimento, String estadoCivil, String CPF, 
+            String identidade, String id, String nacionalidade, String parentesco, 
             FormularioSocioeconomico formularioSocioeconomico) {
         super(codigoPessoa, nome, dataNascimento, estadoCivil, CPF, identidade);
-        this.id = id;
+        this.codigo = id;
         this.nacionalidade = nacionalidade;
         this.parentesco = parentesco;
         this.formularioSocioeconomico = formularioSocioeconomico;
     }
-    public int getId() {
-        return id;
+    
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNacionalidade() {
