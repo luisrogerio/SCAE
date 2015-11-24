@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +14,25 @@ import model.Curso;
  * @author Raissa
  */
 public class CursoDAO {
+
+    public static void gravar(Curso curso) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO cursos (id, nome, turno, tipo) VALUES (?, ?, ?, ?) ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, curso.getId());
+            comando.setString(2, curso.getNome());
+            comando.setString(3, curso.getTurno());
+            comando.setString(4, curso.getTipo());
+            comando.execute();
+            comando.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public static List<Curso> obterCursos() throws ClassNotFoundException {
         Connection conexao = null;
@@ -38,16 +58,16 @@ public class CursoDAO {
         }
         return cursos;
     }
-    
-    public static void fecharConexao(Connection conexao, Statement comando){
+
+    public static void fecharConexao(Connection conexao, Statement comando) {
         try {
-            if (comando != null){
-                comando.close();   
+            if (comando != null) {
+                comando.close();
             }
-            if (conexao != null){
+            if (conexao != null) {
                 conexao.close();
             }
-            }catch (SQLException e){
+        } catch (SQLException e) {
         }
     }
 }

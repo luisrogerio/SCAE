@@ -18,7 +18,7 @@ public class Declaracoes {
     private Pessoa pessoa;
     private Edital edital;
     
-    private int codigoPessoa;
+    private String codigoPessoa;
     private int codigoEdital;
 
     public Declaracoes(int id, boolean residenciaRepublica, boolean naoAtividade, boolean atividadeInformal, 
@@ -111,11 +111,11 @@ public class Declaracoes {
         this.edital = edital;
     }
 
-    public int getCodigoPessoa() {
+    public String getCodigoPessoa() {
         return codigoPessoa;
     }
 
-    public void setCodigoPessoa(int codigoPessoa) {
+    public void setCodigoPessoa(String codigoPessoa) {
         this.codigoPessoa = codigoPessoa;
     }
 

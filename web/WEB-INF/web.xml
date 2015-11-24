@@ -36,6 +36,10 @@
         <servlet-name>PesquisaQuadroFinanceiroController</servlet-name>
         <servlet-class>controller.PesquisaQuadroFinanceiroController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManterCursoController</servlet-name>
+        <servlet-class>controller.ManterCursoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaCursoController</servlet-name>
         <url-pattern>/PesquisaCursoController</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>PesquisaQuadroFinanceiroController</servlet-name>
         <url-pattern>/PesquisaQuadroFinanceiroController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterCursoController</servlet-name>
+        <url-pattern>/ManterCursoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

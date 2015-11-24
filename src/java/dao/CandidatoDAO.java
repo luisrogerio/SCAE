@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +20,28 @@ import model.Candidato;
  */
 public class CandidatoDAO {
 
+    public static void gravar(Candidato candidato) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO candidatos (matricula, curso, pessoa, genero, telefoneResidencial, telefoneCelular, instituicaoFundamental, instituicaoMedio) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, candidato.getMatricula());
+            comando.setInt(2, candidato.getCodigoCurso());
+            comando.setString(3, candidato.getCodigoPessoa());
+            comando.setString(4, candidato.getGenero());
+            comando.setString(5, candidato.getTelefoneResidencial());
+            comando.setString(6, candidato.getTelefoneCelular());
+            comando.setString(7, candidato.getInstituicaoFundamental());
+            comando.setString(8, candidato.getInstituicaoMedio());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
     public static List<Candidato> obterCandidatos() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -29,7 +52,7 @@ public class CandidatoDAO {
             ResultSet rs = comando.executeQuery("SELECT * FROM candidatos, pessoas WHERE pessoas.id = candidatos.pessoa");
             while (rs.next()) {
                 Candidato candidato = new Candidato(
-                        rs.getInt("id"),
+                        rs.getString("id"),
                         rs.getString("nome"),
                         rs.getString("dataNascimento"),
                         rs.getString("estadoCivil"),
@@ -43,7 +66,7 @@ public class CandidatoDAO {
                         rs.getString("instituicaoMedio"),
                         null
                 );
-                candidato.setCodigoPessoa(rs.getInt("pessoa"));
+                candidato.setCodigoPessoa(rs.getString("pessoa"));
                 candidato.setCodigoCurso(rs.getInt("curso"));
                 candidatos.add(candidato);
             }
@@ -54,9 +77,9 @@ public class CandidatoDAO {
         }
         return candidatos;
     }
-    
-    public static Candidato obterCandidato(int id) 
-            throws ClassNotFoundException{
+
+    public static Candidato obterCandidato(int id)
+            throws ClassNotFoundException {
         Candidato candidato = null;
         return candidato;
     }

@@ -16,7 +16,7 @@ public class Candidato extends Pessoa {
     private String instituicaoFundamental;
     private String instituicaoMedio;
     private Curso curso;
-    private int codigoPessoa;
+    private String codigoPessoa;
 
     private int codigoCurso;
 
@@ -104,11 +104,11 @@ public class Candidato extends Pessoa {
         this.codigoCurso = codigoCurso;
     }
 
-    public int getCodigoPessoa() {
+    public String getCodigoPessoa() {
         return codigoPessoa;
     }
 
-    public void setCodigoPessoa(int codigoPessoa) {
+    public void setCodigoPessoa(String codigoPessoa) {
         this.codigoPessoa = codigoPessoa;
     }
     

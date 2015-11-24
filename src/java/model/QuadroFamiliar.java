@@ -18,7 +18,7 @@ public class QuadroFamiliar {
     private Pessoa pessoa;
 
     private int codigoFormularioSocioeconomico;
-    private int codigoPessoa;
+    private String codigoPessoa;
 
     public QuadroFamiliar(int id, String doenca, boolean capacidadeTrabalho, boolean dependenciaAtividade,
             float gastoMensal, FormularioSocioeconomico formularioSocioeconomico, Pessoa pessoa) {
@@ -109,11 +109,11 @@ public class QuadroFamiliar {
         this.codigoFormularioSocioeconomico = codigoFormularioSocioeconomico;
     }
 
-    public int getCodigoPessoa() {
+    public String getCodigoPessoa() {
         return codigoPessoa;
     }
 
-    public void setCodigoPessoa(int codigoPessoa) {
+    public void setCodigoPessoa(String codigoPessoa) {
         this.codigoPessoa = codigoPessoa;
     }
 

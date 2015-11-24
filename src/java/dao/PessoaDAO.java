@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +20,26 @@ import model.Pessoa;
  */
 public class PessoaDAO {
 
+    public static void gravar(Pessoa pessoa) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO pessoas (id, nome, dataNascimento, estadoCivil, CPF, identidade) VALUES (?, ?, ?, ?, ?, ?) ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, pessoa.getId());
+            comando.setString(2, pessoa.getNome());
+            comando.setString(3, pessoa.getDataNascimento());
+            comando.setString(4, pessoa.getEstadoCivil());
+            comando.setString(5, pessoa.getCPF());
+            comando.setString(6, pessoa.getIdentidade());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
     public static List<Pessoa> obterPessoas() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -29,7 +50,7 @@ public class PessoaDAO {
             ResultSet rs = comando.executeQuery("SELECT * FROM pessoas");
             while (rs.next()) {
                 Pessoa pessoa = new Pessoa(
-                        rs.getInt("id"),
+                        rs.getString("id"),
                         rs.getString("nome"),
                         rs.getString("dataNascimento"),
                         rs.getString("estadoCivil"),

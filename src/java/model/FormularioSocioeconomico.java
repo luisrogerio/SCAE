@@ -86,8 +86,9 @@ public class FormularioSocioeconomico {
     private Candidato candidato;
     private Edital edital;
     private Endereco endereco;
+    private List<Modalidade> modalidades;
 
-    private int codigoCandidato;
+    private String codigoCandidato;
     private int codigoEdital;
     private int codigoEndereco;
 
@@ -829,11 +830,11 @@ public class FormularioSocioeconomico {
         this.endereco = endereco;
     }
 
-    public int getCodigoCandidato() {
+    public String getCodigoCandidato() {
         return codigoCandidato;
     }
 
-    public void setCodigoCandidato(int codigoCandidato) {
+    public void setCodigoCandidato(String codigoCandidato) {
         this.codigoCandidato = codigoCandidato;
     }
 
@@ -851,6 +852,14 @@ public class FormularioSocioeconomico {
 
     public void setCodigoEndereco(int codigoEndereco) {
         this.codigoEndereco = codigoEndereco;
+    }
+
+    public List<Modalidade> getModalidades() {
+        return modalidades;
+    }
+
+    public void setModalidades(List<Modalidade> modalidades) {
+        this.modalidades = modalidades;
     }
 
     public static List<FormularioSocioeconomico> obterFormulariosSocioeconmicos() throws ClassNotFoundException {

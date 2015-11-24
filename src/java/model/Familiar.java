@@ -14,7 +14,7 @@ public class Familiar extends Pessoa{
     private String parentesco;
     private FormularioSocioeconomico formularioSocioeconomico; 
     
-    private int codigoPessoa;
+    private String codigoPessoa;
     private int codigoFormularioSocioeconomico;
 
     public Familiar(String codigoPessoa, String nome, String dataNascimento, String estadoCivil, String CPF, 
@@ -74,11 +74,11 @@ public class Familiar extends Pessoa{
         this.codigoFormularioSocioeconomico = codigoFormularioSocioeconomico;
     }
 
-    public int getCodigoPessoa() {
+    public String getCodigoPessoa() {
         return codigoPessoa;
     }
 
-    public void setCodigoPessoa(int codigoPessoa) {
+    public void setCodigoPessoa(String codigoPessoa) {
         this.codigoPessoa = codigoPessoa;
     }
     

@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,97 @@ import model.FormularioSocioeconomico;
  * @author Raissa
  */
 public class FormularioSocioeconomicoDAO {
+
+    public static void gravar(FormularioSocioeconomico formularioSocioeconomico) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO formulario_socioeconomico (id, candidato, edital, enredeco, serieModuloPeriodo, atendimentoAssistencia, atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica, nomeAtividadeAcademica, ganhoAtividadeAcademica, atividadeRemunerada, cargaHorariaRemunerada, salarioRemunerada, condicaoManutencao, outraCondicaoManutencao, condicaoMoradia, outraCondicaoMoradia, responsavelManutencao, outroResponsavelManutencao, esgoto, aguaTratada, iluminacao, coletaLixo, pavimentacao, localResidenciaFamiliar, outroLocalResidenciaFamiliar, tipoResidenciaFamiliar, outroTipoResidenciaFamiliar, precoResidenciaFamiliar, cedente, acabamentoResidenciaFamiliar, imoveisExtras, quantidadeAutomoveis, anos, modelos, quantidadeTelevisoes, quantidadeMaquinasDeLavar, quantidadeGeladeiras, quantidadeTvsACabo, quantidadeComputadores, internet, quantidadeEmpregadasMensalistas, quantidadeEmpregadasDiaristas, quantidadeBanheiros, quantidadeQuartos, aluguelImoveis, pensaoMorte, pensaoAlimenticia, ajudaTerceiros, beneficiosSociais, outraRenda, numeroResidentes, despesaFamiliarAgua, despesaFamiliarLuz, despesaFamiliarTelefone, despesaFamiliarCondominio, despesaFamiliarMensalidadeEscolar, despesaFamiliarAlimentacao, despesaFamiliarSaude, despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia, despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone, despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, formularioSocioeconomico.getId());
+            comando.setString(2, formularioSocioeconomico.getCodigoCandidato());
+            comando.setInt(3, formularioSocioeconomico.getCodigoEdital());
+            comando.setInt(4, formularioSocioeconomico.getCodigoEndereco());
+            comando.setString(5, formularioSocioeconomico.getSerieModuloPeriodo());
+            comando.setBoolean(6, formularioSocioeconomico.isAtendimentoAssistencia());
+            comando.setString(7, formularioSocioeconomico.getAtendido());
+            comando.setString(8, formularioSocioeconomico.getProgramaAtendimento());
+            comando.setString(9, formularioSocioeconomico.getAnoAtendimento());
+            comando.setString(10, formularioSocioeconomico.getMeioTransporte());
+            comando.setString(11, formularioSocioeconomico.getOutroMeio());
+            comando.setFloat(12, formularioSocioeconomico.getGastoMensal());
+            comando.setString(13, formularioSocioeconomico.getTipoAtividadeAcademica());
+            comando.setString(14, formularioSocioeconomico.getNomeAtividadeAcademica());
+            comando.setFloat(15, formularioSocioeconomico.getGanhoAtividadeAcademica());
+            comando.setBoolean(16, formularioSocioeconomico.isAtividadeRemunerada());
+            comando.setInt(17, formularioSocioeconomico.getCargaHorariaRemunerada());
+            comando.setFloat(18, formularioSocioeconomico.getSalarioRemunerada());
+            comando.setString(19, formularioSocioeconomico.getCondicaoManutencao());
+            comando.setString(20, formularioSocioeconomico.getOutraCondicaoManutencao());
+            comando.setString(21, formularioSocioeconomico.getCondicaoMoradia());
+            comando.setString(22, formularioSocioeconomico.getOutraCondicaoMoradia());
+            comando.setString(23, formularioSocioeconomico.getResponsavelManutencao());
+            comando.setString(24, formularioSocioeconomico.getOutroResponsavelManutencao());
+            comando.setBoolean(25, formularioSocioeconomico.isEsgoto());
+            comando.setBoolean(26, formularioSocioeconomico.isAguaTratada());
+            comando.setBoolean(27, formularioSocioeconomico.isIluminacao());
+            comando.setBoolean(28, formularioSocioeconomico.isColetaLixo());
+            comando.setBoolean(29, formularioSocioeconomico.isPavimentacao());
+            comando.setString(30, formularioSocioeconomico.getLocalResidenciaFamiliar());
+            comando.setString(31, formularioSocioeconomico.getOutroLocalResidenciaFamiliar());
+            comando.setString(32, formularioSocioeconomico.getTipoResidenciaFamiliar());
+            comando.setString(33, formularioSocioeconomico.getOutroTipoResidenciaFamiliar());
+            comando.setFloat(34, formularioSocioeconomico.getPrecoResidenciaFamiliar());
+            comando.setString(35, formularioSocioeconomico.getCedente());
+            comando.setBoolean(36, formularioSocioeconomico.isAcabamentoResidenciaFamiliar());
+            comando.setString(37, formularioSocioeconomico.getImoveisExtras());
+            comando.setInt(38, formularioSocioeconomico.getQuantidadeAutomoveis());
+            comando.setString(39, formularioSocioeconomico.getAnos());
+            comando.setString(40, formularioSocioeconomico.getModelos());
+            comando.setInt(41, formularioSocioeconomico.getQuantidadeTelevisoes());
+            comando.setInt(42, formularioSocioeconomico.getQuantidadeMaquinasDeLavar());
+            comando.setInt(43, formularioSocioeconomico.getQuantidadeGeladeiras());
+            comando.setInt(44, formularioSocioeconomico.getQuantidadeTvsACabo());
+            comando.setInt(45, formularioSocioeconomico.getQuantidadeComputadores());
+            comando.setBoolean(46, formularioSocioeconomico.isInternet());
+            comando.setInt(47, formularioSocioeconomico.getQuantidadeEmpregadasMensalistas());
+            comando.setInt(48, formularioSocioeconomico.getQuantidadeEmpregadasDiaristas());
+            comando.setInt(49, formularioSocioeconomico.getQuantidadeBanheiros());
+            comando.setInt(50, formularioSocioeconomico.getQuantidadeQuartos());
+            comando.setFloat(51, formularioSocioeconomico.getAluguelImoveis());
+            comando.setFloat(52, formularioSocioeconomico.getPensaoMorte());
+            comando.setFloat(53, formularioSocioeconomico.getPensaoAlimenticia());
+            comando.setFloat(54, formularioSocioeconomico.getAjudaTerceiros());
+            comando.setFloat(55, formularioSocioeconomico.getBeneficiosSociais());
+            comando.setFloat(56, formularioSocioeconomico.getOutraRenda());
+            comando.setInt(57, formularioSocioeconomico.getNumeroResidentes());
+            comando.setFloat(58, formularioSocioeconomico.getDespesaFamiliarAgua());
+            comando.setFloat(59, formularioSocioeconomico.getDespesaFamiliarLuz());
+            comando.setFloat(60, formularioSocioeconomico.getDespesaFamiliarTelefone());
+            comando.setFloat(61, formularioSocioeconomico.getDespesaFamiliarCondominio());
+            comando.setFloat(62, formularioSocioeconomico.getDespesaFamiliarMensalidadeEscolar());
+            comando.setFloat(63, formularioSocioeconomico.getDespesaFamiliarAlimentacao());
+            comando.setFloat(64, formularioSocioeconomico.getDespesaFamiliarSaude());
+            comando.setFloat(65, formularioSocioeconomico.getDespesaFamiliarTransporte());
+            comando.setFloat(66, formularioSocioeconomico.getDespesaFamiliarIPTU());
+            comando.setFloat(67, formularioSocioeconomico.getDespesaFamiliarAluguel());
+            comando.setFloat(68, formularioSocioeconomico.getDespesaFamiliarPensaoAlimenticia());
+            comando.setFloat(69, formularioSocioeconomico.getDespesaFamiliarOutros());
+            comando.setFloat(70, formularioSocioeconomico.getDespesaRepublicaAgua());
+            comando.setFloat(71, formularioSocioeconomico.getDespesaRepublicaLuz());
+            comando.setFloat(72, formularioSocioeconomico.getDespesaRepublicaTelefone());
+            comando.setFloat(73, formularioSocioeconomico.getDespesaRepublicaCondominio());
+            comando.setFloat(74, formularioSocioeconomico.getDespesaRepublicaAluguel());
+            comando.setFloat(75, formularioSocioeconomico.getDespesaRepublicaIPTU());
+            comando.setString(76, formularioSocioeconomico.getDadosExtras());
+            comando.setString(77, formularioSocioeconomico.getData());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public static List<FormularioSocioeconomico> obterFormulariosSocioeconmicos() throws ClassNotFoundException {
         Connection conexao = null;
@@ -107,7 +199,7 @@ public class FormularioSocioeconomicoDAO {
                         null,
                         null
                 );
-                formularioSocioeconomico.setCodigoCandidato(rs.getInt("candidato"));
+                formularioSocioeconomico.setCodigoCandidato(rs.getString("candidato"));
                 formularioSocioeconomico.setCodigoEndereco(rs.getInt("endereco"));
                 formularioSocioeconomico.setCodigoEdital(rs.getInt("edital"));
                 formulariosSocioeconmicos.add(formularioSocioeconomico);

@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,25 @@ import model.Familiar;
  * @author Raissa
  */
 public class FamiliarDAO {
+
+    public static void gravar(Familiar familiar) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO familiares (codigo, formulario_socioeconomico, pessoa, nacionalidade, parentesco) VALUES (?, ?, ?, ?, ?) ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, familiar.getCodigo());
+            comando.setInt(2, familiar.getCodigoFormularioSocioeconomico());
+            comando.setString(3, familiar.getCodigoPessoa());
+            comando.setString(4, familiar.getNacionalidade());
+            comando.setString(5, familiar.getParentesco());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public static List<Familiar> obterFamiliares() throws ClassNotFoundException {
         Connection conexao = null;
@@ -35,7 +55,7 @@ public class FamiliarDAO {
                         rs.getString("estadoCivil"),
                         rs.getString("CPF"),
                         rs.getString("identidade"),
-                        rs.getInt("codigo"),
+                        rs.getString("codigo"),
                         rs.getString("nacionalidade"),
                         rs.getString("parentesco"),
                         null

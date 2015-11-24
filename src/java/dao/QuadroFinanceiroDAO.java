@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,27 @@ import model.QuadroFinanceiro;
  * @author Raissa
  */
 public class QuadroFinanceiroDAO {
+
+    public static void gravar(QuadroFinanceiro quadroFinanceiro) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO quadro_financeiro (id, formulario_socioeconomico, pessoa, escolaridade, situacaoDeTrabalho, ocupacao, rendaMensal) VALUES (?, ?, ?, ?, ?, ?, ?) ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, quadroFinanceiro.getId());
+            comando.setInt(2, quadroFinanceiro.getCodigoFormularioSocioeconomico());
+            comando.setString(3, quadroFinanceiro.getCodigoPessoa());
+            comando.setString(4, quadroFinanceiro.getEscolaridade());
+            comando.setString(5, quadroFinanceiro.getSituacaoDeTrabalho());
+            comando.setString(6, quadroFinanceiro.getOcupacao());
+            comando.setFloat(7, quadroFinanceiro.getRendaMensal());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public static List<QuadroFinanceiro> obterQuadrosFinanceiros() throws ClassNotFoundException {
         Connection conexao = null;
@@ -38,7 +60,7 @@ public class QuadroFinanceiroDAO {
                         null
                 );
                 quadroFinanceiro.setCodigoFormularioSocioeconomico(rs.getInt("formularioSocioeconomico"));
-                quadroFinanceiro.setCodigoPessoa(rs.getInt("pessoa"));
+                quadroFinanceiro.setCodigoPessoa(rs.getString("pessoa"));
                 quadrosFinanceiros.add(quadroFinanceiro);
             }
         } catch (SQLException e) {

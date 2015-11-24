@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,22 @@ import model.Modalidade;
  * @author Raissa
  */
 public class ModalidadeDAO {
+
+    public static void gravar(Modalidade modalidade) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO modalidades (id, nome) VALUES (?, ?) ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, modalidade.getId());
+            comando.setString(2, modalidade.getNome());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public static List<Modalidade> obterModalidades() throws ClassNotFoundException {
         Connection conexao = null;

@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,24 @@ import model.Edital;
  * @author Raissa
  */
 public class EditalDAO {
+
+    public static void gravar(Edital edital) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO editais (id, ano, semestre, descricao) VALUES (?, ?, ?, ?) ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, edital.getId());
+            comando.setString(2, edital.getAno());
+            comando.setInt(3, edital.getSemestre());
+            comando.setString(4, edital.getDescricao());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public static List<Edital> obterEditais() throws ClassNotFoundException {
         Connection conexao = null;

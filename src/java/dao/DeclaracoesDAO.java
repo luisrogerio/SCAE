@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +20,28 @@ import model.Declaracoes;
  */
 public class DeclaracoesDAO {
 
+    public static void gravar(Declaracoes declaracao) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO declaracoes (id, edital, pessoa, residenciaRepublica, naoAtividade, atividadeInformal, inexistenciaContaBancaria, inexistenciaContaBancariaJuridica) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, declaracao.getId());
+            comando.setInt(2, declaracao.getCodigoEdital());
+            comando.setString(3, declaracao.getCodigoPessoa());
+            comando.setBoolean(4, declaracao.isResidenciaRepublica());
+            comando.setBoolean(5, declaracao.isNaoAtividade());
+            comando.setBoolean(6, declaracao.isAtividadeInformal());
+            comando.setBoolean(7, declaracao.isInexistenciaContaBancaria());
+            comando.setBoolean(8, declaracao.isInexistenciaContaBancariaJuridica());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
     public static List<Declaracoes> obterDeclaracoes() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -29,17 +52,17 @@ public class DeclaracoesDAO {
             ResultSet rs = comando.executeQuery("SELECT * FROM declaracoes");
             while (rs.next()) {
                 Declaracoes declaracao = new Declaracoes(
-                        rs.getInt("id"), 
-                        rs.getBoolean("residenciaRepublica"), 
-                        rs.getBoolean("naoAtividade"), 
-                        rs.getBoolean("atividadeInformal"), 
-                        rs.getBoolean("inexistenciaContaBancaria"), 
-                        rs.getBoolean("inexistenciaContaBancariaJuridica"), 
-                        null, 
+                        rs.getInt("id"),
+                        rs.getBoolean("residenciaRepublica"),
+                        rs.getBoolean("naoAtividade"),
+                        rs.getBoolean("atividadeInformal"),
+                        rs.getBoolean("inexistenciaContaBancaria"),
+                        rs.getBoolean("inexistenciaContaBancariaJuridica"),
+                        null,
                         null
                 );
                 declaracao.setCodigoEdital(rs.getInt("edital"));
-                declaracao.setCodigoPessoa(rs.getInt("pessoa"));
+                declaracao.setCodigoPessoa(rs.getString("pessoa"));
                 declaracoes.add(declaracao);
             }
         } catch (SQLException e) {
