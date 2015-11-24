@@ -9,8 +9,8 @@
     </head>
     <body>
         <h2>Formulário Socioeconômico</h2>
-        <table border="1">
-            <form type='POST'>
+        <form action="ManterFormularioSocioeconomicoController?confirmar${operacao}" method='POST'>
+            <table border="1">
                 <tr>
                     <td><label for='textId'>Código</label></td>
                     <td><input type='text' name='textId'></td>
@@ -370,7 +370,7 @@
                 <tr>
                     <td colspan="2"><input type='submit' name='Enviar'></td>
                 </tr>
-            </form>
-        </table>
+            </table>
+        </form>
     </body>
 </html>

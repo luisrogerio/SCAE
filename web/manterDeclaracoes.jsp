@@ -9,8 +9,8 @@
     </head>
     <body>
         <h2>Declarações</h2>
-        <table>
-            <form type='POST'>
+        <form action="MannterDeclaracoesController?confirmar${operacao}" method='POST'>
+            <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
                     <td><input type='text' name='textId'></td>
@@ -54,7 +54,7 @@
                 <tr>
                     <td colspan="2"><input type='submit' name='Enviar'></td>
                 </tr>
-            </form>
-        </table>
+            </table>
+        </form>
     </body>
 </html>
