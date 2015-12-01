@@ -1,6 +1,7 @@
 package model;
 
 import dao.CursoDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -55,6 +56,10 @@ public class Curso {
     
     public static List<Curso> obterCursos() throws ClassNotFoundException{
         return CursoDAO.obterCursos();
+    }
+    
+    public static void gravar(Curso curso) throws ClassNotFoundException, SQLException{
+        CursoDAO.gravar(curso);
     }
     
 }
