@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <h2>Manter Candidato - ${$operacao}</h2>
+        <h2>Manter Candidato - ${operacao}</h2>
         <form action="ManterCursoControoler?acao=confirmar${operacao}" method="POST">
             <table>
                 <tr>
