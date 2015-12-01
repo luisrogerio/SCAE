@@ -13,24 +13,24 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId'></td>
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td><label for='textAno'>Ano</label></td>
-                    <td><input type='text' name='textAno'></td>
+                    <td><input type='text' name='textAno' imput="${edital.ano}"></td>
                 </tr>
                 <tr>
                     <td><label for='selectSemestre'>Semestre</label></td>
                     <td>
                         <select name='selectSemestre'>
                             <option value="1">1</option>
-                            <option value="2">2</option>
+                                <option value="2">2</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><label for='textAno'>Descrição</label></td>
-                    <td><textarea name='textAno'></textarea></td>
+                    <td><textarea name='textAno'imput="${edital.descricao}"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type='submit' name='Enviar'></td>

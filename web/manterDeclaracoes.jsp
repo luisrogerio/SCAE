@@ -13,12 +13,12 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId'></td>
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Candidato ou Familiar</td>
                     <td>
-                        <select name="selectPessoa">
+                        <select name="selectPessoa"<c:if test="${curso.turno == 'true'}">Selected</c:if>>
                             <option></option>
                         </select>
                     </td>
@@ -26,7 +26,7 @@
                 <tr>
                     <td>Edital</td>
                     <td>
-                        <select name="selectEdital">
+                        <select name="selectEdital"<c:if test="${pessoa.pessoa== 'true'}">Selected</c:if>>
                             <option></option>
                         </select>
                     </td>

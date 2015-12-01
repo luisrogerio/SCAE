@@ -13,31 +13,31 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId'></td>
+                    <td><input type='text' name='textId' value="${candidato.matricula}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td><label for='textPessoa'>Código da Pessoa</label></td>
-                    <td><input type='text' name='textPessoa'></td>
+                    <td><input type='text' name='textPessoa' value="${candidato.codigoPessoa}"></td>
                 </tr>
                 <tr>
                     <td><label for='textNome'>Nome</label></td>
-                    <td><input type='text' name='textNome'></td>
+                    <td><input type='text' name='textNome' value="${candidato.nome}"></td>
                 </tr>
                 <tr>
                     <td><label for='textDataNascimento'>Data de Nascimento</label></td>
-                    <td><input type='text' name='textDataNascimento'></td>
+                    <td><input type='text' name='textDataNascimento' value="${candidato.dataNascimento}"></td>
                 </tr>
                 <tr>
                     <td><label for='textCPF'>CPF</label></td>
-                    <td><input type='text' name='textCPF'></td>				
+                    <td><input type='text' name='textCPF' value="${candidato.CPF}"></td>				
                 </tr>
                 <tr>
                     <td><label for='textIdentidade'>Identidade</label></td>
-                    <td><input type='text' name='textIdentidade'></td>
+                    <td><input type='text' name='textIdentidade' value="${candidato.identidade}"></td>
                 </tr>
                 <tr>
                     <td><label for='textMatricula'>Matrícula</label></td>
-                    <td><input type='text' name='textMatricula'></td>				
+                    <td><input type='text' name='textMatricula' value="${candidato.matricula}"></td>				
                 </tr>
                 <tr>
                     <td><label for='selectCurso'>Curso</label></td>
@@ -50,22 +50,22 @@
                 <tr>
                     <td><label for='textGenero'>Gênero</label></td>
                     <td>		
-                        <input type='radio' name='textGenero' value="Masculino">Masculino
-                        <input type='radio' name='textGenero' value="Feminino">Feminino
+                        <input type='radio' name='textGenero' value="Masculino" <c:if test="${candidato == 'Masculino'}"> checked</c:if>>Masculino
+                        <input type='radio' name='textGenero' value="Feminino"  <c:if test="${candidato == 'Feminino'}"> checked</c:if>>Feminino
                     </td>				
                 </tr>
                 <tr>
                     <td><label for='textTelefoneResidencial'>Telefone Residencial</label></td>
-                    <td><input type='text' name='textTelefoneResidencial'></td>				
+                    <td><input type='text' name='textTelefoneResidencial' value="${candidato.telefoneResidencial}"></td>				
                 </tr>
                 <tr>
                     <td><label for='textTelefoneCelular'>Telefone Celular</label></td>
-                    <td><input type='text' name='textTelefoneCelular'></td>				
+                    <td><input type='text' name='textTelefoneCelular' value="${candidato.telefoneCelular}"></td>				
                 </tr>
                 <tr>
                     <td><label for='textInstituicaoFundamental'>Instituição Fundamental</label></td>
                     <td>
-                        <select name="textInstituicaoFundamental">
+                        <select name="textInstituicaoFundamental"<c:if test="${candidato.instituicaoFundamental == 'true'}">Selected</c:if>>
                             <option value="publica">Pública</option>
                             <option value="particular">Particular</option>
                             <option value="publicaEParticular">Parte em pública e depois em particular</option>
@@ -77,7 +77,7 @@
                 <tr>
                     <td><label for='textInstituicaoMedio'>Instituição Médio</label></td>
                     <td>
-                        <select name="textInstituicaoMedio">
+                        <select name="textInstituicaoMedio"<c:if test="${candidato.instituicaoMedio == 'true'}">Selected</c:if>>
                             <option value="publica">Pública</option>
                             <option value="particular">Particular</option>
                             <option value="publicaEParticular">Parte em pública e depois em particular</option>

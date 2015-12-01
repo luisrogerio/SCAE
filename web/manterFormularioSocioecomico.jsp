@@ -13,7 +13,7 @@
             <table border="1">
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId'></td>
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Edital</td>

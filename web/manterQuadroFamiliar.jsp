@@ -13,7 +13,7 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId'></td>			
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>			
                 </tr>
                 <tr>
                     <td>Candidato ou Familiar</td>
@@ -33,19 +33,19 @@
                 </tr>
                 <tr>
                     <td><label for='textDoenca'>Nome da Doença</label></td>
-                    <td><input type='text' name='textDoenca'></td>			
+                    <td><input type='text' name='textDoenca'  value="${quadrofamiliar.doenca}"></td>			
                 </tr>
                 <tr>
-                    <td><input type='checkbox' name='checkCapacidadeTrabalho'></td>
+                    <td><input type='checkbox' name='checkCapacidadeTrabalho'value="${quadrofamiliar.capacidadeTrabalho}"></td>
                     <td><label for='checkCapacidadeTrabalho'>Tem Capacidade de Trabalho</label></td>			
                 </tr>
                 <tr>
-                    <td><input type='checkbox' name='checkDependenciaAtividades'></td>
+                    <td><input type='checkbox' name='checkDependenciaAtividades'value="${quadrofamiliar.dependenciaAtividade}"></td>
                     <td><label for='checkDependenciaAtividades'>Dependência para Atividades diárias</label></td>			
                 </tr>
                 <tr>
                     <td><label for='textGastosMensais'>Gastos mensais com tratamento</label></td>
-                    <td><input type='text' name='textGastosMensais'></td>			
+                    <td><input type='text' name='textGastosMensais' value="${quadrofamiliar.gastoMensal}"></td>			
                 </tr>
                 <tr>
                     <td colspan="2"><input type='submit' name='Enviar'></td>			

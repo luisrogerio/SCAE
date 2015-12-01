@@ -58,7 +58,7 @@
                 <tr>
                     <td><label for='textOcupacao'>Ocupação</label></td>
                     <td><input type='text' name='textOcupacao' value="${quadroFinanceiro.ocupacao}"
-                           <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                           <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td> 
                 </tr>
                 <tr>
                     <td><label for='textRendaMensal'>Renda mensal bruta</label></td>

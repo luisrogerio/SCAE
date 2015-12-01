@@ -7,38 +7,61 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.FormularioSocioeconomico;
 
 /**
  *
- * @author LuísRogério
+ * @author Raissa
  */
-public class PesquisaFormularioSocioeconomico extends HttpServlet {
+public class ManterModalidadeController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconmicos());
-            RequestDispatcher view =request.getRequestDispatcher("/pesquisaFormularioSocioeconomico.jsp");
-            view.forward(request, response);
-        } catch (ClassNotFoundException ex){
-            
+        String acao = request.getParameter("acao");
+        if(acao.equals("prepararIncluir")){
+            prepararIncluir(request, response);
+        } else {
+            if(acao.equals("confirmarIncluir")){
+                confirmarIncluir(request, response);
+            } else {
+                if(acao.equals("prepararEditar")){
+                    prepararEditar(request, response);
+                } else {
+                    if (acao.equals("confirmarEditar")){
+                        confirmarEditar(request, response);
+                    } else {
+                        if(acao.equals("prepararExcluir")) {
+                            prepararExcluir(request, response);
+                        } else {
+                            if(acao.equals("confirmarExcluir")){
+                                confirmarExcluir(request, response);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
+    
+        
+        public void prepararIncluir(HttpServletRequest request,
+                HttpServletResponse response) {
+            try{
+                request.setAttribute("operacao", "Incluir");
+                RequestDispatcher view = request.getRequestDispatcher("/manterModalidade.jsp");
+                view.forward(request, response);
+            } catch (ServletException ex) {
+                
+            } catch (IOException ex) {
+                
+            } 
+        }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

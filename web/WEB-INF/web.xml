@@ -21,10 +21,6 @@
         <servlet-class>controller.PesquisaFamiliarController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PesquisaFormularioSocioeconomico</servlet-name>
-        <servlet-class>controller.PesquisaFormularioSocioeconomico</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PesquisaModalidadeController</servlet-name>
         <servlet-class>controller.PesquisaModalidadeController</servlet-class>
     </servlet>
@@ -39,6 +35,42 @@
     <servlet>
         <servlet-name>ManterCursoController</servlet-name>
         <servlet-class>controller.ManterCursoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaFormularioSocioeconomicoController</servlet-name>
+        <servlet-class>controller.PesquisaFormularioSocioeconomicoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterCandidatoController</servlet-name>
+        <servlet-class>controller.ManterCandidatoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterDeclaracaoController</servlet-name>
+        <servlet-class>controller.ManterDeclaracaoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterEditalController</servlet-name>
+        <servlet-class>controller.ManterEditalController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterFamiliarController</servlet-name>
+        <servlet-class>controller.ManterFamiliarController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterFormularioSocioeconomicoController</servlet-name>
+        <servlet-class>.ManterFormularioSocioeconomicoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterModalidadeController</servlet-name>
+        <servlet-class>controller.ManterModalidadeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterQuadroFamiliarController</servlet-name>
+        <servlet-class>controller.ManterQuadroFamiliarController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterQuadroFinanceiroController</servlet-name>
+        <servlet-class>controller.ManterQuadroFinanceiroController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaCursoController</servlet-name>
@@ -61,10 +93,6 @@
         <url-pattern>/PesquisaFamiliarController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PesquisaFormularioSocioeconomico</servlet-name>
-        <url-pattern>/PesquisaFormularioSocioeconomico</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>PesquisaModalidadeController</servlet-name>
         <url-pattern>/PesquisaModalidadeController</url-pattern>
     </servlet-mapping>
@@ -79,6 +107,38 @@
     <servlet-mapping>
         <servlet-name>ManterCursoController</servlet-name>
         <url-pattern>/ManterCursoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaFormularioSocioeconomicoController</servlet-name>
+        <url-pattern>/PesquisaFormularioSocioeconomicoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterDeclaracaoController</servlet-name>
+        <url-pattern>/ManterDeclaracaoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterEditalController</servlet-name>
+        <url-pattern>/ManterEditalController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterFamiliarController</servlet-name>
+        <url-pattern>/ManterFamiliarController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterModalidadeController</servlet-name>
+        <url-pattern>/ManterModalidadeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterQuadroFamiliarController</servlet-name>
+        <url-pattern>/ManterQuadroFamiliarController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterQuadroFinanceiroController</servlet-name>
+        <url-pattern>/ManterQuadroFinanceiroController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterCandidatoController</servlet-name>
+        <url-pattern>/ManterCandidatoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

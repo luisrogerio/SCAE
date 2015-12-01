@@ -13,16 +13,16 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId'></td>
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td><label for='textNome'>Nome</label></td>
-                    <td><input type='text' name='textNome'></td>
+                    <td><input type='text' name='textNome' value="${curso.nome}"></td>
                 </tr>
                 <tr>
                     <td><label for='selectTurno'>Turno</label></td>
                     <td>
-                        <select name="selectTurno">
+                        <select name="selectTurno"<c:if test="${curso.turno == 'true'}">Selected</c:if>>
                             <option value="integral">Integral</option>
                             <option value="diurno">Diurno</option>
                             <option value="vespertino">Vespertino</option>
@@ -33,7 +33,7 @@
                 <tr>
                     <td><label for='selectTipo'>Tipo</label></td>
                     <td>
-                        <select name="selectTipo">
+                        <select name="selectTipo"<c:if test="${curso.tipo == 'true'}">Selected</c:if>>
                             <option value="integrado">Integrado</option>
                             <option value="superior">Superior</option>
                             <option value="posGraduacao">Pós-Graduação</option>

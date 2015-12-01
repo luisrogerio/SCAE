@@ -13,11 +13,11 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId'></td>
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td><label for='textPessoa'>Código da Pessoa</label></td>
-                    <td><input type='text' name='textPessoa'></td>
+                    <td><input type='text' name='textPessoa'  value="${familiar.codigo}"></td>
                 </tr>
                 <tr>
                     <td>Formulário Socioecômico</td>
@@ -29,27 +29,27 @@
                 </tr>
                 <tr>
                     <td><label for='textNome'>Nome</label></td>
-                    <td><input type='text' name='textNome'></td>
+                    <td><input type='text' name='textNome'  value="${familiar.nome}"></td>
                 </tr>
                 <tr>
                     <td><label for='textDataNascimento'>Data de Nascimento</label></td>
-                    <td><input type='text' name='textDataNascimento'></td>
+                    <td><input type='text' name='textDataNascimento' value="${familiar.dataNascimento}" ></td>
                 </tr>
                 <tr>
                     <td><label for='textCPF'>CPF</label></td>
-                    <td><input type='text' name='textCPF'></td>
+                    <td><input type='text' name='textCPF'  value="${familiar.CPF}"></td>
                 </tr>
                 <tr>
                     <td><label for='textIdentidade'>Identidade</label></td>
-                    <td><input type='text' name='textIdentidade'></td>
+                    <td><input type='text' name='textIdentidade'  value="${familiar.identidade}"></td>
                 </tr>
                 <tr>
                     <td><label for='textNacionalidade'>Nacionalidade</label></td>
-                    <td><input type='text' name='textNacionalidade'></td>
+                    <td><input type='text' name='textNacionalidade'  value="${familiar.nacionalidade}"></td>
                 </tr>
                 <tr>
                     <td><label for='textParentesco'>Parentesco</label></td>
-                    <td><input type='text' name='textParentesco'></td>
+                    <td><input type='text' name='textParentesco'  value="${familiar.parentesco}"></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type='submit' name='Enviar'></td>
