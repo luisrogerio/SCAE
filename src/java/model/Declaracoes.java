@@ -1,6 +1,8 @@
 package model;
 
+import dao.CursoDAO;
 import dao.DeclaracoesDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -81,31 +83,31 @@ public class Declaracoes {
         this.inexistenciaContaBancariaJuridica = inexistenciaContaBancariaJuridica;
     }
 
-    public Pessoa getPessoa() {
-        if(this.codigoPessoa != 0 && this.pessoa == null){
-            try {
-                this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
-            } catch (ClassNotFoundException){
-                
-            }
-        }
-        return this.pessoa;
-    }
+//    public Pessoa getPessoa() {
+//        if(this.codigoPessoa != 0 && this.pessoa == null){
+//            try {
+//                this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
+//            } catch (ClassNotFoundException){
+//                
+//            }
+//        }
+//        return this.pessoa;
+//    }
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
 
-    public Edital getEdital() {
-        if(this.codigoEdital != 0 && this.edital == null){
-            try {
-                this.edital = Edital.obterEdital(this.codigoEdital);
-            } catch (ClassNotFoundException){
-                
-            }
-        }
-        return this.edital;
-    }
+//    public Edital getEdital() {
+//        if(this.codigoEdital != 0 && this.edital == null){
+//            try {
+//                this.edital = Edital.obterEdital(this.codigoEdital);
+//            } catch (ClassNotFoundException){
+//                
+//            }
+//        }
+//        return this.edital;
+//    }
 
     public void setEdital(Edital edital) {
         this.edital = edital;
@@ -130,5 +132,7 @@ public class Declaracoes {
     public static List<Declaracoes> obterDeclaracoes() throws ClassNotFoundException{
         return DeclaracoesDAO.obterDeclaracoes();
     }
-    
+        public static void gravar(Declaracoes declaracoes) throws ClassNotFoundException, SQLException{
+        DeclaracoesDAO.gravar(declaracoes);
+    }
 }

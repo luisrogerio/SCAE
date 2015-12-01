@@ -6,12 +6,13 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Curso;
 
 /**
  *
@@ -24,7 +25,7 @@ public class ManterCandidatoController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        } else if (acao.equals("confirmarIncluir")) {
+        } /*else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
@@ -34,20 +35,24 @@ public class ManterCandidatoController extends HttpServlet {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
-        }
+        }*/
     }
 
     public void prepararIncluir(HttpServletRequest request,
             HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
+            List<Curso> cursos = Curso.obterCursos();
+            request.setAttribute("cursos", cursos);
             RequestDispatcher view = request.getRequestDispatcher("/manterCandidato.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
 
         } catch (IOException ex) {
 
-        }
+        } catch (ClassNotFoundException ex) {
+            
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

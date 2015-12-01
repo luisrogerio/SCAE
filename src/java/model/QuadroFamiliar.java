@@ -1,6 +1,7 @@
 package model;
 
 import dao.QuadroFamiliarDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -71,31 +72,31 @@ public class QuadroFamiliar {
         this.gastoMensal = gastoMensal;
     }
 
-    public FormularioSocioeconomico getFormularioSocioeconomico() {
-        if (this.codigoFormularioSocioeconomico != 0 && this.formularioSocioeconomico == null) {
-            try {
-                this.pessoa = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
-            } catch (ClassNotFoundException) {
-
-            }
-        }
-        return this.formularioSocioeconomico;
-    }
+//    public FormularioSocioeconomico getFormularioSocioeconomico() {
+//        if (this.codigoFormularioSocioeconomico != 0 && this.formularioSocioeconomico == null) {
+//            try {
+//                this.pessoa = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
+//            } catch (ClassNotFoundException) {
+//
+//            }
+//        }
+//        return this.formularioSocioeconomico;
+//    }
 
     public void setFormularioSocioeconomico(FormularioSocioeconomico formularioSocioeconomico) {
         this.formularioSocioeconomico = formularioSocioeconomico;
     }
 
-    public Pessoa getPessoa() {
-        if (this.codigoPessoa != 0 && this.pessoa == null) {
-            try {
-                this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
-            } catch (ClassNotFoundException) {
-
-            }
-        }
-        return this.pessoa;
-    }
+//    public Pessoa getPessoa() {
+//        if (this.codigoPessoa != 0 && this.pessoa == null) {
+//            try {
+//                this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
+//            } catch (ClassNotFoundException) {
+//
+//            }
+//        }
+//        return this.pessoa;
+//    }
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
@@ -119,6 +120,10 @@ public class QuadroFamiliar {
 
     public static List<QuadroFamiliar> obterQuadrosFamiliares() throws ClassNotFoundException {
         return QuadroFamiliarDAO.obterQuadrosFamiliares();
+    }
+    
+    public static void gravar(QuadroFamiliar quadroFamiliar) throws ClassNotFoundException, SQLException{
+        QuadroFamiliarDAO.gravar(quadroFamiliar);
     }
 
 }

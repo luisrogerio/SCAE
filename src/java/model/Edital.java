@@ -1,6 +1,7 @@
 package model;
 
 import dao.EditalDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -53,8 +54,12 @@ public class Edital {
         this.descricao = descricao;
     }
 
-    public static List<Edital> obterEditais() throws ClassNotFoundException{
+    public static List<Edital> obterEditais() throws ClassNotFoundException {
         return EditalDAO.obterEditais();
     }
-    
+
+    public static void gravar(Edital edital) throws ClassNotFoundException, SQLException {
+        EditalDAO.gravar(edital);
+    }
+
 }

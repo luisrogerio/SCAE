@@ -12,16 +12,12 @@
         <form action="ManterCursoControoler?acao=confirmar${operacao}" method="POST">
             <table>
                 <tr>
-                    <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId' value="${candidato.matricula}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr>
-                    <td><label for='textPessoa'>Código da Pessoa</label></td>
-                    <td><input type='text' name='textPessoa' value="${candidato.codigoPessoa}"></td>
+                    <td><label for='textMatricula'>Matrícula</label></td>
+                    <td><input type='text' name='textMatricula' <c:if test="${operacao != 'Incluir'}"> readonly</c:if> value="${candidato.matricula}"></td>				
                 </tr>
                 <tr>
                     <td><label for='textNome'>Nome</label></td>
-                    <td><input type='text' name='textNome' value="${candidato.nome}"></td>
+                    <td><input type='text' name='textNome' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> value="${candidato.nome}"></td>
                 </tr>
                 <tr>
                     <td><label for='textDataNascimento'>Data de Nascimento</label></td>
@@ -36,22 +32,21 @@
                     <td><input type='text' name='textIdentidade' value="${candidato.identidade}"></td>
                 </tr>
                 <tr>
-                    <td><label for='textMatricula'>Matrícula</label></td>
-                    <td><input type='text' name='textMatricula' value="${candidato.matricula}"></td>				
-                </tr>
-                <tr>
                     <td><label for='selectCurso'>Curso</label></td>
                     <td>
                         <select name="selectCurso">
-                            <option></option>
+                            <option value="0"></option>
+                            <c:forEach items="${cursos}" var="curso">
+                                <option value="${curso.id}">${curso.nome}</option>
+                            </c:forEach>
                         </select>
                     </td>				
                 </tr>
                 <tr>
                     <td><label for='textGenero'>Gênero</label></td>
                     <td>		
-                        <input type='radio' name='textGenero' value="Masculino" <c:if test="${candidato == 'Masculino'}"> checked</c:if>>Masculino
-                        <input type='radio' name='textGenero' value="Feminino"  <c:if test="${candidato == 'Feminino'}"> checked</c:if>>Feminino
+                        <input type='radio' name='textGenero' value="Masculino" <c:if test="${candidato.genero == 'Masculino'}"> checked</c:if>>Masculino
+                        <input type='radio' name='textGenero' value="Feminino"  <c:if test="${candidato.genero == 'Feminino'}"> checked</c:if>>Feminino
                     </td>				
                 </tr>
                 <tr>
@@ -65,7 +60,7 @@
                 <tr>
                     <td><label for='textInstituicaoFundamental'>Instituição Fundamental</label></td>
                     <td>
-                        <select name="textInstituicaoFundamental"<c:if test="${candidato.instituicaoFundamental == 'true'}">Selected</c:if>>
+                        <select name="textInstituicaoFundamental"<c:if test="${candidato.instituicaoFundamental == true}">Selected</c:if>>
                             <option value="publica">Pública</option>
                             <option value="particular">Particular</option>
                             <option value="publicaEParticular">Parte em pública e depois em particular</option>
@@ -77,7 +72,7 @@
                 <tr>
                     <td><label for='textInstituicaoMedio'>Instituição Médio</label></td>
                     <td>
-                        <select name="textInstituicaoMedio"<c:if test="${candidato.instituicaoMedio == 'true'}">Selected</c:if>>
+                        <select name="textInstituicaoMedio"<c:if test="${candidato.instituicaoMedio == true}">Selected</c:if>>
                             <option value="publica">Pública</option>
                             <option value="particular">Particular</option>
                             <option value="publicaEParticular">Parte em pública e depois em particular</option>

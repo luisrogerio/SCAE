@@ -6,11 +6,13 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Curso;
 
 /**
  *
@@ -25,7 +27,7 @@ public class ManterCursoController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        } else if (acao.equals("prepararEditar")) {
+        } /*else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
@@ -33,7 +35,7 @@ public class ManterCursoController extends HttpServlet {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
-        }
+        }*/
     }
 
     public void prepararIncluir(HttpServletRequest request,
@@ -46,6 +48,28 @@ public class ManterCursoController extends HttpServlet {
 
         } catch (IOException ex) {
 
+        }
+    }
+    
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
+        int id = Integer.parseInt(request.getParameter("textId"));
+        String nome = request.getParameter("textNome");
+        String turno = request.getParameter("selectTurno");
+        String tipo = request.getParameter("selectTipo");
+        
+        try{
+            Curso curso = new Curso(id, nome, turno, tipo);
+            Curso.gravar(curso);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCursoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+            
+        } catch (SQLException ex) {
+            
+        } catch (ClassNotFoundException ex){
+            
+        } catch (Exception ex){
+            
         }
     }
 

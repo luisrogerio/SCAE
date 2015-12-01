@@ -1,6 +1,7 @@
 package model;
 
 import dao.CandidatoDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -79,18 +80,18 @@ public class Candidato extends Pessoa {
     public void setInstituicaoMedio(String instituicaoMedio) {
         this.instituicaoMedio = instituicaoMedio;
     }
-
-    public Curso getCurso() {
-        if (this.codigoCurso != 0 && this.curso == null) {
-            try {
-                this.curso = Curso.obterCurso(this.codigoCurso);
-            } catch (ClassNotFoundException){
-                
-            }
-        }
-
-        return this.curso;
-    }
+//
+//    public Curso getCurso() {
+//        if (this.codigoCurso != 0 && this.curso == null) {
+//            try {
+//                this.curso = Curso.obterCurso(this.codigoCurso);
+//            } catch (ClassNotFoundException) {
+//
+//            }
+//        }
+//
+//        return this.curso;
+//    }
 
     public void setCurso(Curso curso) {
         this.curso = curso;
@@ -111,13 +112,17 @@ public class Candidato extends Pessoa {
     public void setCodigoPessoa(String codigoPessoa) {
         this.codigoPessoa = codigoPessoa;
     }
-    
-    public static List<Candidato> obterCandidatos() throws ClassNotFoundException{
+
+    public static List<Candidato> obterCandidatos() throws ClassNotFoundException {
         return CandidatoDAO.obterCandidatos();
     }
-    
-    public static Candidato obterCandidato(int matricula) throws ClassNotFoundException{
+
+    public static Candidato obterCandidato(int matricula) throws ClassNotFoundException {
         return CandidatoDAO.obterCandidato(matricula);
+    }
+
+    public static void gravar(Candidato candidato) throws ClassNotFoundException, SQLException {
+        CandidatoDAO.gravar(candidato);
     }
 
 }

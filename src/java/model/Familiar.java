@@ -1,24 +1,25 @@
 package model;
 
 import dao.FamiliarDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
  *
  * @author LuísRogério
  */
-public class Familiar extends Pessoa{
-    
+public class Familiar extends Pessoa {
+
     private String codigo;
     private String nacionalidade;
     private String parentesco;
-    private FormularioSocioeconomico formularioSocioeconomico; 
-    
+    private FormularioSocioeconomico formularioSocioeconomico;
+
     private String codigoPessoa;
     private int codigoFormularioSocioeconomico;
 
-    public Familiar(String codigoPessoa, String nome, String dataNascimento, String estadoCivil, String CPF, 
-            String identidade, String id, String nacionalidade, String parentesco, 
+    public Familiar(String codigoPessoa, String nome, String dataNascimento, String estadoCivil, String CPF,
+            String identidade, String id, String nacionalidade, String parentesco,
             FormularioSocioeconomico formularioSocioeconomico) {
         super(codigoPessoa, nome, dataNascimento, estadoCivil, CPF, identidade);
         this.codigo = id;
@@ -26,7 +27,7 @@ public class Familiar extends Pessoa{
         this.parentesco = parentesco;
         this.formularioSocioeconomico = formularioSocioeconomico;
     }
-    
+
     public String getCodigo() {
         return codigo;
     }
@@ -50,17 +51,17 @@ public class Familiar extends Pessoa{
     public void setParentesco(String parentesco) {
         this.parentesco = parentesco;
     }
-
-    public FormularioSocioeconomico getFormularioSocioeconomico() {
-        if(this.codigoFormularioSocioeconomico != 0 && this.formularioSocioeconomico == null){
-            try {
-                this.formularioSocioeconomico = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
-            } catch (ClassNotFoundException){
-                
-            }
-        }
-        return this.formularioSocioeconomico;
-    }
+//
+//    public FormularioSocioeconomico getFormularioSocioeconomico() {
+//        if(this.codigoFormularioSocioeconomico != 0 && this.formularioSocioeconomico == null){
+//            try {
+//                this.formularioSocioeconomico = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
+//            } catch (ClassNotFoundException){
+//                
+//            }
+//        }
+//        return this.formularioSocioeconomico;
+//    }
 
     public void setFormularioSocioeconomico(FormularioSocioeconomico formularioSocioeconomico) {
         this.formularioSocioeconomico = formularioSocioeconomico;
@@ -81,9 +82,13 @@ public class Familiar extends Pessoa{
     public void setCodigoPessoa(String codigoPessoa) {
         this.codigoPessoa = codigoPessoa;
     }
-    
-    public static List<Familiar> obterFamiliares() throws ClassNotFoundException{
+
+    public static List<Familiar> obterFamiliares() throws ClassNotFoundException {
         return FamiliarDAO.obterFamiliares();
     }
-    
+
+    public static void gravar(Familiar familiar) throws ClassNotFoundException, SQLException {
+        FamiliarDAO.gravar(familiar);
+    }
+
 }

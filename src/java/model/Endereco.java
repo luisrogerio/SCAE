@@ -1,6 +1,7 @@
 package model;
 
 import dao.EnderecoDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * @author LuísRogério
  */
 public class Endereco {
-    
+
     private int id;
     private String logradouro;
     private String rua;
@@ -21,8 +22,8 @@ public class Endereco {
     private String cidadeRepublica;
     private String UFRepublica;
 
-    public Endereco(int id, String logradouro, String rua, String bairro, String cidade, String UF, 
-            String logradouroRepublica, String ruaRepublica, String bairroRepublica, String cidadeRepublica, 
+    public Endereco(int id, String logradouro, String rua, String bairro, String cidade, String UF,
+            String logradouroRepublica, String ruaRepublica, String bairroRepublica, String cidadeRepublica,
             String UFRepublica) {
         this.id = id;
         this.logradouro = logradouro;
@@ -124,9 +125,13 @@ public class Endereco {
     public void setUFRepublica(String UFRepublica) {
         this.UFRepublica = UFRepublica;
     }
-    
-    public static List<Endereco> obterEnderecos() throws ClassNotFoundException{
+
+    public static List<Endereco> obterEnderecos() throws ClassNotFoundException {
         return EnderecoDAO.obterEnderecos();
     }
-    
+
+    public static void gravar(Endereco endereco) throws ClassNotFoundException, SQLException {
+        EnderecoDAO.gravar(endereco);
+    }
+
 }

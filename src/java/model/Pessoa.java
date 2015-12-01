@@ -1,6 +1,7 @@
 package model;
 
 import dao.PessoaDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -76,5 +77,8 @@ public class Pessoa {
     public static List<Pessoa> obterPessoas() throws ClassNotFoundException{
         return PessoaDAO.obterPessoas();
     }
-    
+        
+    public static void gravar(Pessoa pessoa) throws ClassNotFoundException, SQLException{
+        PessoaDAO.gravar(pessoa);
+    }
 }

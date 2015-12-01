@@ -1,6 +1,7 @@
 package model;
 
 import dao.ModalidadeDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * @author LuísRogério
  */
 public class Modalidade {
-    
+
     private int id;
     private String nome;
 
@@ -16,6 +17,7 @@ public class Modalidade {
         this.id = id;
         this.nome = nome;
     }
+
     public int getId() {
         return id;
     }
@@ -31,9 +33,13 @@ public class Modalidade {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    public static List<Modalidade> obterModalidades() throws ClassNotFoundException{
+
+    public static List<Modalidade> obterModalidades() throws ClassNotFoundException {
         return ModalidadeDAO.obterModalidades();
     }
-    
+
+    public static void gravar(Modalidade modalidade) throws ClassNotFoundException, SQLException {
+        ModalidadeDAO.gravar(modalidade);
+    }
+
 }

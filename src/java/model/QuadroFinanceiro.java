@@ -1,6 +1,7 @@
 package model;
 
 import dao.QuadroFinanceiroDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -71,31 +72,31 @@ public class QuadroFinanceiro {
         this.rendaMensal = rendaMensal;
     }
 
-    public FormularioSocioeconomico getFormularioSocioeconomico() {
-        if(this.codigoFormularioSocioeconomico != 0 && this.formularioSocioeconomico == null){
-            try {
-                this.pessoa = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
-            } catch (ClassNotFoundException){
-                
-            }
-        }
-        return this.formularioSocioeconomico;
-    }
+//    public FormularioSocioeconomico getFormularioSocioeconomico() {
+//        if(this.codigoFormularioSocioeconomico != 0 && this.formularioSocioeconomico == null){
+//            try {
+//                this.pessoa = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
+//            } catch (ClassNotFoundException){
+//                
+//            }
+//        }
+//        return this.formularioSocioeconomico;
+//    }
 
     public void setFormularioSocioeconomico(FormularioSocioeconomico formularioSocioeconomico) {
         this.formularioSocioeconomico = formularioSocioeconomico;
     }
 
-    public Pessoa getPessoa() {
-        if(this.codigoPessoa != 0 && this.pessoa == null){
-            try {
-                this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
-            } catch (ClassNotFoundException){
-                
-            }
-        }
-        return this.pessoa;
-    }
+//    public Pessoa getPessoa() {
+//        if(this.codigoPessoa != 0 && this.pessoa == null){
+//            try {
+//                this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
+//            } catch (ClassNotFoundException){
+//                
+//            }
+//        }
+//        return this.pessoa;
+//    }
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
@@ -119,6 +120,10 @@ public class QuadroFinanceiro {
     
     public static List<QuadroFinanceiro> obterQuadrosFinanceiros() throws ClassNotFoundException{
         return QuadroFinanceiroDAO.obterQuadrosFinanceiros();
+    }
+    
+    public static void gravar(QuadroFinanceiro quadroFinanceiro) throws ClassNotFoundException, SQLException{
+        QuadroFinanceiroDAO.gravar(quadroFinanceiro);
     }
     
 }

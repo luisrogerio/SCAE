@@ -9,7 +9,7 @@
     </head>
     <body>
         <h2>Declarações</h2>
-        <form action="MannterDeclaracoesController?confirmar${operacao}" method='POST'>
+        <form action="MannterDeclaracoesController?acao=confirmar${operacao}" method='POST'>
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>

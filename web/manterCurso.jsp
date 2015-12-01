@@ -9,7 +9,7 @@
     </head>
     <body>
         <h2>Manter Curso - ${operacao}</h2>
-        <form action="ManterCursoController?confirmar${operacao}" method='POST'>
+        <form action="ManterCursoController?acao=confirmar${operacao}" method='POST'>
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>

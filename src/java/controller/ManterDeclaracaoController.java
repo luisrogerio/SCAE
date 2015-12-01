@@ -24,7 +24,7 @@ public class ManterDeclaracaoController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        } else if (acao.equals("confirmarIncluir")) {
+        } /*else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
@@ -34,7 +34,7 @@ public class ManterDeclaracaoController extends HttpServlet {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
-        }
+        }*/
     }
 
     public void prepararIncluir(HttpServletRequest request,
