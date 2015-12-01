@@ -72,14 +72,14 @@
                 <tr>
                     <td><label for='textInstituicaoMedio'>Instituição Médio</label></td>
                     <td>
-                        <select name="textInstituicaoMedio"<c:if test="${candidato.instituicaoMedio == true}">Selected</c:if>>
+                        <select name="textInstituicaoMedio" <c:if test="${candidato.instituicaoMedio == true}">Selected</c:if>>
                             <option value="publica">Pública</option>
                             <option value="particular">Particular</option>
                             <option value="publicaEParticular">Parte em pública e depois em particular</option>
                             <option value="particularEPublica">Parte em particular e depois em pública</option>
                             <option value="particularBolsa">Particular com bolsa</option>
                         </select>
-                    </td>				
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type='submit' name='Enviar'></td>
