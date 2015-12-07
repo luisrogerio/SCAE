@@ -22,11 +22,11 @@
                 <tr>
                     <td><label for='selectTurno'>Turno</label></td>
                     <td>
-                        <select name="selectTurno"<c:if test="${curso.turno == 'true'}">Selected</c:if>>
-                            <option value="integral">Integral</option>
-                            <option value="diurno">Diurno</option>
-                            <option value="vespertino">Vespertino</option>
-                            <option value="noturno">Noturno</option>
+                        <select name="selectTurno">
+                            <option value="integral" <c:if test="${candidato.instituicaoMedio == 'integral'}">selected</c:if>Integral</option>
+                            <option value="diurno" <c:if test="${candidato.instituicaoMedio == 'diurno'}">selected</c:if>Diurno</option>
+                            <option value="vespertino" <c:if test="${candidato.instituicaoMedio == 'vespertino'}">selected</c:if>Vespertino</option>
+                            <option value="noturno" <c:if test="${candidato.instituicaoMedio == 'noturno'}">selected</c:if>>Noturno</option>
                         </select>
                     </td>
                 </tr>
@@ -34,11 +34,11 @@
                     <td><label for='selectTipo'>Tipo</label></td>
                     <td>
                         <select name="selectTipo"<c:if test="${curso.tipo == 'true'}">Selected</c:if>>
-                            <option value="integrado">Integrado</option>
-                            <option value="superior">Superior</option>
-                            <option value="posGraduacao">Pós-Graduação</option>
-                            <option value="concomitante">Concomitante Externo</option>
-                            <option value="subsequente">Subsequente</option>
+                            <option value="integrado" <c:if test="${candidato.instituicaoMedio == 'integrado'}">selected</c:if>Integrado</option>
+                            <option value="superior" <c:if test="${candidato.instituicaoMedio == 'superior'}">selected</c:if>Superior</option>
+                            <option value="posGraduacao" <c:if test="${candidato.instituicaoMedio == 'posGraduacao'}">selected</c:if>Pós-Graduação</option>
+                            <option value="concomitante" <c:if test="${candidato.instituicaoMedio == 'comcomitante'}">selected</c:if>Concomitante Externo</option>
+                            <option value="subsequente" <c:if test="${candidato.instituicaoMedio == 'subsequente'}">selected</c:if>Subsequente</option>
                         </select>
                     </td>
                 </tr>

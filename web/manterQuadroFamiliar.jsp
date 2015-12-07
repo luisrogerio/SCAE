@@ -36,11 +36,11 @@
                     <td><input type='text' name='textDoenca'  value="${quadrofamiliar.doenca}"></td>			
                 </tr>
                 <tr>
-                    <td><input type='checkbox' name='checkCapacidadeTrabalho'value="${quadrofamiliar.capacidadeTrabalho}"></td>
+                    <td><input type='checkbox' name='checkCapacidadeTrabalho' <c:if test="${quadrofamiliar.capacidadeTrabalho == 'true'}"> checked</c:if>></td>
                     <td><label for='checkCapacidadeTrabalho'>Tem Capacidade de Trabalho</label></td>			
                 </tr>
                 <tr>
-                    <td><input type='checkbox' name='checkDependenciaAtividades'value="${quadrofamiliar.dependenciaAtividade}"></td>
+                    <td><input type='checkbox' name='checkDependenciaAtividades' <c:if test="${quadrofamiliar.dependenciaAtividade == 'true'}"> checked</c:if>></td>
                     <td><label for='checkDependenciaAtividades'>Dependência para Atividades diárias</label></td>			
                 </tr>
                 <tr>

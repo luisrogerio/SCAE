@@ -32,23 +32,23 @@
                     </td>
                 </tr>	
                 <tr>
-                    <td><input type='checkbox' name='checkResidenciaRepublica'></td>
+                    <td><input type='checkbox' name='checkResidenciaRepublica' <c:if test="${declaracoes.residenciaRepublica == 'true'}"> checked</c:if>></td>
                     <td><label for='checkResidenciaRepublica'>Declaração de Residência em República</label></td>
                 </tr>
                 <tr>
-                    <td><input type='checkbox' name='checkNaoAtividade'></td>
+                    <td><input type='checkbox' name='checkNaoAtividade'  <c:if test="${declaracoes.naoAtividade == 'true'}"> checked</c:if>></td>
                     <td><label for='checkNaoAtividade'>Declaração de Não Atividade</label></td>
                 </tr>
                 <tr>
-                    <td><input type='checkbox' name='checkAtividadeInformal'></td>
+                    <td><input type='checkbox' name='checkAtividadeInformal' <c:if test="${declaracoes.atividadeInformal == 'true'}"> checked</c:if>></td>
                     <td><label for='checkAtividadeInformal'>Declaração de Atividade Econômica Informal</label></td>
                 </tr>
                 <tr>
-                    <td><input type='checkbox' name='checkInexistenciaContaBancaria'></td>
+                    <td><input type='checkbox' name='checkInexistenciaContaBancaria' <c:if test="${declaracoe.inexistenciaContaBancaria == 'true'}"> checked</c:if>></td>
                     <td><label for='checkInexistenciaContaBancaria'>Declaração de Inexistência Conta Bancária</label></td>
                 </tr>
                 <tr>
-                    <td><input type='checkbox' name='checkInexistenciaContaBancariaJuridica'></td>
+                    <td><input type='checkbox' name='checkInexistenciaContaBancariaJuridica' <c:if test="${declaracoes.inexistenciaContabancariaJuridica == 'true'}"> checked</c:if>></td>
                     <td><label for='checkInexistenciaContaBancariaJuridica'>Declaração de Inexistência Conta Bancária Jurídica</label></td>
                 </tr>
                 <tr>

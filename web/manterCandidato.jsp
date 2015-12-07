@@ -60,24 +60,24 @@
                 <tr>
                     <td><label for='textInstituicaoFundamental'>Instituição Fundamental</label></td>
                     <td>
-                        <select name="textInstituicaoFundamental"<c:if test="${candidato.instituicaoFundamental == true}">Selected</c:if>>
-                            <option value="publica">Pública</option>
-                            <option value="particular">Particular</option>
-                            <option value="publicaEParticular">Parte em pública e depois em particular</option>
-                            <option value="particularEPublica">Parte em particular e depois em pública</option>
-                            <option value="particularBolsa">Particular com bolsa</option>
+                        <select name="textInstituicaoFundamental">
+                            <option value="publica" <c:if test="${candidato.instituicaoMedio == 'publica'}">selected</c:if>Pública</option>
+                            <option value="particular" <c:if test="${candidato.instituicaoMedio == 'particular'}">selected</c:if>Particular</option>
+                            <option value="publicaEParticular" <c:if test="${candidato.instituicaoMedio == 'publicaEParticular'}">selected</c:if>Parte em pública e depois em particular</option>
+                            <option value="particularEPublica" <c:if test="${candidato.instituicaoMedio == 'particularEPublica'}">selected</c:if>Parte em particular e depois em pública</option>
+                            <option value="particularBolsa" <c:if test="${candidato.instituicaoMedio == 'particularEPublica'}">selected</c:if>Particular com bolsa</option>
                         </select>
                     </td>				
                 </tr>
                 <tr>
                     <td><label for='textInstituicaoMedio'>Instituição Médio</label></td>
                     <td>
-                        <select name="textInstituicaoMedio" <c:if test="${candidato.instituicaoMedio == true}">Selected</c:if>>
-                            <option value="publica">Pública</option>
-                            <option value="particular">Particular</option>
-                            <option value="publicaEParticular">Parte em pública e depois em particular</option>
-                            <option value="particularEPublica">Parte em particular e depois em pública</option>
-                            <option value="particularBolsa">Particular com bolsa</option>
+                        <select name="textInstituicaoMedio">
+                            <option value="publica" <c:if test="${candidato.instituicaoMedio == 'publica'}">selected</c:if>>Pública</option>
+                            <option value="particular" <c:if test="${candidato.instituicaoMedio == 'particular'}">selected</c:if>>Particular</option>
+                            <option value="publicaEParticular" <c:if test="${candidato.instituicaoMedio == 'publicaEParticular'}">selected</c:if>>Parte em pública e depois em particular</option>
+                            <option value="particularEPublica" <c:if test="${candidato.instituicaoMedio == 'particularEPublica'}">selected</c:if>>Parte em particular e depois em pública</option>
+                            <option value="particularBolsa" <c:if test="${candidato.instituicaoMedio == 'particularEPublica'}">selected</c:if>>Particular com bolsa</option>
                         </select>
                     </td>
                 </tr>
