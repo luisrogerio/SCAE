@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Endereco;
 import model.FormularioSocioeconomico;
 
 /**
@@ -20,11 +21,16 @@ import model.FormularioSocioeconomico;
  */
 public class FormularioSocioeconomicoDAO {
 
-    public static void gravar(FormularioSocioeconomico formularioSocioeconomico) throws SQLException, ClassNotFoundException {
+    public static void gravar(FormularioSocioeconomico formularioSocioeconomico, Endereco endereco) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         try {
+            Endereco.gravar(endereco);
+        } catch (SQLException e){
+            throw e;
+        }
+        try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO formulario_socioeconomico (id, candidato, edital, enredeco, serieModuloPeriodo, atendimentoAssistencia, atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica, nomeAtividadeAcademica, ganhoAtividadeAcademica, atividadeRemunerada, cargaHorariaRemunerada, salarioRemunerada, condicaoManutencao, outraCondicaoManutencao, condicaoMoradia, outraCondicaoMoradia, responsavelManutencao, outroResponsavelManutencao, esgoto, aguaTratada, iluminacao, coletaLixo, pavimentacao, localResidenciaFamiliar, outroLocalResidenciaFamiliar, tipoResidenciaFamiliar, outroTipoResidenciaFamiliar, precoResidenciaFamiliar, cedente, acabamentoResidenciaFamiliar, imoveisExtras, quantidadeAutomoveis, anos, modelos, quantidadeTelevisoes, quantidadeMaquinasDeLavar, quantidadeGeladeiras, quantidadeTvsACabo, quantidadeComputadores, internet, quantidadeEmpregadasMensalistas, quantidadeEmpregadasDiaristas, quantidadeBanheiros, quantidadeQuartos, aluguelImoveis, pensaoMorte, pensaoAlimenticia, ajudaTerceiros, beneficiosSociais, outraRenda, numeroResidentes, despesaFamiliarAgua, despesaFamiliarLuz, despesaFamiliarTelefone, despesaFamiliarCondominio, despesaFamiliarMensalidadeEscolar, despesaFamiliarAlimentacao, despesaFamiliarSaude, despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia, despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone, despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+            String sql = "INSERT INTO formulariosSocioeconomicos (id, candidato, edital, enredeco, serieModuloPeriodo, atendimentoAssistencia, atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica, nomeAtividadeAcademica, ganhoAtividadeAcademica, atividadeRemunerada, cargaHorariaRemunerada, salarioRemunerada, condicaoManutencao, outraCondicaoManutencao, condicaoMoradia, outraCondicaoMoradia, responsavelManutencao, outroResponsavelManutencao, esgoto, aguaTratada, iluminacao, coletaLixo, pavimentacao, localResidenciaFamiliar, outroLocalResidenciaFamiliar, tipoResidenciaFamiliar, outroTipoResidenciaFamiliar, precoResidenciaFamiliar, cedente, acabamentoResidenciaFamiliar, imoveisExtras, quantidadeAutomoveis, anos, modelos, quantidadeTelevisoes, quantidadeMaquinasDeLavar, quantidadeGeladeiras, quantidadeTvsACabo, quantidadeComputadores, internet, quantidadeEmpregadasMensalistas, quantidadeEmpregadasDiaristas, quantidadeBanheiros, quantidadeQuartos, aluguelImoveis, pensaoMorte, pensaoAlimenticia, ajudaTerceiros, beneficiosSociais, outraRenda, numeroResidentes, despesaFamiliarAgua, despesaFamiliarLuz, despesaFamiliarTelefone, despesaFamiliarCondominio, despesaFamiliarMensalidadeEscolar, despesaFamiliarAlimentacao, despesaFamiliarSaude, despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia, despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone, despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, formularioSocioeconomico.getId());
             comando.setString(2, formularioSocioeconomico.getCodigoCandidato());
@@ -111,14 +117,14 @@ public class FormularioSocioeconomicoDAO {
         }
     }
 
-    public static List<FormularioSocioeconomico> obterFormulariosSocioeconmicos() throws ClassNotFoundException {
+    public static List<FormularioSocioeconomico> obterFormulariosSocioeconomicos() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<FormularioSocioeconomico> formulariosSocioeconmicos = new ArrayList<FormularioSocioeconomico>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM formulariosSocioeconmicos");
+            ResultSet rs = comando.executeQuery("SELECT * FROM formulariosSocioeconomicos");
             while (rs.next()) {
                 FormularioSocioeconomico formularioSocioeconomico = new FormularioSocioeconomico(
                         rs.getInt("id"),
@@ -210,6 +216,106 @@ public class FormularioSocioeconomicoDAO {
             fecharConexao(conexao, comando);
         }
         return formulariosSocioeconmicos;
+    }
+    
+    public static FormularioSocioeconomico obterFormularioSocioeconomico(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        FormularioSocioeconomico formularioSocioeconomico = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM formulariosSocioeconomicos WHERE id = " + id);
+            while (rs.next()) {
+                formularioSocioeconomico = new FormularioSocioeconomico(
+                        rs.getInt("id"),
+                        rs.getString("serieModuloPeriodo"),
+                        rs.getBoolean("atendimentoAssistencia"),
+                        rs.getString("atendido"),
+                        rs.getString("programaAtendimento"),
+                        rs.getString("anoAtendimento"),
+                        rs.getString("meioTransporte"),
+                        rs.getString("outroMeio"),
+                        rs.getFloat("gastoMensal"),
+                        rs.getString("tipoAtividadeAcademica"),
+                        rs.getString("nomeAtividadeAcademica"),
+                        rs.getFloat("ganhoAtividadeAcademica"),
+                        rs.getBoolean("atividadeRemunerada"),
+                        rs.getInt("cargaHorariaRemunerada"),
+                        rs.getFloat("salarioRemunerada"),
+                        rs.getString("condicaoManutencao"),
+                        rs.getString("outraCondicaoManutencao"),
+                        rs.getString("condicaoMoradia"),
+                        rs.getString("outraCondicaoMoradia"),
+                        rs.getString("responsavelManutencao"),
+                        rs.getString("outroResponsavelManutencao"),
+                        rs.getBoolean("esgoto"),
+                        rs.getBoolean("aguaTratada"),
+                        rs.getBoolean("iluminacao"),
+                        rs.getBoolean("coletaLixo"),
+                        rs.getBoolean("pavimentacao"),
+                        rs.getString("localResidenciaFamiliar"),
+                        rs.getString("outroLocalResidenciaFamiliar"),
+                        rs.getString("tipoResidenciaFamiliar"),
+                        rs.getString("outroTipoResidenciaFamiliar"),
+                        rs.getFloat("precoResidenciaFamiliar"),
+                        rs.getString("cedente"),
+                        rs.getBoolean("acabamentoResidenciaFamiliar"),
+                        rs.getString("imoveisExtras"),
+                        rs.getInt("quantidadeAutomoveis"),
+                        rs.getString("anos"),
+                        rs.getString("modelos"),
+                        rs.getInt("quantidadeTelevisoes"),
+                        rs.getInt("quantidadeMaquinasDeLavar"),
+                        rs.getInt("quantidadeGeladeiras"),
+                        rs.getInt("quantidadeTvsACabo"),
+                        rs.getInt("quantidadeComputadores"),
+                        rs.getBoolean("internet"),
+                        rs.getInt("quantidadeEmpregadasMensalistas"),
+                        rs.getInt("quantidadeEmpregadasDiaristas"),
+                        rs.getInt("quantidadeBanheiros"),
+                        rs.getInt("quantidadeQuartos"),
+                        rs.getFloat("aluguelImoveis"),
+                        rs.getFloat("pensaoMorte"),
+                        rs.getFloat("pensaoAlimenticia"),
+                        rs.getFloat("ajudaTerceiros"),
+                        rs.getFloat("beneficiosSociais"),
+                        rs.getFloat("outraRenda"),
+                        rs.getInt("numeroResidentes"),
+                        rs.getFloat("despesaFamiliarAgua"),
+                        rs.getFloat("despesaFamiliarLuz"),
+                        rs.getFloat("despesaFamiliarTelefone"),
+                        rs.getFloat("despesaFamiliarCondominio"),
+                        rs.getFloat("despesaFamiliarMensalidadeEscolar"),
+                        rs.getFloat("despesaFamiliarAlimentacao"),
+                        rs.getFloat("despesaFamiliarSaude"),
+                        rs.getFloat("despesaFamiliarTransporte"),
+                        rs.getFloat("despesaFamiliarIPTU"),
+                        rs.getFloat("despesaFamiliarAluguel"),
+                        rs.getFloat("despesaFamiliarPensaoAlimenticia"),
+                        rs.getFloat("despesaFamiliarOutros"),
+                        rs.getFloat("despesaRepublicaAgua"),
+                        rs.getFloat("despesaRepublicaLuz"),
+                        rs.getFloat("despesaRepublicaTelefone"),
+                        rs.getFloat("despesaRepublicaCondominio"),
+                        rs.getFloat("despesaRepublicaAluguel"),
+                        rs.getFloat("despesaRepublicaIPTU"),
+                        rs.getString("dadosExtras"),
+                        rs.getString("data"),
+                        null,
+                        null,
+                        null
+                );
+                formularioSocioeconomico.setCodigoCandidato(rs.getString("candidato"));
+                formularioSocioeconomico.setCodigoEndereco(rs.getInt("endereco"));
+                formularioSocioeconomico.setCodigoEdital(rs.getInt("edital"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return formularioSocioeconomico;
     }
 
     public static void fecharConexao(Connection conexao, Statement comando) {

@@ -129,6 +129,10 @@ public class Endereco {
     public static List<Endereco> obterEnderecos() throws ClassNotFoundException {
         return EnderecoDAO.obterEnderecos();
     }
+    
+    public static Endereco obterEndereco(int id) throws ClassNotFoundException {
+        return EnderecoDAO.obterEndereco(id);
+    }
 
     public static void gravar(Endereco endereco) throws ClassNotFoundException, SQLException {
         EnderecoDAO.gravar(endereco);

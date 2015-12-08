@@ -10,7 +10,7 @@ import java.util.List;
  * @author LuísRogério
  */
 public class Declaracoes {
-    
+
     private int id;
     private boolean residenciaRepublica;
     private boolean naoAtividade;
@@ -19,11 +19,11 @@ public class Declaracoes {
     private boolean inexistenciaContaBancariaJuridica;
     private Pessoa pessoa;
     private Edital edital;
-    
+
     private String codigoPessoa;
     private int codigoEdital;
 
-    public Declaracoes(int id, boolean residenciaRepublica, boolean naoAtividade, boolean atividadeInformal, 
+    public Declaracoes(int id, boolean residenciaRepublica, boolean naoAtividade, boolean atividadeInformal,
             boolean inexistenciaContaBancaria, boolean inexistenciaContaBancariaJuridica, Pessoa pessoa, Edital edital) {
         this.id = id;
         this.residenciaRepublica = residenciaRepublica;
@@ -83,32 +83,31 @@ public class Declaracoes {
         this.inexistenciaContaBancariaJuridica = inexistenciaContaBancariaJuridica;
     }
 
-//    public Pessoa getPessoa() {
-//        if(this.codigoPessoa != 0 && this.pessoa == null){
-//            try {
-//                this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
-//            } catch (ClassNotFoundException){
-//                
-//            }
-//        }
-//        return this.pessoa;
-//    }
-
+    public Pessoa getPessoa() {
+        if(this.codigoPessoa.equals("0") && this.pessoa == null){
+            try {
+                this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
+            } catch (ClassNotFoundException ex){
+                
+            }
+        }
+        return this.pessoa;
+    }
+    
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
 
-//    public Edital getEdital() {
-//        if(this.codigoEdital != 0 && this.edital == null){
-//            try {
-//                this.edital = Edital.obterEdital(this.codigoEdital);
-//            } catch (ClassNotFoundException){
-//                
-//            }
-//        }
-//        return this.edital;
-//    }
-
+    public Edital getEdital() {
+        if(this.codigoEdital != 0 && this.edital == null){
+            try {
+                this.edital = Edital.obterEdital(this.codigoEdital);
+            } catch (ClassNotFoundException ex){
+                
+            }
+        }
+        return this.edital;
+    }
     public void setEdital(Edital edital) {
         this.edital = edital;
     }
@@ -128,11 +127,16 @@ public class Declaracoes {
     public void setCodigoEdital(int codigoEdital) {
         this.codigoEdital = codigoEdital;
     }
-    
-    public static List<Declaracoes> obterDeclaracoes() throws ClassNotFoundException{
+
+    public static List<Declaracoes> obterDeclaracoes() throws ClassNotFoundException {
         return DeclaracoesDAO.obterDeclaracoes();
     }
-        public static void gravar(Declaracoes declaracoes) throws ClassNotFoundException, SQLException{
+
+    public static Declaracoes obterDeclaracao(int id) throws ClassNotFoundException {
+        return DeclaracoesDAO.obterDeclaracao(id);
+    }
+
+    public static void gravar(Declaracoes declaracoes) throws ClassNotFoundException, SQLException {
         DeclaracoesDAO.gravar(declaracoes);
     }
 }

@@ -28,9 +28,9 @@ public class ManterEditalController extends HttpServlet {
         }
         else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        } /*else if (acao.equals("prepararEditar")) {
+        } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
+        }/* else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
         } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
@@ -69,6 +69,23 @@ public class ManterEditalController extends HttpServlet {
 
         } catch (Exception ex) {
 
+        }
+    }
+    
+    public void prepararEditar(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt(request.getParameter("codigoEdital"));
+            request.setAttribute("edital", Edital.obterEdital(id));
+            RequestDispatcher view = request.getRequestDispatcher("/manterEdital.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
         }
     }
 

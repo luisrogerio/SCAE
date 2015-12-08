@@ -71,6 +71,35 @@ public class QuadroFinanceiroDAO {
         return quadrosFinanceiros;
     }
 
+    public static QuadroFinanceiro obterQuadroFinanceiro(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        QuadroFinanceiro quadroFinanceiro = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM quadrosFinanceiros WHERE id = " + id);
+            rs.first();
+            quadroFinanceiro = new QuadroFinanceiro(
+                    rs.getInt("id"),
+                    rs.getString("escolaridade"),
+                    rs.getString("situacaoDeTrabalho"),
+                    rs.getString("ocupacao"),
+                    rs.getFloat("rendaMensal"),
+                    null,
+                    null
+            );
+            quadroFinanceiro.setCodigoFormularioSocioeconomico(rs.getInt("formularioSocioeconomico"));
+            quadroFinanceiro.setCodigoPessoa(rs.getString("pessoa"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return quadroFinanceiro;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

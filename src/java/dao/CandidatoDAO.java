@@ -24,12 +24,12 @@ public class CandidatoDAO {
     public static void gravar(Candidato candidato) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         try {
-        Pessoa pessoa = new Pessoa(candidato.getId(), candidato.getNome(), candidato.getDataNascimento(), 
-                candidato.getEstadoCivil(), candidato.getCPF(), candidato.getIdentidade());
+            Pessoa pessoa = new Pessoa(candidato.getId(), candidato.getNome(), candidato.getDataNascimento(),
+                    candidato.getEstadoCivil(), candidato.getCPF(), candidato.getIdentidade());
             Pessoa.gravar(pessoa);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw e;
-        } 
+        }
         try {
             conexao = BD.getConexao();
             String sql = "INSERT INTO candidatos (matricula, curso, pessoa, genero, telefoneResidencial, telefoneCelular, instituicaoFundamental, instituicaoMedio) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
@@ -86,9 +86,40 @@ public class CandidatoDAO {
         return candidatos;
     }
 
-    public static Candidato obterCandidato(int id)
-            throws ClassNotFoundException {
+    public static Candidato obterCandidato(String matricula) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
         Candidato candidato = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM candidatos, "
+                    + "pessoas WHERE pessoas.id = candidatos.pessoa "
+                    + "AND candidatos.matricula LIKE \"" + matricula + "\"");
+            
+            rs.first();
+            candidato = new Candidato(
+                    rs.getString("id"),
+                    rs.getString("nome"),
+                    rs.getString("dataNascimento"),
+                    rs.getString("estadoCivil"),
+                    rs.getString("CPF"),
+                    rs.getString("identidade"),
+                    rs.getString("matricula"),
+                    rs.getString("genero"),
+                    rs.getString("telefoneResidencial"),
+                    rs.getString("telefoneCelular"),
+                    rs.getString("instituicaoFundamental"),
+                    rs.getString("instituicaoMedio"),
+                    null
+            );
+            candidato.setCodigoPessoa(rs.getString("pessoa"));
+            candidato.setCodigoCurso(rs.getInt("curso"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
         return candidato;
     }
 

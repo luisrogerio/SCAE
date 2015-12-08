@@ -58,6 +58,10 @@ public class Curso {
         return CursoDAO.obterCursos();
     }
     
+    public static Curso obterCurso(int id) throws ClassNotFoundException{
+        return CursoDAO.obterCurso(id);
+    }
+    
     public static void gravar(Curso curso) throws ClassNotFoundException, SQLException{
         CursoDAO.gravar(curso);
     }

@@ -30,7 +30,7 @@
                     </tr>
                     <tr>
                         <td><label for='textDescricao'>Descrição</label></td>
-                        <td><textarea name='textDescricao' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> value="${edital.descricao}"></textarea></td>
+                        <td><textarea name='textDescricao' <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>${edital.descricao}</textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type='submit' name='Enviar'></td>

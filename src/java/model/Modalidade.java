@@ -37,6 +37,10 @@ public class Modalidade {
     public static List<Modalidade> obterModalidades() throws ClassNotFoundException {
         return ModalidadeDAO.obterModalidades();
     }
+    
+    public static Modalidade obterModalidade(int id) throws ClassNotFoundException {
+        return ModalidadeDAO.obterModalidade(id);
+    }
 
     public static void gravar(Modalidade modalidade) throws ClassNotFoundException, SQLException {
         ModalidadeDAO.gravar(modalidade);

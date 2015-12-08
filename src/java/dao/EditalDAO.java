@@ -64,6 +64,29 @@ public class EditalDAO {
         return editais;
     }
 
+    public static Edital obterEdital(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Edital edital = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM editais WHERE id = " + id);
+            rs.first();
+            edital = new Edital(
+                    rs.getInt("id"),
+                    rs.getString("ano"),
+                    rs.getInt("semestre"),
+                    rs.getString("descricao")
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return edital;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

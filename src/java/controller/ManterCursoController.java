@@ -27,9 +27,10 @@ public class ManterCursoController extends HttpServlet {
             prepararIncluir(request, response);
         } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        } /*else if (acao.equals("prepararEditar")) {
+        } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
+        }
+        /*else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
         } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
@@ -50,26 +51,43 @@ public class ManterCursoController extends HttpServlet {
 
         }
     }
-    
-    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("textId"));
         String nome = request.getParameter("textNome");
         String turno = request.getParameter("selectTurno");
         String tipo = request.getParameter("selectTipo");
-        
-        try{
+
+        try {
             Curso curso = new Curso(id, nome, turno, tipo);
             Curso.gravar(curso);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCursoController");
             view.forward(request, response);
         } catch (IOException ex) {
-            
+
         } catch (SQLException ex) {
-            
-        } catch (ClassNotFoundException ex){
-            
-        } catch (Exception ex){
-            
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public void prepararEditar(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt(request.getParameter("codigoCurso"));
+            request.setAttribute("curso", Curso.obterCurso(id));
+            RequestDispatcher view = request.getRequestDispatcher("/manterCurso.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
         }
     }
 

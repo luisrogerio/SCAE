@@ -9,7 +9,7 @@
     </head>
     <body>
         <h2>Declarações</h2>
-        <form action="MannterDeclaracoesController?acao=confirmar${operacao}" method='POST'>
+        <form action="ManterDeclaracaoController?acao=confirmar${operacao}" method='POST'>
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
@@ -30,7 +30,10 @@
                         <td>Edital</td>
                         <td>
                             <select name="selectEdital" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option></option>
+                                <option value="0" <c:if test="${declaracao.edital == null}">selected</c:if>></option>
+                                <c:forEach items="${editais}" var="edital">
+                                    <option value="${edital.id}">${edital.ano}</option>
+                                </c:forEach>
                             </select>
                         </td>
                     </tr>	

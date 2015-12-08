@@ -73,6 +73,36 @@ public class DeclaracoesDAO {
         return declaracoes;
     }
 
+    public static Declaracoes obterDeclaracao(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Declaracoes declaracao = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM declaracoes WHERE id = " + id);
+            rs.first();
+            declaracao = new Declaracoes(
+                    rs.getInt("id"),
+                    rs.getBoolean("residenciaRepublica"),
+                    rs.getBoolean("naoAtividade"),
+                    rs.getBoolean("atividadeInformal"),
+                    rs.getBoolean("inexistenciaContaBancaria"),
+                    rs.getBoolean("inexistenciaContaBancariaJuridica"),
+                    null,
+                    null
+            );
+            declaracao.setCodigoEdital(rs.getInt("edital"));
+            declaracao.setCodigoPessoa(rs.getString("pessoa"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return declaracao;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

@@ -29,9 +29,9 @@ public class ManterCandidatoController extends HttpServlet {
         }
         else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        }/* else if (acao.equals("prepararEditar")) {
+        } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
+        } /* else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
         } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
@@ -85,6 +85,25 @@ public class ManterCandidatoController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
 
         } catch (Exception ex) {
+
+        }
+    }
+    
+    public void prepararEditar(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            request.setAttribute("cursos", Curso.obterCursos());
+            String matricula = request.getParameter("codigoCandidato");
+            Candidato candidato = Candidato.obterCandidato(matricula);
+            request.setAttribute("candidato", Candidato.obterCandidato(matricula));
+            RequestDispatcher view = request.getRequestDispatcher("/manterCandidato.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
 
         }
     }

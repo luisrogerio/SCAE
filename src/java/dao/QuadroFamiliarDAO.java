@@ -72,6 +72,35 @@ public class QuadroFamiliarDAO {
         return quadrosFamiliares;
     }
 
+    public static QuadroFamiliar obterQuadroFamiliar(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        QuadroFamiliar quadroFamiliar = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM quadrosFamiliares WHERE id = " + id);
+            rs.first();
+            quadroFamiliar = new QuadroFamiliar(
+                    rs.getInt("id"),
+                    rs.getString("doenca"),
+                    rs.getBoolean("capacidadeTrabalho"),
+                    rs.getBoolean("dependenciaAtividade"),
+                    rs.getFloat("gastoMensal"),
+                    null,
+                    null
+            );
+            quadroFamiliar.setCodigoFormularioSocioeconomico(rs.getInt("formularioSocioeconomico"));
+            quadroFamiliar.setCodigoPessoa(rs.getString("pessoa"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return quadroFamiliar;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

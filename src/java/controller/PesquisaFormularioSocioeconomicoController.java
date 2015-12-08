@@ -24,7 +24,7 @@ public class PesquisaFormularioSocioeconomicoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconmicos());
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
             RequestDispatcher view =request.getRequestDispatcher("/pesquisaFormularioSocioeconomico.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex){

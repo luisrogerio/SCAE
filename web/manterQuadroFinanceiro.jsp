@@ -20,7 +20,7 @@
                         <td>Candidato ou Familiar</td>
                         <td>
                             <select name="selectPessoa" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                            <option value="0"<c:if test="${quadroFinanceiro.pessoa.id == null}"> selected</c:if>></option>
+                            <option value="0"<c:if test="${quadroFinanceiro.pessoa == null}"> selected</c:if>></option>
                             <c:forEach items="pessoas" var="pessoa">
                                 <option value="${pessoa.id}"
                                         <c:if test="${quadroFinanceiro.pessoa.id == pessoa.id}"> selected</c:if>

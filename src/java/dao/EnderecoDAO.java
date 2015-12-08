@@ -77,6 +77,37 @@ public class EnderecoDAO {
         return enderecos;
     }
 
+    public static Endereco obterEndereco(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Endereco endereco = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM enderecos WHERE id = " + id);
+            rs.first();
+            endereco = new Endereco(
+                    rs.getInt("id"),
+                    rs.getString("logradouro"),
+                    rs.getString("rua"),
+                    rs.getString("bairro"),
+                    rs.getString("cidade"),
+                    rs.getString("UF"),
+                    rs.getString("logradouroRepublica"),
+                    rs.getString("ruaRepublica"),
+                    rs.getString("bairroRepublica"),
+                    rs.getString("cidadeRepublica"),
+                    rs.getString("UFRepublica")
+            );
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return endereco;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

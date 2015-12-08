@@ -59,6 +59,29 @@ public class CursoDAO {
         return cursos;
     }
 
+    public static Curso obterCurso(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Curso curso = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM cursos WHERE id = " + id);
+            rs.first();
+            curso = new Curso(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getString("turno"),
+                    rs.getString("tipo")
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return curso;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

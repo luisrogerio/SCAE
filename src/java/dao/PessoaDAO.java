@@ -67,6 +67,32 @@ public class PessoaDAO {
         return pessoas;
     }
 
+    public static Pessoa obterPessoa(String id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Pessoa pessoa = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM pessoas WHERE id LIKE \"" + id + "\"");
+            rs.first();
+            pessoa = new Pessoa(
+                    rs.getString("id"),
+                    rs.getString("nome"),
+                    rs.getString("dataNascimento"),
+                    rs.getString("estadoCivil"),
+                    rs.getString("CPF"),
+                    rs.getString("identidade")
+            );
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return pessoa;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

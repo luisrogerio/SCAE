@@ -31,9 +31,9 @@ public class ManterQuadroFamiliarController extends HttpServlet {
         }
         else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        }/* else if (acao.equals("prepararEditar")) {
+        } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
+        }/* else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
         } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
@@ -47,7 +47,7 @@ public class ManterQuadroFamiliarController extends HttpServlet {
         try {
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("pessoas", Pessoa.obterPessoas());
-            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconmicos());
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
             RequestDispatcher view = request.getRequestDispatcher("/manterQuadroFamiliar.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {

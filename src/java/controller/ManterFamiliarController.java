@@ -29,9 +29,9 @@ public class ManterFamiliarController extends HttpServlet {
         }
         else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        }/* else if (acao.equals("prepararEditar")) {
+        } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
+        }/* else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
         } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
@@ -44,7 +44,7 @@ public class ManterFamiliarController extends HttpServlet {
             HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
-            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconmicos());
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
             RequestDispatcher view = request.getRequestDispatcher("/manterFamiliar.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {

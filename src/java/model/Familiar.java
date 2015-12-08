@@ -51,17 +51,17 @@ public class Familiar extends Pessoa {
     public void setParentesco(String parentesco) {
         this.parentesco = parentesco;
     }
-//
-//    public FormularioSocioeconomico getFormularioSocioeconomico() {
-//        if(this.codigoFormularioSocioeconomico != 0 && this.formularioSocioeconomico == null){
-//            try {
-//                this.formularioSocioeconomico = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
-//            } catch (ClassNotFoundException){
-//                
-//            }
-//        }
-//        return this.formularioSocioeconomico;
-//    }
+
+    public FormularioSocioeconomico getFormularioSocioeconomico() {
+        if(this.codigoFormularioSocioeconomico != 0 && this.formularioSocioeconomico == null){
+            try {
+                this.formularioSocioeconomico = FormularioSocioeconomico.obterFormularioSocioeconomico(this.codigoFormularioSocioeconomico);
+            } catch (ClassNotFoundException ex){
+                
+            }
+        }
+        return this.formularioSocioeconomico;
+    }
 
     public void setFormularioSocioeconomico(FormularioSocioeconomico formularioSocioeconomico) {
         this.formularioSocioeconomico = formularioSocioeconomico;
@@ -85,6 +85,10 @@ public class Familiar extends Pessoa {
 
     public static List<Familiar> obterFamiliares() throws ClassNotFoundException {
         return FamiliarDAO.obterFamiliares();
+    }
+    
+    public static Familiar obterFamiliar(String codigo) throws ClassNotFoundException {
+        return FamiliarDAO.obterFamiliar(codigo);
     }
 
     public static void gravar(Familiar familiar) throws ClassNotFoundException, SQLException {

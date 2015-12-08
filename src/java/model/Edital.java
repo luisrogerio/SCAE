@@ -57,6 +57,10 @@ public class Edital {
     public static List<Edital> obterEditais() throws ClassNotFoundException {
         return EditalDAO.obterEditais();
     }
+    
+    public static Edital obterEdital(int id) throws ClassNotFoundException {
+        return EditalDAO.obterEdital(id);
+    }
 
     public static void gravar(Edital edital) throws ClassNotFoundException, SQLException {
         EditalDAO.gravar(edital);

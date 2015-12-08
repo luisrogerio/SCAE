@@ -786,46 +786,46 @@ public class FormularioSocioeconomico {
         this.data = data;
     }
 
-//    public Candidato getCandidato() {
-//        if (this.codigoCandidato != 0 && this.candidato == null) {
-//            try {
-//                this.candidato = Candidato.obterCandidato(this.codigoCandidato);
-//            } catch (ClassNotFoundException) {
-//
-//            }
-//        }
-//        return this.candidato;
-//    }
+    public Candidato getCandidato() {
+        if (this.codigoCandidato.equals("0") && this.candidato == null) {
+            try {
+                this.candidato = Candidato.obterCandidato(this.codigoCandidato);
+            } catch (ClassNotFoundException ex) {
+
+            }
+        }
+        return this.candidato;
+    }
 
     public void setCandidato(Candidato candidato) {
         this.candidato = candidato;
     }
 
-//    public Edital getEdital() {
-//        if (this.codigoEdital != 0 && this.edital == null) {
-//            try {
-//                this.edital = Edital.obterEdital(this.codigoEdital);
-//            } catch (ClassNotFoundException) {
-//
-//            }
-//        }
-//        return this.edital;
-//    }
+    public Edital getEdital() {
+        if (this.codigoEdital != 0 && this.edital == null) {
+            try {
+                this.edital = Edital.obterEdital(this.codigoEdital);
+            } catch (ClassNotFoundException ex) {
+
+            }
+        }
+        return this.edital;
+    }
 
     public void setEdital(Edital edital) {
         this.edital = edital;
     }
 
-//    public Endereco getEndereco() {
-//        if (this.codigoEndereco != 0 && this.endereco == null) {
-//            try {
-//                this.endereco = Endereco.obterEndereco(this.codigoEndereco);
-//            } catch (ClassNotFoundException) {
-//
-//            }
-//        }
-//        return this.endereco;
-//    }
+    public Endereco getEndereco() {
+        if (this.codigoEndereco != 0 && this.endereco == null) {
+            try {
+                this.endereco = Endereco.obterEndereco(this.codigoEndereco);
+            } catch (ClassNotFoundException ex) {
+
+            }
+        }
+        return this.endereco;
+    }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
@@ -863,12 +863,16 @@ public class FormularioSocioeconomico {
         this.modalidades = modalidades;
     }
 
-    public static List<FormularioSocioeconomico> obterFormulariosSocioeconmicos() throws ClassNotFoundException {
-        return FormularioSocioeconomicoDAO.obterFormulariosSocioeconmicos();
+    public static List<FormularioSocioeconomico> obterFormulariosSocioeconomicos() throws ClassNotFoundException {
+        return FormularioSocioeconomicoDAO.obterFormulariosSocioeconomicos();
+    }
+    
+    public static FormularioSocioeconomico obterFormularioSocioeconomico(int id) throws ClassNotFoundException {
+        return FormularioSocioeconomicoDAO.obterFormularioSocioeconomico(id);
     }
         
-    public static void gravar(FormularioSocioeconomico formularioSocioeconomico) throws ClassNotFoundException, SQLException{
-        FormularioSocioeconomicoDAO.gravar(formularioSocioeconomico);
+    public static void gravar(FormularioSocioeconomico formularioSocioeconomico, Endereco endereco) throws ClassNotFoundException, SQLException{
+        FormularioSocioeconomicoDAO.gravar(formularioSocioeconomico, endereco);
     }
 
 }

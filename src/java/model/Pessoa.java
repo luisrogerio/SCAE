@@ -77,6 +77,10 @@ public class Pessoa {
     public static List<Pessoa> obterPessoas() throws ClassNotFoundException{
         return PessoaDAO.obterPessoas();
     }
+    
+    public static Pessoa obterPessoa(String id) throws ClassNotFoundException{
+        return PessoaDAO.obterPessoa(id);
+    }
         
     public static void gravar(Pessoa pessoa) throws ClassNotFoundException, SQLException{
         PessoaDAO.gravar(pessoa);

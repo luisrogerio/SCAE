@@ -30,9 +30,9 @@ public class ManterDeclaracaoController extends HttpServlet {
         }
         else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        }/* else if (acao.equals("prepararEditar")) {
+        } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
+        }/* else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
         } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
@@ -74,7 +74,7 @@ public class ManterDeclaracaoController extends HttpServlet {
             declaracao.setCodigoEdital(edital);
             declaracao.setCodigoPessoa(pessoa);
             Declaracoes.gravar(declaracao);
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaDeclaracaoController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaDeclaracoesController");
             view.forward(request, response);
         } catch (IOException ex) {
 
@@ -82,6 +82,25 @@ public class ManterDeclaracaoController extends HttpServlet {
 
         } catch (Exception ex) {
 
+        }
+    }
+    
+    public void prepararEditar(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt(request.getParameter("codigoDeclaracao"));
+            request.setAttribute("pessoas", Pessoa.obterPessoas());
+            request.setAttribute("editais", Edital.obterEditais());
+            request.setAttribute("declaracao", Declaracoes.obterDeclaracao(id));
+            RequestDispatcher view = request.getRequestDispatcher("/manterDeclaracoes.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
         }
     }
 

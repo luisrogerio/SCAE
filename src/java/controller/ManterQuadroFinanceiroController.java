@@ -32,9 +32,9 @@ public class ManterQuadroFinanceiroController extends HttpServlet {
         }
         else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        }/* else if (acao.equals("prepararEditar")) {
+        } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
+        }/* else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
         } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
@@ -48,7 +48,7 @@ public class ManterQuadroFinanceiroController extends HttpServlet {
         try {
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("pessoas", Pessoa.obterPessoas());
-            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconmicos());
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
             RequestDispatcher view = request.getRequestDispatcher("/manterQuadroFinanceiro.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
@@ -83,6 +83,25 @@ public class ManterQuadroFinanceiroController extends HttpServlet {
 
         } catch (Exception ex) {
 
+        }
+    }
+    
+    public void prepararEditar(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            int id = Integer.parseInt(request.getParameter("codigoQuadroFinanceiro"));
+            request.setAttribute("operacao", "Incluir");
+            request.setAttribute("pessoas", Pessoa.obterPessoas());
+            request.setAttribute("quadroFinanceiro", QuadroFinanceiro.obterQuadroFinanceiro(id));
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
+            RequestDispatcher view = request.getRequestDispatcher("/manterQuadroFinanceiro.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
         }
     }
 

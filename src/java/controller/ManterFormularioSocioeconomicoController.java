@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Endereco;
 import model.FormularioSocioeconomico;
 
 /**
@@ -25,12 +26,11 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        }
-        else if (acao.equals("confirmarIncluir")) {
+        } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        }/* else if (acao.equals("prepararEditar")) {
+        } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        } else if (acao.equals("confirmarEditar")) {
+        }/*  else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
         } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
@@ -54,6 +54,16 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
 
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("textId"));
+        String logradouro = request.getParameter("textLogradouro");
+        String rua = request.getParameter("textRua");
+        String bairro = request.getParameter("textBairro");
+        String cidade = request.getParameter("textCidade");
+        String UF = request.getParameter("textUF");
+        String logradouroRepublica = request.getParameter("textLogradouroRepublica");
+        String ruaRepublica = request.getParameter("textRuaRepublica");
+        String bairroRepublica = request.getParameter("textBairroRepublica");
+        String cidadeRepublica = request.getParameter("textCidadeRepublica");
+        String UFRepublica = request.getParameter("textUFRepublica");
         String candidato = request.getParameter("selectCandidato");
         int edital = Integer.parseInt(request.getParameter("selectEdital"));
         int enredeco = Integer.parseInt(request.getParameter("textEnredeco"));
@@ -132,28 +142,30 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String data = request.getParameter("textData");
 
         try {
-            FormularioSocioeconomico formularioSocioeconomico = new FormularioSocioeconomico(id, serieModuloPeriodo, atendimentoAssistencia, 
-                    atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica, 
-                    nomeAtividadeAcademica, ganhoAtividadeAcademica, atividadeRemunerada, cargaHorariaRemunerada, 
-                    salarioRemunerada, condicaoManutencao, outraCondicaoManutencao, condicaoMoradia, 
-                    outraCondicaoMoradia, responsavelManutencao, outroResponsavelManutencao, esgoto, 
-                    aguaTratada, iluminacao, coletaLixo, pavimentacao, localResidenciaFamiliar, 
-                    outroLocalResidenciaFamiliar, tipoResidenciaFamiliar, outroTipoResidenciaFamiliar, 
-                    precoResidenciaFamiliar, cedente, acabamentoResidenciaFamiliar, imoveisExtras, 
-                    quantidadeAutomoveis, anos, modelos, quantidadeTelevisoes, quantidadeMaquinasDeLavar, 
-                    quantidadeGeladeiras, quantidadeTvsACabo, quantidadeComputadores, internet, quantidadeEmpregadasMensalistas, 
-                    quantidadeEmpregadasDiaristas, quantidadeBanheiros, quantidadeQuartos, aluguelImoveis, 
-                    pensaoMorte, pensaoAlimenticia, ajudaTerceiros, beneficiosSociais, outraRenda, numeroResidentes, 
-                    despesaFamiliarAgua, despesaFamiliarLuz, despesaFamiliarTelefone, despesaFamiliarCondominio, 
-                    despesaFamiliarMensalidadeEscolar, despesaFamiliarAlimentacao, despesaFamiliarSaude, 
-                    despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia, 
-                    despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone, 
-                    despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras, 
+            FormularioSocioeconomico formularioSocioeconomico = new FormularioSocioeconomico(id, serieModuloPeriodo, atendimentoAssistencia,
+                    atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica,
+                    nomeAtividadeAcademica, ganhoAtividadeAcademica, atividadeRemunerada, cargaHorariaRemunerada,
+                    salarioRemunerada, condicaoManutencao, outraCondicaoManutencao, condicaoMoradia,
+                    outraCondicaoMoradia, responsavelManutencao, outroResponsavelManutencao, esgoto,
+                    aguaTratada, iluminacao, coletaLixo, pavimentacao, localResidenciaFamiliar,
+                    outroLocalResidenciaFamiliar, tipoResidenciaFamiliar, outroTipoResidenciaFamiliar,
+                    precoResidenciaFamiliar, cedente, acabamentoResidenciaFamiliar, imoveisExtras,
+                    quantidadeAutomoveis, anos, modelos, quantidadeTelevisoes, quantidadeMaquinasDeLavar,
+                    quantidadeGeladeiras, quantidadeTvsACabo, quantidadeComputadores, internet, quantidadeEmpregadasMensalistas,
+                    quantidadeEmpregadasDiaristas, quantidadeBanheiros, quantidadeQuartos, aluguelImoveis,
+                    pensaoMorte, pensaoAlimenticia, ajudaTerceiros, beneficiosSociais, outraRenda, numeroResidentes,
+                    despesaFamiliarAgua, despesaFamiliarLuz, despesaFamiliarTelefone, despesaFamiliarCondominio,
+                    despesaFamiliarMensalidadeEscolar, despesaFamiliarAlimentacao, despesaFamiliarSaude,
+                    despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia,
+                    despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone,
+                    despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras,
                     data, null, null, null);
+            Endereco endereco = new Endereco(id, logradouro, rua, bairro, cidade, UF, 
+                    logradouroRepublica, ruaRepublica, bairroRepublica, cidadeRepublica, UFRepublica);
             formularioSocioeconomico.setCodigoCandidato(candidato);
             formularioSocioeconomico.setCodigoEdital(edital);
-            formularioSocioeconomico.setCodigoEndereco(endereco);
-            FormularioSocioeconomico.gravar(formularioSocioeconomico);
+            formularioSocioeconomico.setCodigoEndereco(id);
+            FormularioSocioeconomico.gravar(formularioSocioeconomico, endereco);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFormularioSocioeconomicoController");
             view.forward(request, response);
         } catch (IOException ex) {

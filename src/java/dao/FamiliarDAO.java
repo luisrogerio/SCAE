@@ -23,13 +23,13 @@ public class FamiliarDAO {
 
     public static void gravar(Familiar familiar) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
-        Pessoa pessoa = new Pessoa(familiar.getId(), familiar.getNome(), familiar.getDataNascimento(), 
+        Pessoa pessoa = new Pessoa(familiar.getId(), familiar.getNome(), familiar.getDataNascimento(),
                 familiar.getEstadoCivil(), familiar.getCPF(), familiar.getIdentidade());
         try {
             Pessoa.gravar(pessoa);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw e;
-        } 
+        }
         try {
             conexao = BD.getConexao();
             String sql = "INSERT INTO familiares (codigo, formulario_socioeconomico, pessoa, nacionalidade, parentesco) VALUES (?, ?, ?, ?, ?) ";
@@ -77,6 +77,37 @@ public class FamiliarDAO {
             fecharConexao(conexao, comando);
         }
         return familiares;
+    }
+
+    public static Familiar obterFamiliar(String codigo) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Familiar familiar = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM familiares, pessoas "
+                    + "WHERE familiares.pessoa = pessoas.id AND familiares.codigo LIKE \"" + codigo + "\"");
+            rs.first();
+            familiar = new Familiar(
+                    rs.getString("pessoas.id"),
+                    rs.getString("nome"),
+                    rs.getString("dataNascimento"),
+                    rs.getString("estadoCivil"),
+                    rs.getString("CPF"),
+                    rs.getString("identidade"),
+                    rs.getString("codigo"),
+                    rs.getString("nacionalidade"),
+                    rs.getString("parentesco"),
+                    null
+            );
+            familiar.setCodigoFormularioSocioeconomico(rs.getInt("formularioSocioeconomico"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return familiar;
     }
 
     public static void fecharConexao(Connection conexao, Statement comando) {

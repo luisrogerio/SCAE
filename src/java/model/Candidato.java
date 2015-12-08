@@ -80,18 +80,18 @@ public class Candidato extends Pessoa {
     public void setInstituicaoMedio(String instituicaoMedio) {
         this.instituicaoMedio = instituicaoMedio;
     }
-//
-//    public Curso getCurso() {
-//        if (this.codigoCurso != 0 && this.curso == null) {
-//            try {
-//                this.curso = Curso.obterCurso(this.codigoCurso);
-//            } catch (ClassNotFoundException) {
-//
-//            }
-//        }
-//
-//        return this.curso;
-//    }
+
+    public Curso getCurso() {
+        if (this.codigoCurso != 0 && this.curso == null) {
+            try {
+                this.curso = Curso.obterCurso(this.codigoCurso);
+            } catch (ClassNotFoundException ex) {
+
+            }
+        }
+
+        return this.curso;
+    }
 
     public void setCurso(Curso curso) {
         this.curso = curso;
@@ -117,7 +117,7 @@ public class Candidato extends Pessoa {
         return CandidatoDAO.obterCandidatos();
     }
 
-    public static Candidato obterCandidato(int matricula) throws ClassNotFoundException {
+    public static Candidato obterCandidato(String matricula) throws ClassNotFoundException {
         return CandidatoDAO.obterCandidato(matricula);
     }
 

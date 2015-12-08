@@ -21,8 +21,8 @@
                 <tr>
                     <td><c:out value="${declaracao.id}"/></td>
                     <td><c:out value="${declaracao.residenciaRepublica}"/></td>
-                    <td><a href="ManterCursoController?acao=prepararEditar&codigoDeclaracao=<c:out value="${declaracao.id}"/>">Editar</a></td>
-                    <td><a href="ManterCursoController?acao=prepararExcluir&codigoDeclaracao=<c:out value="${declaracao.id}"/>">Excluir</a></td>
+                    <td><a href="ManterDeclaracaoController?acao=prepararEditar&codigoDeclaracao=<c:out value="${declaracao.id}"/>">Editar</a></td>
+                    <td><a href="ManterDeclaracaoController?acao=prepararExcluir&codigoDeclaracao=<c:out value="${declaracao.id}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
         </table>
