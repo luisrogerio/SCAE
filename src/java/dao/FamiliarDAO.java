@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Familiar;
+import model.Pessoa;
 
 /**
  *
@@ -22,6 +23,13 @@ public class FamiliarDAO {
 
     public static void gravar(Familiar familiar) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
+        Pessoa pessoa = new Pessoa(familiar.getId(), familiar.getNome(), familiar.getDataNascimento(), 
+                familiar.getEstadoCivil(), familiar.getCPF(), familiar.getIdentidade());
+        try {
+            Pessoa.gravar(pessoa);
+        } catch (SQLException e){
+            throw e;
+        } 
         try {
             conexao = BD.getConexao();
             String sql = "INSERT INTO familiares (codigo, formulario_socioeconomico, pessoa, nacionalidade, parentesco) VALUES (?, ?, ?, ?, ?) ";

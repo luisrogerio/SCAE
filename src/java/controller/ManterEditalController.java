@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Edital;
 
 /**
  *
@@ -24,9 +25,10 @@ public class ManterEditalController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        } /*else if (acao.equals("confirmarIncluir")) {
+        }
+        else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        } else if (acao.equals("prepararEditar")) {
+        } /*else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
@@ -46,6 +48,26 @@ public class ManterEditalController extends HttpServlet {
         } catch (ServletException ex) {
 
         } catch (IOException ex) {
+
+        }
+    }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        String ano = request.getParameter("textAno");
+        int semestre = Integer.parseInt(request.getParameter("selectSemestre"));
+        String descricao = request.getParameter("textDescricao");
+
+        try {
+            Edital edital = new Edital(id, ano, semestre, descricao);
+            Edital.gravar(edital);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaEditalController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
 
         }
     }

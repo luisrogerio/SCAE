@@ -7,11 +7,15 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.Normalizer;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.FormularioSocioeconomico;
+import model.Pessoa;
+import model.QuadroFamiliar;
 
 /**
  *
@@ -24,9 +28,10 @@ public class ManterQuadroFamiliarController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        } /*else if (acao.equals("confirmarIncluir")) {
+        }
+        else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        } else if (acao.equals("prepararEditar")) {
+        }/* else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
@@ -41,11 +46,41 @@ public class ManterQuadroFamiliarController extends HttpServlet {
             HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
+            request.setAttribute("pessoas", Pessoa.obterPessoas());
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconmicos());
             RequestDispatcher view = request.getRequestDispatcher("/manterQuadroFamiliar.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
 
         } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
+        }
+    }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        String pessoa = request.getParameter("selectPessoa");
+        String doenca = request.getParameter("textDoenca");
+        boolean capacidadeTrabalho = Boolean.parseBoolean(request.getParameter("textCapacidadeTrabalho"));
+        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("textDependenciaAtividade"));
+        float gastoMensal = Float.parseFloat(request.getParameter("textGastoMensal"));
+
+        try {
+            QuadroFamiliar quadroFamiliar = new QuadroFamiliar(id, doenca, capacidadeTrabalho, 
+                    dependenciaAtividade, gastoMensal, null, null);
+            quadroFamiliar.setCodigoFormularioSocioeconomico(formulario_socioeconomico);
+            quadroFamiliar.setCodigoPessoa(pessoa);
+            QuadroFamiliar.gravar(quadroFamiliar);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaQuadroFamiliarController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
 
         }
     }

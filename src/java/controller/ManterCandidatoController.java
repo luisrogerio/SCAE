@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Candidato;
 import model.Curso;
 
 /**
@@ -25,9 +26,10 @@ public class ManterCandidatoController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        } /*else if (acao.equals("confirmarIncluir")) {
+        }
+        else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        } else if (acao.equals("prepararEditar")) {
+        }/* else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
@@ -42,8 +44,7 @@ public class ManterCandidatoController extends HttpServlet {
             HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
-            List<Curso> cursos = Curso.obterCursos();
-            request.setAttribute("cursos", cursos);
+            request.setAttribute("cursos", Curso.obterCursos());
             RequestDispatcher view = request.getRequestDispatcher("/manterCandidato.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
@@ -51,8 +52,41 @@ public class ManterCandidatoController extends HttpServlet {
         } catch (IOException ex) {
 
         } catch (ClassNotFoundException ex) {
-            
-        } 
+
+        }
+    }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        String matricula = request.getParameter("textMatricula");
+        String nome = request.getParameter("textNome");
+        String dataNascimento = request.getParameter("textDataNascimento");
+        String estadoCivil = request.getParameter("textEstadoCivil");
+        String CPF = request.getParameter("textCPF");
+        String identidade = request.getParameter("textIdentidade");
+        int curso = Integer.parseInt(request.getParameter("selectCurso"));
+        String genero = request.getParameter("textGenero");
+        String telefoneResidencial = request.getParameter("textTelefoneResidencial");
+        String telefoneCelular = request.getParameter("textTelefoneCelular");
+        String instituicaoFundamental = request.getParameter("textInstituicaoFundamental");
+        String instituicaoMedio = request.getParameter("textInstituicaoMedio");
+
+        try {
+            Candidato candidato = new Candidato(matricula, nome, 
+                    dataNascimento, estadoCivil, CPF, identidade, 
+                    matricula, genero, telefoneResidencial, 
+                    telefoneCelular, instituicaoFundamental, instituicaoMedio, null);
+            candidato.setCodigoCurso(curso);
+            candidato.setCodigoPessoa(matricula);
+            Candidato.gravar(candidato);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCandidatoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

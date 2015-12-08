@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Candidato;
+import model.Pessoa;
 
 /**
  *
@@ -22,6 +23,13 @@ public class CandidatoDAO {
 
     public static void gravar(Candidato candidato) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
+        try {
+        Pessoa pessoa = new Pessoa(candidato.getId(), candidato.getNome(), candidato.getDataNascimento(), 
+                candidato.getEstadoCivil(), candidato.getCPF(), candidato.getIdentidade());
+            Pessoa.gravar(pessoa);
+        } catch (SQLException e){
+            throw e;
+        } 
         try {
             conexao = BD.getConexao();
             String sql = "INSERT INTO candidatos (matricula, curso, pessoa, genero, telefoneResidencial, telefoneCelular, instituicaoFundamental, instituicaoMedio) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";

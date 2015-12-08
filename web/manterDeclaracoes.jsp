@@ -14,41 +14,44 @@
                 <tr>
                     <td><label for='textId'>Código</label></td>
                     <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr>
-                    <td>Candidato ou Familiar</td>
-                    <td>
-                        <select name="selectPessoa"<c:if test="${curso.turno == 'true'}">Selected</c:if>>
-                            <option></option>
-                        </select>
-                    </td>
-                </tr>	
-                <tr>
-                    <td>Edital</td>
-                    <td>
-                        <select name="selectEdital"<c:if test="${pessoa.pessoa== 'true'}">Selected</c:if>>
-                            <option></option>
-                        </select>
-                    </td>
-                </tr>	
-                <tr>
-                    <td><input type='checkbox' name='checkResidenciaRepublica' <c:if test="${declaracoes.residenciaRepublica == 'true'}"> checked</c:if>></td>
-                    <td><label for='checkResidenciaRepublica'>Declaração de Residência em República</label></td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' name='checkNaoAtividade'  <c:if test="${declaracoes.naoAtividade == 'true'}"> checked</c:if>></td>
-                    <td><label for='checkNaoAtividade'>Declaração de Não Atividade</label></td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' name='checkAtividadeInformal' <c:if test="${declaracoes.atividadeInformal == 'true'}"> checked</c:if>></td>
-                    <td><label for='checkAtividadeInformal'>Declaração de Atividade Econômica Informal</label></td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' name='checkInexistenciaContaBancaria' <c:if test="${declaracoe.inexistenciaContaBancaria == 'true'}"> checked</c:if>></td>
-                    <td><label for='checkInexistenciaContaBancaria'>Declaração de Inexistência Conta Bancária</label></td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' name='checkInexistenciaContaBancariaJuridica' <c:if test="${declaracoes.inexistenciaContabancariaJuridica == 'true'}"> checked</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Candidato ou Familiar</td>
+                        <td>
+                            <select name="selectPessoa" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <option value="0" <c:if test="${declaracao.pessoa == null}">selected</c:if>></option>
+                                <c:forEach items="${pessoas}" var="pessoa">
+                                    <option value="${pessoa.id}">${pessoa.nome}</option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>	
+                    <tr>
+                        <td>Edital</td>
+                        <td>
+                            <select name="selectEdital" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <option></option>
+                            </select>
+                        </td>
+                    </tr>	
+                    <tr>
+                        <td><input type='checkbox' name='checkResidenciaRepublica' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${declaracoes.residenciaRepublica == 'true'}"> checked</c:if>></td>
+                        <td><label for='checkResidenciaRepublica'>Declaração de Residência em República</label></td>
+                    </tr>
+                    <tr>
+                            <td><input type='checkbox' name='checkNaoAtividade' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${declaracoes.naoAtividade == 'true'}"> checked</c:if>></td>
+                        <td><label for='checkNaoAtividade'>Declaração de Não Atividade</label></td>
+                    </tr>
+                    <tr>
+                            <td><input type='checkbox' name='checkAtividadeInformal' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${declaracoes.atividadeInformal == 'true'}"> checked</c:if>></td>
+                        <td><label for='checkAtividadeInformal'>Declaração de Atividade Econômica Informal</label></td>
+                    </tr>
+                    <tr>
+                            <td><input type='checkbox' name='checkInexistenciaContaBancaria' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${declaracoe.inexistenciaContaBancaria == 'true'}"> checked</c:if>></td>
+                        <td><label for='checkInexistenciaContaBancaria'>Declaração de Inexistência Conta Bancária</label></td>
+                    </tr>
+                    <tr>
+                            <td><input type='checkbox' name='checkInexistenciaContaBancariaJuridica' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${declaracoes.inexistenciaContabancariaJuridica == 'true'}"> checked</c:if>></td>
                     <td><label for='checkInexistenciaContaBancariaJuridica'>Declaração de Inexistência Conta Bancária Jurídica</label></td>
                 </tr>
                 <tr>

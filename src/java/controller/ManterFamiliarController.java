@@ -12,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Familiar;
+import model.FormularioSocioeconomico;
 
 /**
  *
@@ -24,9 +26,10 @@ public class ManterFamiliarController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        } /*else if (acao.equals("confirmarIncluir")) {
+        }
+        else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        } else if (acao.equals("prepararEditar")) {
+        }/* else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
@@ -41,11 +44,42 @@ public class ManterFamiliarController extends HttpServlet {
             HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconmicos());
             RequestDispatcher view = request.getRequestDispatcher("/manterFamiliar.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
 
         } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
+        }
+    }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        String codigo = request.getParameter("textCodigo");
+        String nome = request.getParameter("textNome");
+        String dataNascimento = request.getParameter("textDataNascimento");
+        String estadoCivil = request.getParameter("textEstadoCivil");
+        String CPF = request.getParameter("textCPF");
+        String identidade = request.getParameter("textIdentidade");
+        int formularioSocioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        String nacionalidade = request.getParameter("textNacionalidade");
+        String parentesco = request.getParameter("textParentesco");
+
+        try {
+            Familiar familiar = new Familiar(codigo, nome, dataNascimento, estadoCivil, CPF, identidade, codigo, 
+                    nacionalidade, parentesco, null);
+            familiar.setCodigoFormularioSocioeconomico(formularioSocioeconomico);
+            familiar.setCodigoPessoa(codigo);
+            Familiar.gravar(familiar);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFamiliarController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
 
         }
     }

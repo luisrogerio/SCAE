@@ -13,11 +13,11 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId <c:if test="${operacao != 'Incluir'}"> readonly</c:if>'></td>
-                </tr>
-                <tr>
-                    <td><label for='textNome'>Nome</label></td>
-                    <td><input type='text' name='textNome'  value="${modalidade.nome}"></td>
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td><label for='textNome'>Nome</label></td>
+                        <td><input type='text' name='textNome' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> value="${modalidade.nome}"></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type='submit' name='Enviar'></td>

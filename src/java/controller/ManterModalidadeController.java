@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Modalidade;
 
 /**
  *
@@ -24,9 +25,10 @@ public class ManterModalidadeController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        } /*else if (acao.equals("confirmarIncluir")) {
+        }
+        else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
-        } else if (acao.equals("prepararEditar")) {
+        }/* else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
@@ -46,6 +48,24 @@ public class ManterModalidadeController extends HttpServlet {
         } catch (ServletException ex) {
 
         } catch (IOException ex) {
+
+        }
+    }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        String nome = request.getParameter("textNome");
+
+        try {
+            Modalidade modalidade = new Modalidade(id, nome);
+            Modalidade.gravar(modalidade);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaModalidadeController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
 
         }
     }

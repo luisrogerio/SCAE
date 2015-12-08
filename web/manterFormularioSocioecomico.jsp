@@ -14,11 +14,11 @@
                 <tr>
                     <td><label for='textId'>Código</label></td>
                     <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr>
-                    <td>Edital</td>
-                    <td>
-                        <select name="selectEdital">
+                    </tr>
+                    <tr>
+                        <td>Edital</td>
+                        <td>
+                            <select name="selectEdital"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             <option></option>
                         </select>
                     </td>

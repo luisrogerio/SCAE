@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class EditalDAO {
             String sql = "INSERT INTO editais (id, ano, semestre, descricao) VALUES (?, ?, ?, ?) ";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, edital.getId());
-            comando.setString(2, edital.getAno());
+            comando.setDate(2, new Date(Integer.parseInt(edital.getAno()), 0, 0));
             comando.setInt(3, edital.getSemestre());
             comando.setString(4, edital.getDescricao());
             comando.execute();

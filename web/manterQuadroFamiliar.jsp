@@ -14,38 +14,41 @@
                 <tr>
                     <td><label for='textId'>Código</label></td>
                     <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>			
-                </tr>
-                <tr>
-                    <td>Candidato ou Familiar</td>
-                    <td>
-                        <select name="selectPessoa">
-                            <option></option>
-                        </select>
-                    </td>
-                </tr>	
-                <tr>
-                    <td>Formulário Socioecômico</td>
-                    <td>
-                        <select name="selectFormularioSocioeconomico">
-                            <option></option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for='textDoenca'>Nome da Doença</label></td>
-                    <td><input type='text' name='textDoenca'  value="${quadrofamiliar.doenca}"></td>			
-                </tr>
-                <tr>
-                    <td><input type='checkbox' name='checkCapacidadeTrabalho' <c:if test="${quadrofamiliar.capacidadeTrabalho == 'true'}"> checked</c:if>></td>
-                    <td><label for='checkCapacidadeTrabalho'>Tem Capacidade de Trabalho</label></td>			
-                </tr>
-                <tr>
-                    <td><input type='checkbox' name='checkDependenciaAtividades' <c:if test="${quadrofamiliar.dependenciaAtividade == 'true'}"> checked</c:if>></td>
-                    <td><label for='checkDependenciaAtividades'>Dependência para Atividades diárias</label></td>			
-                </tr>
-                <tr>
-                    <td><label for='textGastosMensais'>Gastos mensais com tratamento</label></td>
-                    <td><input type='text' name='textGastosMensais' value="${quadrofamiliar.gastoMensal}"></td>			
+                    </tr>
+                    <tr>
+                        <td>Candidato ou Familiar</td>
+                        <td>
+                            <select name="selectPessoa" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <option value="0" <c:if test="${declaracao.pessoa == null}">selected</c:if>></option>
+                                <c:forEach items="${pessoas}" var="pessoa">
+                                    <option value="${pessoa.id}">${pessoa.nome}</option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>	
+                    <tr>
+                        <td>Formulário Socioecômico</td>
+                        <td>
+                            <select name="selectFormularioSocioeconomico" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <option></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for='textDoenca'>Nome da Doença</label></td>
+                        <td><input type='text' name='textDoenca' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> value="${quadrofamiliar.doenca}"></td>			
+                    </tr>
+                    <tr>
+                        <td><input type='checkbox' name='checkCapacidadeTrabalho' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${quadrofamiliar.capacidadeTrabalho == 'true'}"> checked</c:if>></td>
+                        <td><label for='checkCapacidadeTrabalho'>Tem Capacidade de Trabalho</label></td>			
+                    </tr>
+                    <tr>
+                            <td><input type='checkbox' name='checkDependenciaAtividades' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${quadrofamiliar.dependenciaAtividade == 'true'}"> checked</c:if>></td>
+                        <td><label for='checkDependenciaAtividades'>Dependência para Atividades diárias</label></td>			
+                    </tr>
+                    <tr>
+                        <td><label for='textGastosMensais'>Gastos mensais com tratamento</label></td>
+                            <td><input type='text' name='textGastosMensais' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> value="${quadrofamiliar.gastoMensal}"></td>			
                 </tr>
                 <tr>
                     <td colspan="2"><input type='submit' name='Enviar'></td>			
