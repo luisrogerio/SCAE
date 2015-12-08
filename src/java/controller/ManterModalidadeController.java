@@ -25,8 +25,7 @@ public class ManterModalidadeController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        }
-        else if (acao.equals("confirmarIncluir")) {
+        } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
@@ -67,6 +66,23 @@ public class ManterModalidadeController extends HttpServlet {
 
         } catch (Exception ex) {
 
+        }
+    }
+
+    public void prepararEditar(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int id = Integer.parseInt(request.getParameter("codigoModalidade"));
+            request.setAttribute("modalidade", Modalidade.obterModalidade(id));
+            RequestDispatcher view = request.getRequestDispatcher("/manterModalidade.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
         }
     }
 

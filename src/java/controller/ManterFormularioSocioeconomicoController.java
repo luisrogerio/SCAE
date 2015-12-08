@@ -160,7 +160,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
                     despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone,
                     despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras,
                     data, null, null, null);
-            Endereco endereco = new Endereco(id, logradouro, rua, bairro, cidade, UF, 
+            Endereco endereco = new Endereco(id, logradouro, rua, bairro, cidade, UF,
                     logradouroRepublica, ruaRepublica, bairroRepublica, cidadeRepublica, UFRepublica);
             formularioSocioeconomico.setCodigoCandidato(candidato);
             formularioSocioeconomico.setCodigoEdital(edital);
@@ -174,6 +174,23 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
 
         } catch (Exception ex) {
 
+        }
+    }
+
+    public void prepararEditar(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Incluir");
+            int id = Integer.parseInt(request.getParameter("codigoFormularioSocioeconomico"));
+            request.setAttribute("formularioSocioeconomico", FormularioSocioeconomico.obterFormularioSocioeconomico(id));
+            RequestDispatcher view = request.getRequestDispatcher("/manterFormularioSocioeconomico.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
         }
     }
 

@@ -13,7 +13,7 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if> value="${modalidade.id}"></td>
                     </tr>
                     <tr>
                         <td><label for='textNome'>Nome</label></td>

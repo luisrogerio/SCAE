@@ -84,6 +84,25 @@ public class ManterQuadroFamiliarController extends HttpServlet {
 
         }
     }
+    
+        public void prepararEditar(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Incluir");
+            int id = Integer.parseInt(request.getParameter("codigoQuadroFamiliar"));
+            request.setAttribute("quadroFamiliar", QuadroFamiliar.obterQuadroFamiliar(id));
+            request.setAttribute("pessoas", Pessoa.obterPessoas());
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
+            RequestDispatcher view = request.getRequestDispatcher("/manterQuadroFamiliar.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
