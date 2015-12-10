@@ -92,7 +92,7 @@ public class ManterModalidadeController extends HttpServlet {
 
         try {
             Modalidade modalidade = new Modalidade(id, nome);
-            Modalidade.gravar(modalidade);
+            Modalidade.alterar(modalidade);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaModalidadeController");
             view.forward(request, response);
         } catch (IOException ex) {

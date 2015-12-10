@@ -117,7 +117,7 @@ public class ManterFamiliarController extends HttpServlet {
                     nacionalidade, parentesco, null);
             familiar.setCodigoFormularioSocioeconomico(formularioSocioeconomico);
             familiar.setCodigoPessoa(codigo);
-            Familiar.gravar(familiar);
+            Familiar.alterar(familiar);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFamiliarController");
             view.forward(request, response);
         } catch (IOException ex) {

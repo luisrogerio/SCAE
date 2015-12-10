@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import model.Declaracoes;
@@ -34,6 +35,38 @@ public class DeclaracoesDAO {
             comando.setBoolean(6, declaracao.isAtividadeInformal());
             comando.setBoolean(7, declaracao.isInexistenciaContaBancaria());
             comando.setBoolean(8, declaracao.isInexistenciaContaBancariaJuridica());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public static void alterar(Declaracoes declaracao) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE declaracoes SET edital = ?, pessoa = ?, residenciaRepublica = ?, "
+                    + "naoAtividade = ?, atividadeInformal = ?, inexistenciaContaBancaria = ?, "
+                    + "inexistenciaContaBancariaJuridica = ? WHERE id = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(8, declaracao.getId());
+            if(declaracao.getEdital() == null){
+                comando.setNull(1, Types.NULL);
+            } else {
+                comando.setInt(1, declaracao.getCodigoEdital());
+            }
+            if(declaracao.getPessoa()== null){
+                comando.setNull(2, Types.NULL);
+            } else {
+                comando.setString(2, declaracao.getCodigoPessoa());
+            }
+            comando.setBoolean(3, declaracao.isResidenciaRepublica());
+            comando.setBoolean(4, declaracao.isNaoAtividade());
+            comando.setBoolean(5, declaracao.isAtividadeInformal());
+            comando.setBoolean(6, declaracao.isInexistenciaContaBancaria());
+            comando.setBoolean(7, declaracao.isInexistenciaContaBancariaJuridica());
             comando.execute();
             comando.close();
             conexao.close();

@@ -39,6 +39,24 @@ public class EditalDAO {
         }
     }
 
+    public static void alterar(Edital edital) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE editais SET ano = ?, semestre = ?, descricao = ? WHERE id = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(4, edital.getId());
+            comando.setString(1, edital.getAno());
+            comando.setInt(2, edital.getSemestre());
+            comando.setString(3, edital.getDescricao());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
     public static List<Edital> obterEditais() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;

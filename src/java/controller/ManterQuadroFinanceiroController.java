@@ -119,7 +119,7 @@ public class ManterQuadroFinanceiroController extends HttpServlet {
                     ocupacao, rendaMensal, null, null);
             quadroFinanceiro.setCodigoFormularioSocioeconomico(formulario_socioeconomico);
             quadroFinanceiro.setCodigoPessoa(pessoa);
-            QuadroFinanceiro.gravar(quadroFinanceiro); //Mudar para alterar();
+            QuadroFinanceiro.alterar(quadroFinanceiro); //Mudar para alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaQuadroFinanceiroController");
             view.forward(request, response);
         } catch (IOException ex) {

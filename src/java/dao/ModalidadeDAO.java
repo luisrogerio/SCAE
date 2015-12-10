@@ -36,6 +36,22 @@ public class ModalidadeDAO {
         }
     }
 
+    public static void alterar(Modalidade modalidade) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE modalidades SET nome = ? WHERE id = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(2, modalidade.getId());
+            comando.setString(1, modalidade.getNome());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
     public static List<Modalidade> obterModalidades() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;

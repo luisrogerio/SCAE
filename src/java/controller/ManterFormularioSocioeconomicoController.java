@@ -17,7 +17,7 @@ import model.FormularioSocioeconomico;
 
 /**
  *
- * @author Raissa
+ * @author luisr
  */
 public class ManterFormularioSocioeconomicoController extends HttpServlet {
 
@@ -307,7 +307,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
             formularioSocioeconomico.setCodigoCandidato(candidato);
             formularioSocioeconomico.setCodigoEdital(edital);
             formularioSocioeconomico.setCodigoEndereco(id);
-            FormularioSocioeconomico.gravar(formularioSocioeconomico, endereco);
+            FormularioSocioeconomico.alterar(formularioSocioeconomico, endereco);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFormularioSocioeconomicoController");
             view.forward(request, response);
         } catch (IOException ex) {

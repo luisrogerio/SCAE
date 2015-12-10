@@ -57,10 +57,6 @@
         <servlet-class>controller.ManterFamiliarController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManterFormularioSocioeconomicoController</servlet-name>
-        <servlet-class>.ManterFormularioSocioeconomicoController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ManterModalidadeController</servlet-name>
         <servlet-class>controller.ManterModalidadeController</servlet-class>
     </servlet>
@@ -71,6 +67,10 @@
     <servlet>
         <servlet-name>ManterQuadroFinanceiroController</servlet-name>
         <servlet-class>controller.ManterQuadroFinanceiroController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterFormularioSocioeconomicoController</servlet-name>
+        <servlet-class>controller.ManterFormularioSocioeconomicoController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaCursoController</servlet-name>
@@ -139,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>ManterCandidatoController</servlet-name>
         <url-pattern>/ManterCandidatoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterFormularioSocioeconomicoController</servlet-name>
+        <url-pattern>/ManterFormularioSocioeconomicoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

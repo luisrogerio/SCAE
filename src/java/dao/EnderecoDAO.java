@@ -45,6 +45,35 @@ public class EnderecoDAO {
         }
     }
 
+    public static void alterar(Endereco endereco) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE enredecos SET logradouro = ?, rua = ?, bairro = ?, "
+                    + "cidade = ?, UF = ?, logradouroRepublica = ?, "
+                    + "ruaRepublica = ?, bairroRepublica = ?, cidadeRepublica = ?, "
+                    + "UFRepublica = ? WHERE id = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(11, endereco.getId());
+            comando.setString(1, endereco.getLogradouro());
+            comando.setString(2, endereco.getRua());
+            comando.setString(3, endereco.getBairro());
+            comando.setString(4, endereco.getCidade());
+            comando.setString(5, endereco.getUF());
+            comando.setString(6, endereco.getLogradouroRepublica());
+            comando.setString(7, endereco.getRuaRepublica());
+            comando.setString(8, endereco.getBairroRepublica());
+            comando.setString(9, endereco.getCidadeRepublica());
+            comando.setString(10, endereco.getUFRepublica());
+            comando.execute();
+            comando.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
     public static List<Endereco> obterEnderecos() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;

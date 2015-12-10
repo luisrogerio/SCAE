@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import model.QuadroFamiliar;
@@ -33,6 +34,38 @@ public class QuadroFamiliarDAO {
             comando.setBoolean(5, quadroFamiliar.isCapacidadeTrabalho());
             comando.setBoolean(6, quadroFamiliar.isDependenciaAtividade());
             comando.setFloat(7, quadroFamiliar.getGastoMensal());
+            comando.execute();
+            comando.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public static void alterar(QuadroFamiliar quadroFamiliar) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE quadro_familiar SET formulario_socioeconomico = ?, "
+                    + "pessoa = ?, doenca = ?, capacidadeTrabalho = ?, "
+                    + "dependenciaAtividade = ?, gastoMensal = ? WHERE id = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(7, quadroFamiliar.getId());
+            if(quadroFamiliar.getFormularioSocioeconomico() == null){
+                comando.setNull(1, Types.NULL);
+            } else {
+                comando.setInt(1, quadroFamiliar.getCodigoFormularioSocioeconomico());
+            }
+            if(quadroFamiliar.getPessoa()== null){
+                comando.setNull(2, Types.NULL);
+            } else {
+                comando.setString(2, quadroFamiliar.getCodigoPessoa());
+            }
+            comando.setString(3, quadroFamiliar.getDoenca());
+            comando.setBoolean(4, quadroFamiliar.isCapacidadeTrabalho());
+            comando.setBoolean(5, quadroFamiliar.isDependenciaAtividade());
+            comando.setFloat(6, quadroFamiliar.getGastoMensal());
             comando.execute();
             comando.close();
             conexao.close();

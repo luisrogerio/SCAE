@@ -129,7 +129,7 @@ public class ManterCandidatoController extends HttpServlet {
                     telefoneCelular, instituicaoFundamental, instituicaoMedio, null);
             candidato.setCodigoCurso(curso);
             candidato.setCodigoPessoa(matricula);
-            Candidato.gravar(candidato);//VAI MUDAR PARA 'ALTERAR'
+            Candidato.alterar(candidato);//VAI MUDAR PARA 'ALTERAR'
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCandidatoController");
             view.forward(request, response);
         } catch (IOException ex) {
