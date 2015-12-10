@@ -13,7 +13,7 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>			
+                    <td><input type='text' name='textId' value='${quadroFamiliar.id}' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>			
                     </tr>
                     <tr>
                         <td>Candidato ou Familiar</td>
@@ -30,7 +30,11 @@
                         <td>Formulário Socioecômico</td>
                         <td>
                             <select name="selectFormularioSocioeconomico" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option></option>
+                                <option value="0" <c:if test="${familiar.formularioSocioeconomico == null}">selected</c:if>></option>
+                                <c:forEach items="${formulariosSocioeconomicos}" var="a">
+                                    
+                                    <option value="${a.id}">${a.id}</option>
+                                </c:forEach>
                             </select>
                         </td>
                     </tr>

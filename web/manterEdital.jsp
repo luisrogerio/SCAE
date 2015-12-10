@@ -23,8 +23,8 @@
                         <td><label for='selectSemestre'>Semestre</label></td>
                         <td>
                             <select name='selectSemestre' <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
+                        <option value="1" <c:if test="${edital.semestre==1}">selected</c:if>>1</option>
+                                <option <c:if test="${edital.semestre==2}">selected</c:if> value="2">2</option>
                             </select>
                         </td>
                     </tr>

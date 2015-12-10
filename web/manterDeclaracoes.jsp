@@ -21,6 +21,7 @@
                             <select name="selectPessoa" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                 <option value="0" <c:if test="${declaracao.pessoa == null}">selected</c:if>></option>
                                 <c:forEach items="${pessoas}" var="pessoa">
+                                    
                                     <option value="${pessoa.id}">${pessoa.nome}</option>
                                 </c:forEach>
                             </select>

@@ -51,8 +51,9 @@
                         <td><label for='selectSituacaoDeTrabalho'>Situação de trabalho</label></td>
                         <td>
                             <select name="selectSituacaoDeTrabalho" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option></option>
-                            </select>
+                                   <option value='1' <c:if test='${quadroFinanceiro.situacaoDeTrabalho==1}'>checked </c:if>>>1 - Não trabalho</option>
+                                   <option value='2' <c:if test='${quadroFinanceiro.situacaoDeTrabalho==2}'>checked </c:if>>>2 - Desempregado</option>
+                        </select>
                         </td>
                     </tr>
                     <tr>
