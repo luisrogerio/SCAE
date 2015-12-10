@@ -40,6 +40,28 @@ public class PessoaDAO {
         }
     }
 
+    public static void alterar(Pessoa pessoa) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE pessoas SET "
+                    + "nome = ?, dataNascimento = ?, "
+                    + "estadoCivil = ?, CPF = ?, identidade = ? WHERE id = ? ";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(6, pessoa.getId());
+            comando.setString(1, pessoa.getNome());
+            comando.setString(2, pessoa.getDataNascimento());
+            comando.setString(3, pessoa.getEstadoCivil());
+            comando.setString(4, pessoa.getCPF());
+            comando.setString(5, pessoa.getIdentidade());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
     public static List<Pessoa> obterPessoas() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;

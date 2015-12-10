@@ -104,7 +104,7 @@ public class ManterDeclaracaoController extends HttpServlet {
         }
     }
     
-    public void confirmareDITAR(HttpServletRequest request, HttpServletResponse response) {
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("textId"));
         int edital = Integer.parseInt(request.getParameter("selectEdital"));
         String pessoa = request.getParameter("selectPessoa");
@@ -119,7 +119,7 @@ public class ManterDeclaracaoController extends HttpServlet {
                     naoAtividade, atividadeInformal, inexistenciaContaBancaria, inexistenciaContaBancariaJuridica, null, null);
             declaracao.setCodigoEdital(edital);
             declaracao.setCodigoPessoa(pessoa);
-            Declaracoes.gravar(declaracao);//vai mudar
+            Declaracoes.alterar(declaracao);//vai mudar
             RequestDispatcher view = request.getRequestDispatcher("PesquisaDeclaracoesController");
             view.forward(request, response);
         } catch (IOException ex) {

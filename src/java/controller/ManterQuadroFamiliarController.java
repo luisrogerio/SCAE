@@ -117,7 +117,7 @@ public class ManterQuadroFamiliarController extends HttpServlet {
                     dependenciaAtividade, gastoMensal, null, null);
             quadroFamiliar.setCodigoFormularioSocioeconomico(formulario_socioeconomico);
             quadroFamiliar.setCodigoPessoa(pessoa);
-            QuadroFamiliar.gravar(quadroFamiliar);
+            QuadroFamiliar.alterar(quadroFamiliar);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaQuadroFamiliarController");
             view.forward(request, response);
         } catch (IOException ex) {

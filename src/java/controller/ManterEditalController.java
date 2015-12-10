@@ -97,7 +97,7 @@ public class ManterEditalController extends HttpServlet {
 
         try {
             Edital edital = new Edital(id, ano, semestre, descricao);
-            Edital.gravar(edital);//MUDAR
+            Edital.alterar(edital);//MUDAR
             RequestDispatcher view = request.getRequestDispatcher("PesquisaEditalController");
             view.forward(request, response);
         } catch (IOException ex) {

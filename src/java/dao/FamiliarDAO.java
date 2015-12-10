@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import model.Familiar;
@@ -39,6 +40,37 @@ public class FamiliarDAO {
             comando.setString(3, familiar.getCodigoPessoa());
             comando.setString(4, familiar.getNacionalidade());
             comando.setString(5, familiar.getParentesco());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public static void alterar(Familiar familiar) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        Pessoa pessoa = new Pessoa(familiar.getId(), familiar.getNome(), familiar.getDataNascimento(),
+                familiar.getEstadoCivil(), familiar.getCPF(), familiar.getIdentidade());
+        try {
+            Pessoa.alterar(pessoa);
+        } catch (SQLException e) {
+            throw e;
+        }
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE familiares SET formulario_socioeconomico = ?, "
+                    + "pessoa = ?, nacionalidade = ?, parentesco = ? WHERE codigo = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(0, familiar.getCodigo());
+            if(familiar.getFormularioSocioeconomico() == null){
+                comando.setNull(1, Types.NULL);
+            } else {
+                comando.setInt(1, familiar.getCodigoFormularioSocioeconomico());
+            }
+            comando.setString(2, familiar.getCodigo());
+            comando.setString(3, familiar.getNacionalidade());
+            comando.setString(4, familiar.getParentesco());
             comando.execute();
             comando.close();
             conexao.close();

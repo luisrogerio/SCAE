@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import model.QuadroFinanceiro;
@@ -36,6 +37,38 @@ public class QuadroFinanceiroDAO {
             comando.execute();
             comando.close();
             conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public static void alterar(QuadroFinanceiro quadroFinanceiro) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE quadro_financeiro SET formulario_socioeconomico = ?, pessoa = ?, "
+                    + "escolaridade = ?, situacaoDeTrabalho = ?, "
+                    + "ocupacao = ?, rendaMensal = ? WHERE id = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(7, quadroFinanceiro.getId());
+            if(quadroFinanceiro.getFormularioSocioeconomico() == null) {
+                comando.setNull(1, Types.NULL);
+            } else {
+                comando.setInt(1, quadroFinanceiro.getCodigoFormularioSocioeconomico());
+            }
+            if(quadroFinanceiro.getPessoa() == null) {
+                comando.setNull(2, Types.NULL);
+            } else {
+                comando.setString(2, quadroFinanceiro.getCodigoPessoa());
+            }
+            comando.setString(3, quadroFinanceiro.getEscolaridade());
+            comando.setString(4, quadroFinanceiro.getSituacaoDeTrabalho());
+            comando.setString(5, quadroFinanceiro.getOcupacao());
+            comando.setFloat(6, quadroFinanceiro.getRendaMensal());
+            comando.execute();
+            comando.close();
+            conexao.close();
+
         } catch (SQLException e) {
             throw e;
         }

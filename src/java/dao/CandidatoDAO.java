@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import model.Candidato;
@@ -42,6 +43,42 @@ public class CandidatoDAO {
             comando.setString(6, candidato.getTelefoneCelular());
             comando.setString(7, candidato.getInstituicaoFundamental());
             comando.setString(8, candidato.getInstituicaoMedio());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    
+    public static void alterar(Candidato candidato) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            Pessoa pessoa = new Pessoa(candidato.getId(), candidato.getNome(), candidato.getDataNascimento(),
+                    candidato.getEstadoCivil(), candidato.getCPF(), candidato.getIdentidade());
+            Pessoa.alterar(pessoa);
+        } catch (SQLException e) {
+            throw e;
+        }
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE candidatos SET curso = ?, pessoa = ?, "
+                    + "genero = ?, telefoneResidencial = ?, telefoneCelular = ?, "
+                    + "instituicaoFundamental = ?, instituicaoMedio = ? "
+                    + "WHERE matricula = ?" ;
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(8, candidato.getMatricula());
+            if(candidato.getCurso() == null){
+                comando.setNull(1, Types.NULL);
+            } else {
+                comando.setInt(1, candidato.getCodigoCurso());
+            }
+            comando.setString(2, candidato.getMatricula());
+            comando.setString(3, candidato.getGenero());
+            comando.setString(4, candidato.getTelefoneResidencial());
+            comando.setString(5, candidato.getTelefoneCelular());
+            comando.setString(6, candidato.getInstituicaoFundamental());
+            comando.setString(7, candidato.getInstituicaoMedio());
             comando.execute();
             comando.close();
             conexao.close();
