@@ -97,7 +97,7 @@ public class CursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update curso set nome = ?, turno = ?, tipo = ? where id =?";
+            String sql = "update cursos set nome = ?, turno = ?, tipo = ? where id =?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(4, curso.getId());
             comando.setString(1, curso.getNome());

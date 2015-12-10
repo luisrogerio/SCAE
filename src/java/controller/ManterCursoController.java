@@ -99,7 +99,7 @@ public class ManterCursoController extends HttpServlet {
 
         try {
             Curso curso = new Curso(id, nome, turno, tipo);
-            Curso.gravar(curso);//MUDARÁ P EDITAR
+            Curso.alterar(curso);//MUDARÁ P EDITAR
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCursoController");
             view.forward(request, response);
         } catch (IOException ex) {
