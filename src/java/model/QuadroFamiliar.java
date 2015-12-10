@@ -129,5 +129,8 @@ public class QuadroFamiliar {
     public static void gravar(QuadroFamiliar quadroFamiliar) throws ClassNotFoundException, SQLException {
         QuadroFamiliarDAO.gravar(quadroFamiliar);
     }
+    public static void alterar(QuadroFamiliar quadroFamiliar) throws ClassNotFoundException, SQLException {
+        QuadroFamiliarDAO.alterar(quadroFamiliar);
+    }
 
 }

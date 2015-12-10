@@ -129,5 +129,9 @@ public class QuadroFinanceiro {
     public static void gravar(QuadroFinanceiro quadroFinanceiro) throws ClassNotFoundException, SQLException{
         QuadroFinanceiroDAO.gravar(quadroFinanceiro);
     }
+
+    public static void alterar(QuadroFinanceiro quadroFinanceiro) throws ClassNotFoundException, SQLException{
+        QuadroFinanceiroDAO.alterar(quadroFinanceiro);
+    }
     
 }

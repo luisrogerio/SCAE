@@ -125,4 +125,8 @@ public class Candidato extends Pessoa {
         CandidatoDAO.gravar(candidato);
     }
 
+    public static void alterar(Candidato candidato) throws ClassNotFoundException, SQLException {
+        CandidatoDAO.alterar(candidato);
+    }
+
 }

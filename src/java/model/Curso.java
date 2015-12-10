@@ -66,4 +66,8 @@ public class Curso {
         CursoDAO.gravar(curso);
     }
     
+    public static void alterar(Curso curso) throws ClassNotFoundException, SQLException{
+        CursoDAO.alterar(curso);
+    }
+    
 }

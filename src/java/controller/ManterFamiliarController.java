@@ -26,14 +26,13 @@ public class ManterFamiliarController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        }
-        else if (acao.equals("confirmarIncluir")) {
+        } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        }/* else if (acao.equals("confirmarEditar")) {
+        } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        } else if (acao.equals("prepararExcluir")) {
+        }/* else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
@@ -51,8 +50,8 @@ public class ManterFamiliarController extends HttpServlet {
 
         } catch (IOException ex) {
 
-        } catch (ClassNotFoundException ex){
-            
+        } catch (ClassNotFoundException ex) {
+
         }
     }
 
@@ -68,7 +67,7 @@ public class ManterFamiliarController extends HttpServlet {
         String parentesco = request.getParameter("textParentesco");
 
         try {
-            Familiar familiar = new Familiar(codigo, nome, dataNascimento, estadoCivil, CPF, identidade, codigo, 
+            Familiar familiar = new Familiar(codigo, nome, dataNascimento, estadoCivil, CPF, identidade, codigo,
                     nacionalidade, parentesco, null);
             familiar.setCodigoFormularioSocioeconomico(formularioSocioeconomico);
             familiar.setCodigoPessoa(codigo);
@@ -84,6 +83,52 @@ public class ManterFamiliarController extends HttpServlet {
         }
     }
 
+    public void prepararEditar(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            String codigo = request.getParameter("codigoFamiliar");
+            request.setAttribute("familiar", Familiar.obterFamiliar(codigo));
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
+            RequestDispatcher view = request.getRequestDispatcher("/manterFamiliar.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        String codigo = request.getParameter("textCodigo");
+        String nome = request.getParameter("textNome");
+        String dataNascimento = request.getParameter("textDataNascimento");
+        String estadoCivil = request.getParameter("textEstadoCivil");
+        String CPF = request.getParameter("textCPF");
+        String identidade = request.getParameter("textIdentidade");
+        int formularioSocioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        String nacionalidade = request.getParameter("textNacionalidade");
+        String parentesco = request.getParameter("textParentesco");
+
+        try {
+            Familiar familiar = new Familiar(codigo, nome, dataNascimento, estadoCivil, CPF, identidade, codigo,
+                    nacionalidade, parentesco, null);
+            familiar.setCodigoFormularioSocioeconomico(formularioSocioeconomico);
+            familiar.setCodigoPessoa(codigo);
+            Familiar.gravar(familiar);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFamiliarController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

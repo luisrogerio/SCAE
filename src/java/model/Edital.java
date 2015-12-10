@@ -66,4 +66,8 @@ public class Edital {
         EditalDAO.gravar(edital);
     }
 
+    public static void alterar(Edital edital) throws ClassNotFoundException, SQLException {
+        EditalDAO.alterar(edital);
+    }
+
 }
