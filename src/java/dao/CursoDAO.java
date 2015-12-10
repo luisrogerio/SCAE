@@ -93,4 +93,22 @@ public class CursoDAO {
         } catch (SQLException e) {
         }
     }
+       public static void alterar(Curso curso) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "update curso set nome = ?, turno = ?, tipo = ? where id =?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(4, curso.getId());
+            comando.setString(1, curso.getNome());
+            comando.setString(2, curso.getTurno());
+            comando.setString(3, curso.getTipo());
+            comando.execute();
+            comando.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }

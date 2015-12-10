@@ -30,9 +30,9 @@ public class ManterCursoController extends HttpServlet {
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
         }
-        /*else if (acao.equals("confirmarEditar")) {
+        else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        } else if (acao.equals("prepararExcluir")) {
+        }/* else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
@@ -87,6 +87,28 @@ public class ManterCursoController extends HttpServlet {
         } catch (IOException ex) {
 
         } catch (ClassNotFoundException ex) {
+
+        }
+    }
+    
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        String nome = request.getParameter("textNome");
+        String turno = request.getParameter("selectTurno");
+        String tipo = request.getParameter("selectTipo");
+
+        try {
+            Curso curso = new Curso(id, nome, turno, tipo);
+            Curso.gravar(curso);//MUDARÁ P EDITAR
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCursoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (SQLException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
 
         }
     }

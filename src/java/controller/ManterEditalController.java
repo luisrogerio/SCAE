@@ -30,9 +30,9 @@ public class ManterEditalController extends HttpServlet {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        }/* else if (acao.equals("confirmarEditar")) {
+        } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        } else if (acao.equals("prepararExcluir")) {
+        }/* else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
@@ -86,6 +86,26 @@ public class ManterEditalController extends HttpServlet {
 
         } catch (ClassNotFoundException ex){
             
+        }
+    }
+    
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        String ano = request.getParameter("textAno");
+        int semestre = Integer.parseInt(request.getParameter("selectSemestre"));
+        String descricao = request.getParameter("textDescricao");
+
+        try {
+            Edital edital = new Edital(id, ano, semestre, descricao);
+            Edital.gravar(edital);//MUDAR
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaEditalController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
         }
     }
 

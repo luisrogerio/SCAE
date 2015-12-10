@@ -31,9 +31,9 @@ public class ManterCandidatoController extends HttpServlet {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        } /* else if (acao.equals("confirmarEditar")) {
+        }  else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        } else if (acao.equals("prepararExcluir")) {
+        } /*else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
@@ -104,6 +104,39 @@ public class ManterCandidatoController extends HttpServlet {
         } catch (IOException ex) {
 
         } catch (ClassNotFoundException ex) {
+
+        }
+    }
+    
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        String matricula = request.getParameter("textMatricula");
+        String nome = request.getParameter("textNome");
+        String dataNascimento = request.getParameter("textDataNascimento");
+        String estadoCivil = request.getParameter("textEstadoCivil");
+        String CPF = request.getParameter("textCPF");
+        String identidade = request.getParameter("textIdentidade");
+        int curso = Integer.parseInt(request.getParameter("selectCurso"));
+        String genero = request.getParameter("textGenero");
+        String telefoneResidencial = request.getParameter("textTelefoneResidencial");
+        String telefoneCelular = request.getParameter("textTelefoneCelular");
+        String instituicaoFundamental = request.getParameter("textInstituicaoFundamental");
+        String instituicaoMedio = request.getParameter("textInstituicaoMedio");
+
+        try {
+            Candidato candidato = new Candidato(matricula, nome, 
+                    dataNascimento, estadoCivil, CPF, identidade, 
+                    matricula, genero, telefoneResidencial, 
+                    telefoneCelular, instituicaoFundamental, instituicaoMedio, null);
+            candidato.setCodigoCurso(curso);
+            candidato.setCodigoPessoa(matricula);
+            Candidato.gravar(candidato);//VAI MUDAR PARA 'ALTERAR'
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCandidatoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
 
         }
     }
