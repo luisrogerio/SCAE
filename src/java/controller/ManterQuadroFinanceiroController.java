@@ -34,9 +34,9 @@ public class ManterQuadroFinanceiroController extends HttpServlet {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        }/* else if (acao.equals("confirmarEditar")) {
+        } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        } else if (acao.equals("prepararExcluir")) {
+        }/*  else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
@@ -102,6 +102,32 @@ public class ManterQuadroFinanceiroController extends HttpServlet {
 
         } catch (ClassNotFoundException ex){
             
+        }
+    }
+    
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        String pessoa = request.getParameter("selectPessoa");
+        String escolaridade = request.getParameter("textEscolaridade");
+        String situacaoDeTrabalho = request.getParameter("textSituacaoDeTrabalho");
+        String ocupacao = request.getParameter("textOcupacao");
+        float rendaMensal = Float.parseFloat(request.getParameter("textRendaMensal"));
+
+        try {
+            QuadroFinanceiro quadroFinanceiro = new QuadroFinanceiro(id, escolaridade, situacaoDeTrabalho, 
+                    ocupacao, rendaMensal, null, null);
+            quadroFinanceiro.setCodigoFormularioSocioeconomico(formulario_socioeconomico);
+            quadroFinanceiro.setCodigoPessoa(pessoa);
+            QuadroFinanceiro.gravar(quadroFinanceiro); //Mudar para alterar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaQuadroFinanceiroController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
         }
     }
 

@@ -30,9 +30,9 @@ public class ManterFamiliarController extends HttpServlet {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        }/* else if (acao.equals("confirmarEditar")) {
+        } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        } else if (acao.equals("prepararExcluir")) {
+        }/* else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
@@ -101,6 +101,34 @@ public class ManterFamiliarController extends HttpServlet {
         }
     }
 
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        String codigo = request.getParameter("textCodigo");
+        String nome = request.getParameter("textNome");
+        String dataNascimento = request.getParameter("textDataNascimento");
+        String estadoCivil = request.getParameter("textEstadoCivil");
+        String CPF = request.getParameter("textCPF");
+        String identidade = request.getParameter("textIdentidade");
+        int formularioSocioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        String nacionalidade = request.getParameter("textNacionalidade");
+        String parentesco = request.getParameter("textParentesco");
+
+        try {
+            Familiar familiar = new Familiar(codigo, nome, dataNascimento, estadoCivil, CPF, identidade, codigo,
+                    nacionalidade, parentesco, null);
+            familiar.setCodigoFormularioSocioeconomico(formularioSocioeconomico);
+            familiar.setCodigoPessoa(codigo);
+            Familiar.gravar(familiar);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFamiliarController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

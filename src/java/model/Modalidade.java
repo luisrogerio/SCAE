@@ -46,4 +46,8 @@ public class Modalidade {
         ModalidadeDAO.gravar(modalidade);
     }
 
+    public static void alterar(Modalidade modalidade) throws ClassNotFoundException, SQLException {
+        ModalidadeDAO.alterar(modalidade);
+    }
+
 }

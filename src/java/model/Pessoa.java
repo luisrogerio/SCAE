@@ -85,4 +85,8 @@ public class Pessoa {
     public static void gravar(Pessoa pessoa) throws ClassNotFoundException, SQLException{
         PessoaDAO.gravar(pessoa);
     }
+    
+    public static void alterar(Pessoa pessoa) throws ClassNotFoundException, SQLException{
+        PessoaDAO.alterar(pessoa);
+    }
 }

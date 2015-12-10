@@ -29,9 +29,9 @@ public class ManterModalidadeController extends HttpServlet {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        }/* else if (acao.equals("confirmarEditar")) {
+        } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        } else if (acao.equals("prepararExcluir")) {
+        }/* else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
@@ -86,6 +86,24 @@ public class ManterModalidadeController extends HttpServlet {
         }
     }
 
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        String nome = request.getParameter("textNome");
+
+        try {
+            Modalidade modalidade = new Modalidade(id, nome);
+            Modalidade.gravar(modalidade);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaModalidadeController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

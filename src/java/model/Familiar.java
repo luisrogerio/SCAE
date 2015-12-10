@@ -95,4 +95,8 @@ public class Familiar extends Pessoa {
         FamiliarDAO.gravar(familiar);
     }
 
+    public static void alterar(Familiar familiar) throws ClassNotFoundException, SQLException {
+        FamiliarDAO.alterar(familiar);
+    }
+
 }

@@ -139,4 +139,8 @@ public class Declaracoes {
     public static void gravar(Declaracoes declaracoes) throws ClassNotFoundException, SQLException {
         DeclaracoesDAO.gravar(declaracoes);
     }
+    
+    public static void alterar(Declaracoes declaracoes) throws ClassNotFoundException, SQLException {
+        DeclaracoesDAO.alterar(declaracoes);
+    }
 }

@@ -138,4 +138,8 @@ public class Endereco {
         EnderecoDAO.gravar(endereco);
     }
 
+    public static void alterar(Endereco endereco) throws ClassNotFoundException, SQLException {
+        EnderecoDAO.alterar(endereco);
+    }
+
 }
