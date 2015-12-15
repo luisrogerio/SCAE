@@ -19,9 +19,11 @@
                         <td>Candidato ou Familiar</td>
                         <td>
                             <select name="selectPessoa" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option value="0" <c:if test="${declaracao.pessoa == null}">selected</c:if>></option>
+                                <option value="0" <c:if test="${quadroFamiliar.pessoa == null}">selected</c:if>></option>
                                 <c:forEach items="${pessoas}" var="pessoa">
-                                    <option value="${pessoa.id}">${pessoa.nome}</option>
+                                    <option value="${pessoa.id}"
+                                            <c:if test="${quadroFamiliar.pessoa.id = pessoa.id}">
+                                                selected</c:if>>${pessoa.nome}</option>
                                 </c:forEach>
                             </select>
                         </td>
@@ -30,10 +32,12 @@
                         <td>Formulário Socioecômico</td>
                         <td>
                             <select name="selectFormularioSocioeconomico" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option value="0" <c:if test="${familiar.formularioSocioeconomico == null}">selected</c:if>></option>
-                                <c:forEach items="${formulariosSocioeconomicos}" var="a">
+                                <option value="0" <c:if test="${quadroFamiliar.formularioSocioeconomico == null}">selected</c:if>></option>
+                                <c:forEach items="${formulariosSocioeconomicos}" var="formularioSocioeconomico">
                                     
-                                    <option value="${a.id}">${a.id}</option>
+                                    <option value="${formularioSocioeconomico.id}" 
+                                            <c:if test="${quadroFamiliar.formularioSocioeconomico.id = formularioSocioeconomico.id}">
+                                                selected</c:if>>${formularioSocioeconomico.id}</option>
                                 </c:forEach>
                             </select>
                         </td>
@@ -43,11 +47,11 @@
                         <td><input type='text' name='textDoenca' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> value="${quadrofamiliar.doenca}"></td>			
                     </tr>
                     <tr>
-                        <td><input type='checkbox' name='checkCapacidadeTrabalho' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${quadrofamiliar.capacidadeTrabalho == 'true'}"> checked</c:if>></td>
+                        <td><input type='checkbox' name='checkCapacidadeTrabalho' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${quadrofamiliar.capacidadeTrabalho}"> checked</c:if>></td>
                         <td><label for='checkCapacidadeTrabalho'>Tem Capacidade de Trabalho</label></td>			
                     </tr>
                     <tr>
-                            <td><input type='checkbox' name='checkDependenciaAtividades' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${quadrofamiliar.dependenciaAtividade == 'true'}"> checked</c:if>></td>
+                            <td><input type='checkbox' name='checkDependenciaAtividades' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${quadrofamiliar.dependenciaAtividade}"> checked</c:if>></td>
                         <td><label for='checkDependenciaAtividades'>Dependência para Atividades diárias</label></td>			
                     </tr>
                     <tr>

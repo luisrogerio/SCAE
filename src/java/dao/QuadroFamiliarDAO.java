@@ -82,7 +82,7 @@ public class QuadroFamiliarDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM quadrosFamiliares");
+            ResultSet rs = comando.executeQuery("SELECT * FROM quadro_familiar");
             while (rs.next()) {
                 QuadroFamiliar quadroFamiliar = new QuadroFamiliar(
                         rs.getInt("id"),
@@ -112,7 +112,7 @@ public class QuadroFamiliarDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM quadrosFamiliares WHERE id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM quadro_familiar WHERE id = " + id);
             rs.first();
             quadroFamiliar = new QuadroFamiliar(
                     rs.getInt("id"),

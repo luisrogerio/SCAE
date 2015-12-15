@@ -20,9 +20,11 @@
                         <td>
                             <select name="selectFormularioSocioeconomico" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                               <option value="0" <c:if test="${familiar.formularioSocioeconomico == null}">selected</c:if>></option>
-                                <c:forEach items="${formulariosSocioeconomicos}" var="a">
+                                <c:forEach items="${formulariosSocioeconomicos}" var="formularioSocioeconomico">
                                     
-                                    <option value="${a.id}">${a.id}</option>
+                                    <option value="${formularioSocioeconomico.id}"
+                                            <c:if test="${familiar.formularioSocioeconomico.id = formularioSocioeconomico.id}">selected</c:if>
+                                                ${formularioSocioeconomico.id}>${formularioSocioeconomico.id}</option>
                                 </c:forEach>
                             </select>
                         </td>

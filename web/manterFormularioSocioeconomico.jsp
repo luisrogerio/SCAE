@@ -12,25 +12,31 @@
         <form action="ManterFormularioSocioeconomicoController?acao=confirmar${operacao}" method='POST'>
             <table border="1">
                 <tr>
-                    <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td><label for="textId">Código</label></td>
+                    <td><input type="text" name="textId" <c:if test="${operacao != 'Incluir'}"> readonly</c:if> value="${formularioSocioeconomico.id}"></td>
                     </tr>
                     <tr>
                         <td>Edital</td>
                         <td>
-                            <select name="selectEdital"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                            <option></option>
+                            <select name="selectEdital" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <option value="0" <c:if test="${formularioSocioeconomico.edital == null}"> selected</c:if>> </option>
+                            <c:forEach items="${editais}" var="edital">
+                                <option value="${edital.id}">${edital.descricao}</option>
+                            </c:forEach>
                         </select>
                     </td>
-                </tr>				
+                </tr>		
                 <tr>
                     <th colspan="2">Identificação do Estudante</th>
                 </tr>
                 <tr>
                     <td>Candidato</td>
                     <td>
-                        <select name="selectCandidato">
-                            <option></option>
+                        <select name="selectCandidato" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <option value="0" <c:if test="${formularioSocioeconomico.candidato == null}"> selected</c:if>> </option>
+                            <c:forEach items="${candidatos}" var="candidato">
+                                <option value="${candidato.matricula}">${candidato.nome}</option>
+                            </c:forEach>
                         </select>
                     </td>
                 </tr>	

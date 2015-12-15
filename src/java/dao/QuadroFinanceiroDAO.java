@@ -81,7 +81,7 @@ public class QuadroFinanceiroDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM quadrosFinanceiros");
+            ResultSet rs = comando.executeQuery("SELECT * FROM quadro_financeiro");
             while (rs.next()) {
                 QuadroFinanceiro quadroFinanceiro = new QuadroFinanceiro(
                         rs.getInt("id"),
@@ -111,7 +111,7 @@ public class QuadroFinanceiroDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM quadrosFinanceiros WHERE id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM quadro_financeiro WHERE id = " + id);
             rs.first();
             quadroFinanceiro = new QuadroFinanceiro(
                     rs.getInt("id"),

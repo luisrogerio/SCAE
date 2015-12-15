@@ -787,7 +787,7 @@ public class FormularioSocioeconomico {
     }
 
     public Candidato getCandidato() {
-        if (this.codigoCandidato.equals("0") && this.candidato == null) {
+        if (!this.codigoCandidato.equals("0") && this.candidato == null) {
             try {
                 this.candidato = Candidato.obterCandidato(this.codigoCandidato);
             } catch (ClassNotFoundException ex) {

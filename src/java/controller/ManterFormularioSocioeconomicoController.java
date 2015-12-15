@@ -6,12 +6,14 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Candidato;
+import model.Edital;
 import model.Endereco;
 import model.FormularioSocioeconomico;
 
@@ -43,12 +45,16 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
             HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
+            request.setAttribute("candidatos", Candidato.obterCandidatos());
+            request.setAttribute("editais", Edital.obterEditais());
             RequestDispatcher view = request.getRequestDispatcher("/manterFormularioSocioeconomico.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
 
         } catch (IOException ex) {
 
+        } catch (ClassNotFoundException ex){
+            
         }
     }
 
@@ -181,6 +187,8 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
             HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
+            request.setAttribute("candidatos", Candidato.obterCandidatos());
+            request.setAttribute("editais", Edital.obterEditais());
             int id = Integer.parseInt(request.getParameter("codigoFormularioSocioeconomico"));
             request.setAttribute("formularioSocioeconomico", FormularioSocioeconomico.obterFormularioSocioeconomico(id));
             RequestDispatcher view = request.getRequestDispatcher("/manterFormularioSocioeconomico.jsp");
