@@ -93,6 +93,24 @@ public class CursoDAO {
         } catch (SQLException e) {
         }
     }
+       public static void excluir(Curso curso) throws SQLException, ClassNotFoundException{
+           Connection conexao = null;
+           Statement comando = null;
+           String stringSQL;
+           
+           try {
+               conexao = BD.getConexao();
+               comando = conexao.createStatement();
+               stringSQL = "delete from cursos where id = "+curso.getId();
+               comando.execute(stringSQL);
+               
+           }catch (SQLException e){
+               throw e;
+           }finally{
+               fecharConexao(conexao, comando);
+           }
+       }
+                
        public static void alterar(Curso curso) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         try {

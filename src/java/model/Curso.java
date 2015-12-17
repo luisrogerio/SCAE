@@ -70,4 +70,8 @@ public class Curso {
         CursoDAO.alterar(curso);
     }
     
+    public void excluir(Curso curso) throws SQLException,ClassNotFoundException{
+        CursoDAO.excluir(curso);
+    }
+    
 }
