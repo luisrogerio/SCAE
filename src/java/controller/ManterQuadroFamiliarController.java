@@ -34,11 +34,11 @@ public class ManterQuadroFamiliarController extends HttpServlet {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        }/* else if (acao.equals("prepararExcluir")) {
+        } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
-        }*/
+        }
     }
 
     public void prepararIncluir(HttpServletRequest request,
@@ -87,7 +87,7 @@ public class ManterQuadroFamiliarController extends HttpServlet {
     public void prepararEditar(HttpServletRequest request,
             HttpServletResponse response) {
         try {
-            request.setAttribute("operacao", "Incluir");
+            request.setAttribute("operacao", "Editar");
             int id = Integer.parseInt(request.getParameter("codigoQuadroFamiliar"));
             request.setAttribute("quadroFamiliar", QuadroFamiliar.obterQuadroFamiliar(id));
             request.setAttribute("pessoas", Pessoa.obterPessoas());
@@ -118,6 +118,51 @@ public class ManterQuadroFamiliarController extends HttpServlet {
             quadroFamiliar.setCodigoFormularioSocioeconomico(formulario_socioeconomico);
             quadroFamiliar.setCodigoPessoa(pessoa);
             QuadroFamiliar.alterar(quadroFamiliar);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaQuadroFamiliarController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
+    public void prepararExcluir(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            int id = Integer.parseInt(request.getParameter("codigoQuadroFamiliar"));
+            request.setAttribute("quadroFamiliar", QuadroFamiliar.obterQuadroFamiliar(id));
+            request.setAttribute("pessoas", Pessoa.obterPessoas());
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
+            RequestDispatcher view = request.getRequestDispatcher("/manterQuadroFamiliar.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+    
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        String pessoa = request.getParameter("selectPessoa");
+        String doenca = request.getParameter("textDoenca");
+        boolean capacidadeTrabalho = Boolean.parseBoolean(request.getParameter("textCapacidadeTrabalho"));
+        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("textDependenciaAtividade"));
+        float gastoMensal = Float.parseFloat(request.getParameter("textGastoMensal"));
+
+        try {
+            QuadroFamiliar quadroFamiliar = new QuadroFamiliar(id, doenca, capacidadeTrabalho,
+                    dependenciaAtividade, gastoMensal, null, null);
+            quadroFamiliar.setCodigoFormularioSocioeconomico(formulario_socioeconomico);
+            quadroFamiliar.setCodigoPessoa(pessoa);
+            QuadroFamiliar.excluir(quadroFamiliar);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaQuadroFamiliarController");
             view.forward(request, response);
         } catch (IOException ex) {

@@ -33,11 +33,11 @@ public class ManterCandidatoController extends HttpServlet {
             prepararEditar(request, response);
         }  else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        } /*else if (acao.equals("prepararExcluir")) {
+        } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
-        }*/
+        }
     }
 
     public void prepararIncluir(HttpServletRequest request,
@@ -129,7 +129,7 @@ public class ManterCandidatoController extends HttpServlet {
                     telefoneCelular, instituicaoFundamental, instituicaoMedio, null);
             candidato.setCodigoCurso(curso);
             candidato.setCodigoPessoa(matricula);
-            Candidato.alterar(candidato);//VAI MUDAR PARA 'ALTERAR'
+            Candidato.alterar(candidato);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCandidatoController");
             view.forward(request, response);
         } catch (IOException ex) {
@@ -141,6 +141,58 @@ public class ManterCandidatoController extends HttpServlet {
         }
     }
 
+    public void prepararExcluir(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            request.setAttribute("cursos", Curso.obterCursos());
+            String matricula = request.getParameter("codigoCandidato");
+            Candidato candidato = Candidato.obterCandidato(matricula);
+            request.setAttribute("candidato", Candidato.obterCandidato(matricula));
+            RequestDispatcher view = request.getRequestDispatcher("/manterCandidato.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+    
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        String matricula = request.getParameter("textMatricula");
+        String nome = request.getParameter("textNome");
+        String dataNascimento = request.getParameter("textDataNascimento");
+        String estadoCivil = request.getParameter("textEstadoCivil");
+        String CPF = request.getParameter("textCPF");
+        String identidade = request.getParameter("textIdentidade");
+        int curso = Integer.parseInt(request.getParameter("selectCurso"));
+        String genero = request.getParameter("textGenero");
+        String telefoneResidencial = request.getParameter("textTelefoneResidencial");
+        String telefoneCelular = request.getParameter("textTelefoneCelular");
+        String instituicaoFundamental = request.getParameter("textInstituicaoFundamental");
+        String instituicaoMedio = request.getParameter("textInstituicaoMedio");
+
+        try {
+            Candidato candidato = new Candidato(matricula, nome, 
+                    dataNascimento, estadoCivil, CPF, identidade, 
+                    matricula, genero, telefoneResidencial, 
+                    telefoneCelular, instituicaoFundamental, instituicaoMedio, null);
+            candidato.setCodigoCurso(curso);
+            candidato.setCodigoPessoa(matricula);
+            Candidato.excluir(candidato);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCandidatoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
