@@ -88,7 +88,7 @@ public class QuadroFinanceiro {
     }
 
     public Pessoa getPessoa() {
-        if (this.codigoPessoa.equals("0") && this.pessoa == null) {
+        if (!this.codigoPessoa.equals("0") && this.pessoa == null) {
             try {
                 this.pessoa = Pessoa.obterPessoa(this.codigoPessoa);
             } catch (ClassNotFoundException ex) {

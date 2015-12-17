@@ -32,11 +32,11 @@ public class ManterCursoController extends HttpServlet {
         }
         else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        }/* else if (acao.equals("prepararExcluir")) {
+        } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
-        }*/
+        }
     }
 
     public void prepararIncluir(HttpServletRequest request,
@@ -99,7 +99,46 @@ public class ManterCursoController extends HttpServlet {
 
         try {
             Curso curso = new Curso(id, nome, turno, tipo);
-            Curso.alterar(curso);//MUDARÁ P EDITAR
+            Curso.alterar(curso);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCursoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (SQLException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
+    public void prepararExcluir(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            int id = Integer.parseInt(request.getParameter("codigoCurso"));
+            request.setAttribute("curso", Curso.obterCurso(id));
+            RequestDispatcher view = request.getRequestDispatcher("/manterCurso.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+    
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        String nome = request.getParameter("textNome");
+        String turno = request.getParameter("selectTurno");
+        String tipo = request.getParameter("selectTipo");
+
+        try {
+            Curso curso = new Curso(id, nome, turno, tipo);
+            Curso.excluir(curso);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCursoController");
             view.forward(request, response);
         } catch (IOException ex) {

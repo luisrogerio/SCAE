@@ -32,11 +32,11 @@ public class ManterFamiliarController extends HttpServlet {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        }/* else if (acao.equals("prepararExcluir")) {
+        } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
-        }*/
+        }
     }
 
     public void prepararIncluir(HttpServletRequest request,
@@ -118,6 +118,52 @@ public class ManterFamiliarController extends HttpServlet {
             familiar.setCodigoFormularioSocioeconomico(formularioSocioeconomico);
             familiar.setCodigoPessoa(codigo);
             Familiar.alterar(familiar);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaFamiliarController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
+    public void prepararExcluir(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            String codigo = request.getParameter("codigoFamiliar");
+            request.setAttribute("familiar", Familiar.obterFamiliar(codigo));
+            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
+            RequestDispatcher view = request.getRequestDispatcher("/manterFamiliar.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+    
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        String codigo = request.getParameter("textCodigo");
+        String nome = request.getParameter("textNome");
+        String dataNascimento = request.getParameter("textDataNascimento");
+        String estadoCivil = request.getParameter("textEstadoCivil");
+        String CPF = request.getParameter("textCPF");
+        String identidade = request.getParameter("textIdentidade");
+        int formularioSocioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        String nacionalidade = request.getParameter("textNacionalidade");
+        String parentesco = request.getParameter("textParentesco");
+
+        try {
+            Familiar familiar = new Familiar(codigo, nome, dataNascimento, estadoCivil, CPF, identidade, codigo,
+                    nacionalidade, parentesco, null);
+            familiar.setCodigoFormularioSocioeconomico(formularioSocioeconomico);
+            familiar.setCodigoPessoa(codigo);
+            Familiar.excluir(familiar);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFamiliarController");
             view.forward(request, response);
         } catch (IOException ex) {

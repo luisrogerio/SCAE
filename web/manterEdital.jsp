@@ -13,11 +13,12 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>
+                               value="${edital.id}"></td>
                     </tr>
                     <tr>
                         <td><label for='textAno'>Ano</label></td>
-                        <td><input type='text' name='textAno' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> imput="${edital.ano}"></td>
+                        <td><input type='text' name='textAno' <c:if test="${operacao == 'Excluir'}"> readonly</c:if> value="${edital.ano}"></td>
                     </tr>
                     <tr>
                         <td><label for='selectSemestre'>Semestre</label></td>

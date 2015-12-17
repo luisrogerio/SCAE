@@ -31,11 +31,11 @@ public class ManterModalidadeController extends HttpServlet {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        }/* else if (acao.equals("prepararExcluir")) {
+        } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
-        }*/
+        }
     }
 
     public void prepararIncluir(HttpServletRequest request,
@@ -93,6 +93,41 @@ public class ManterModalidadeController extends HttpServlet {
         try {
             Modalidade modalidade = new Modalidade(id, nome);
             Modalidade.alterar(modalidade);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaModalidadeController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
+    public void prepararExcluir(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            int id = Integer.parseInt(request.getParameter("codigoModalidade"));
+            request.setAttribute("modalidade", Modalidade.obterModalidade(id));
+            RequestDispatcher view = request.getRequestDispatcher("/manterModalidade.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
+        }
+    }
+    
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        String nome = request.getParameter("textNome");
+
+        try {
+            Modalidade modalidade = new Modalidade(id, nome);
+            Modalidade.excluir(modalidade);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaModalidadeController");
             view.forward(request, response);
         } catch (IOException ex) {

@@ -32,11 +32,11 @@ public class ManterEditalController extends HttpServlet {
             prepararEditar(request, response);
         } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
-        }/* else if (acao.equals("prepararExcluir")) {
+        } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
         } else if (acao.equals("confirmarExcluir")) {
             confirmarExcluir(request, response);
-        }*/
+        }
     }
 
     public void prepararIncluir(HttpServletRequest request,
@@ -97,7 +97,7 @@ public class ManterEditalController extends HttpServlet {
 
         try {
             Edital edital = new Edital(id, ano, semestre, descricao);
-            Edital.alterar(edital);//MUDAR
+            Edital.alterar(edital);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaEditalController");
             view.forward(request, response);
         } catch (IOException ex) {
@@ -108,7 +108,44 @@ public class ManterEditalController extends HttpServlet {
 
         }
     }
+    
+    public void prepararExcluir(HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            int id = Integer.parseInt(request.getParameter("codigoEdital"));
+            request.setAttribute("edital", Edital.obterEdital(id));
+            RequestDispatcher view = request.getRequestDispatcher("/manterEdital.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
 
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex){
+            
+        }
+    }
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("textId"));
+        String ano = request.getParameter("textAno");
+        int semestre = Integer.parseInt(request.getParameter("selectSemestre"));
+        String descricao = request.getParameter("textDescricao");
+
+        try {
+            Edital edital = new Edital(id, ano, semestre, descricao);
+            Edital.excluir(edital);
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaEditalController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
