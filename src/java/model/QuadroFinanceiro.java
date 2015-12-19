@@ -134,4 +134,8 @@ public class QuadroFinanceiro {
         QuadroFinanceiroDAO.alterar(quadroFinanceiro);
     }
     
+    public static void excluir(QuadroFinanceiro quadro) throws SQLException,ClassNotFoundException{
+        QuadroFinanceiroDAO.excluir(quadro);
+    }
+    
 }

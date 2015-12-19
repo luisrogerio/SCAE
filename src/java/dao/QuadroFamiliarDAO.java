@@ -133,6 +133,24 @@ public class QuadroFamiliarDAO {
         }
         return quadroFamiliar;
     }
+    
+    public static void excluir(QuadroFamiliar quadroF) throws SQLException, ClassNotFoundException{
+           Connection conexao = null;
+           Statement comando = null;
+           String stringSQL;
+           
+           try {
+               conexao = BD.getConexao();
+               comando = conexao.createStatement();
+               stringSQL = "delete from quadrosFamiliares where id = "+quadroF.getId();
+               comando.execute(stringSQL);
+               
+           }catch (SQLException e){
+               throw e;
+           }finally{
+               fecharConexao(conexao, comando);
+           }
+       }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {

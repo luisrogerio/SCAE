@@ -5,6 +5,7 @@
  */
 package dao;
 
+import static dao.CursoDAO.fecharConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import model.Curso;
 import model.Familiar;
 import model.Pessoa;
 
@@ -141,6 +143,24 @@ public class FamiliarDAO {
         }
         return familiar;
     }
+    
+    public static void excluir(Familiar familiar) throws SQLException, ClassNotFoundException{
+           Connection conexao = null;
+           Statement comando = null;
+           String stringSQL;
+           
+           try {
+               conexao = BD.getConexao();
+               comando = conexao.createStatement();
+               stringSQL = "delete from familiares where codigo = "+familiar.getCodigo();
+               comando.execute(stringSQL);
+               
+           }catch (SQLException e){
+               throw e;
+           }finally{
+               fecharConexao(conexao, comando);
+           }
+       }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {

@@ -89,4 +89,8 @@ public class Pessoa {
     public static void alterar(Pessoa pessoa) throws ClassNotFoundException, SQLException{
         PessoaDAO.alterar(pessoa);
     }
+    
+    public static void excluir(Pessoa pessoa) throws SQLException,ClassNotFoundException{
+        PessoaDAO.excluir(pessoa);
+    }
 }

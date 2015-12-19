@@ -132,7 +132,25 @@ public class QuadroFinanceiroDAO {
         }
         return quadroFinanceiro;
     }
-
+    
+    public static void excluir(QuadroFinanceiro quadroFina) throws SQLException, ClassNotFoundException{
+           Connection conexao = null;
+           Statement comando = null;
+           String stringSQL;
+           
+           try {
+               conexao = BD.getConexao();
+               comando = conexao.createStatement();
+               stringSQL = "delete from quadrosfinanceiros where id = "+quadroFina.getId();
+               comando.execute(stringSQL);
+               
+           }catch (SQLException e){
+               throw e;
+           }finally{
+               fecharConexao(conexao, comando);
+           }
+       }
+    
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

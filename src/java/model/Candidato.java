@@ -128,5 +128,9 @@ public class Candidato extends Pessoa {
     public static void alterar(Candidato candidato) throws ClassNotFoundException, SQLException {
         CandidatoDAO.alterar(candidato);
     }
+    
+    public static void excluir(Candidato candidato) throws SQLException,ClassNotFoundException{
+        CandidatoDAO.excluir(candidato);
+    }
 
 }

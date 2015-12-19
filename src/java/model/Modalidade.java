@@ -49,5 +49,9 @@ public class Modalidade {
     public static void alterar(Modalidade modalidade) throws ClassNotFoundException, SQLException {
         ModalidadeDAO.alterar(modalidade);
     }
+    
+    public static void excluir(Modalidade modalidade) throws SQLException,ClassNotFoundException{
+        ModalidadeDAO.excluir(modalidade);
+    }
 
 }

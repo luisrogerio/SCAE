@@ -132,5 +132,9 @@ public class QuadroFamiliar {
     public static void alterar(QuadroFamiliar quadroFamiliar) throws ClassNotFoundException, SQLException {
         QuadroFamiliarDAO.alterar(quadroFamiliar);
     }
+    
+    public static void excluir(QuadroFamiliar quadro) throws SQLException,ClassNotFoundException{
+        QuadroFamiliarDAO.excluir(quadro);
+    }
 
 }

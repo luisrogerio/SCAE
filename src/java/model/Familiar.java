@@ -98,5 +98,9 @@ public class Familiar extends Pessoa {
     public static void alterar(Familiar familiar) throws ClassNotFoundException, SQLException {
         FamiliarDAO.alterar(familiar);
     }
+    
+    public static void excluir(Familiar familiar) throws SQLException,ClassNotFoundException{
+        FamiliarDAO.excluir(familiar);
+    }
 
 }

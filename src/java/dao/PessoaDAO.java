@@ -114,6 +114,24 @@ public class PessoaDAO {
         }
         return pessoa;
     }
+    
+    public static void excluir(Pessoa pessoa) throws SQLException, ClassNotFoundException{
+           Connection conexao = null;
+           Statement comando = null;
+           String stringSQL;
+           
+           try {
+               conexao = BD.getConexao();
+               comando = conexao.createStatement();
+               stringSQL = "delete from pessoas where id = "+pessoa.getId();
+               comando.execute(stringSQL);
+               
+           }catch (SQLException e){
+               throw e;
+           }finally{
+               fecharConexao(conexao, comando);
+           }
+       }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {

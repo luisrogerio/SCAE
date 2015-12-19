@@ -143,4 +143,7 @@ public class Declaracoes {
     public static void alterar(Declaracoes declaracoes) throws ClassNotFoundException, SQLException {
         DeclaracoesDAO.alterar(declaracoes);
     }
+    public static void excluir(Declaracoes declaracoes) throws SQLException,ClassNotFoundException{
+        DeclaracoesDAO.excluir(declaracoes);
+    }
 }

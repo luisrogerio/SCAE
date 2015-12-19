@@ -5,6 +5,7 @@
  */
 package dao;
 
+import static dao.CursoDAO.fecharConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import model.Candidato;
+import model.Curso;
 import model.Pessoa;
 
 /**
@@ -159,6 +161,24 @@ public class CandidatoDAO {
         }
         return candidato;
     }
+    
+    public static void excluir(Candidato candidato) throws SQLException, ClassNotFoundException{
+           Connection conexao = null;
+           Statement comando = null;
+           String stringSQL;
+           
+           try {
+               conexao = BD.getConexao();
+               comando = conexao.createStatement();
+               stringSQL = "delete from candidatos where matricula = "+candidato.getMatricula();
+               comando.execute(stringSQL);
+               
+           }catch (SQLException e){
+               throw e;
+           }finally{
+               fecharConexao(conexao, comando);
+           }
+       }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {

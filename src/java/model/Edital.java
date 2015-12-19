@@ -69,5 +69,9 @@ public class Edital {
     public static void alterar(Edital edital) throws ClassNotFoundException, SQLException {
         EditalDAO.alterar(edital);
     }
+    
+    public static void excluir(Edital edital) throws SQLException,ClassNotFoundException{
+        EditalDAO.excluir(edital);
+    }
 
 }

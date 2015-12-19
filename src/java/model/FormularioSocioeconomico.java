@@ -878,5 +878,8 @@ public class FormularioSocioeconomico {
     public static void alterar(FormularioSocioeconomico formularioSocioeconomico, Endereco endereco) throws ClassNotFoundException, SQLException{
         FormularioSocioeconomicoDAO.alterar(formularioSocioeconomico, endereco);
     }
+    public static void excluir(FormularioSocioeconomico formulario, Endereco endereco) throws SQLException,ClassNotFoundException{
+        FormularioSocioeconomicoDAO.excluir(formulario, endereco);
+    }
 
 }

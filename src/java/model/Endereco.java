@@ -141,5 +141,9 @@ public class Endereco {
     public static void alterar(Endereco endereco) throws ClassNotFoundException, SQLException {
         EnderecoDAO.alterar(endereco);
     }
+    
+    public static void excluir(Endereco endereco) throws SQLException,ClassNotFoundException{
+        EnderecoDAO.excluir(endereco);
+    }
 
 }

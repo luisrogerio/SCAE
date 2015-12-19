@@ -5,6 +5,7 @@
  */
 package dao;
 
+import static dao.CursoDAO.fecharConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import model.Curso;
 import model.Declaracoes;
 
 /**
@@ -135,6 +137,24 @@ public class DeclaracoesDAO {
         }
         return declaracao;
     }
+    
+    public static void excluir(Declaracoes declaracao) throws SQLException, ClassNotFoundException{
+           Connection conexao = null;
+           Statement comando = null;
+           String stringSQL;
+           
+           try {
+               conexao = BD.getConexao();
+               comando = conexao.createStatement();
+               stringSQL = "delete from declaracoes where id = "+declaracao.getId();
+               comando.execute(stringSQL);
+               
+           }catch (SQLException e){
+               throw e;
+           }finally{
+               fecharConexao(conexao, comando);
+           }
+       }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
