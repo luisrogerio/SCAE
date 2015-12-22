@@ -5,7 +5,6 @@
  */
 package dao;
 
-import static dao.CursoDAO.fecharConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +13,6 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import model.Curso;
 import model.Familiar;
 import model.Pessoa;
 
@@ -62,9 +60,8 @@ public class FamiliarDAO {
         try {
             conexao = BD.getConexao();
             String sql = "UPDATE familiares SET formulario_socioeconomico = ?, "
-                    + "pessoa = ?, nacionalidade = ?, parentesco = ? WHERE codigo = ?";
+                    + "pessoa = ?, nacionalidade = ?, parentesco = ? WHERE familiares.codigo LIKE ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(0, familiar.getCodigo());
             if(familiar.getFormularioSocioeconomico() == null){
                 comando.setNull(1, Types.NULL);
             } else {
@@ -73,6 +70,7 @@ public class FamiliarDAO {
             comando.setString(2, familiar.getCodigo());
             comando.setString(3, familiar.getNacionalidade());
             comando.setString(4, familiar.getParentesco());
+            comando.setString(5, familiar.getCodigo());
             comando.execute();
             comando.close();
             conexao.close();
@@ -102,7 +100,7 @@ public class FamiliarDAO {
                         rs.getString("parentesco"),
                         null
                 );
-                familiar.setCodigoFormularioSocioeconomico(rs.getInt("formularioSocioeconomico"));
+                familiar.setCodigoFormularioSocioeconomico(rs.getInt("formulario_socioeconomico"));
                 familiares.add(familiar);
             }
         } catch (SQLException e) {
@@ -135,7 +133,7 @@ public class FamiliarDAO {
                     rs.getString("parentesco"),
                     null
             );
-            familiar.setCodigoFormularioSocioeconomico(rs.getInt("formularioSocioeconomico"));
+            familiar.setCodigoFormularioSocioeconomico(rs.getInt("formulario_socioeconomico"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -152,7 +150,7 @@ public class FamiliarDAO {
            try {
                conexao = BD.getConexao();
                comando = conexao.createStatement();
-               stringSQL = "delete from familiares where codigo = "+familiar.getCodigo();
+               stringSQL = "delete from familiares where codigo LIKE \""+familiar.getCodigo() + "\"";
                comando.execute(stringSQL);
                
            }catch (SQLException e){

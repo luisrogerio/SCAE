@@ -72,7 +72,6 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String UFRepublica = request.getParameter("textUFRepublica");
         String candidato = request.getParameter("selectCandidato");
         int edital = Integer.parseInt(request.getParameter("selectEdital"));
-        int enredeco = Integer.parseInt(request.getParameter("textEnredeco"));
         String serieModuloPeriodo = request.getParameter("textSerieModuloPeriodo");
         boolean atendimentoAssistencia = Boolean.parseBoolean(request.getParameter("textAtendimentoAssistencia"));
         String atendido = request.getParameter("textAtendido");
@@ -93,11 +92,11 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String outraCondicaoMoradia = request.getParameter("textOutraCondicaoMoradia");
         String responsavelManutencao = request.getParameter("textResponsavelManutencao");
         String outroResponsavelManutencao = request.getParameter("textOutroResponsavelManutencao");
-        boolean esgoto = Boolean.parseBoolean(request.getParameter("textEsgoto"));
-        boolean aguaTratada = Boolean.parseBoolean(request.getParameter("textAguaTratada"));
-        boolean iluminacao = Boolean.parseBoolean(request.getParameter("textIluminacao"));
-        boolean coletaLixo = Boolean.parseBoolean(request.getParameter("textColetaLixo"));
-        boolean pavimentacao = Boolean.parseBoolean(request.getParameter("textPavimentacao"));
+        boolean esgoto = Boolean.parseBoolean(request.getParameter("checkEsgoto"));
+        boolean aguaTratada = Boolean.parseBoolean(request.getParameter("checkAguaTratada"));
+        boolean iluminacao = Boolean.parseBoolean(request.getParameter("checkIluminacao"));
+        boolean coletaLixo = Boolean.parseBoolean(request.getParameter("checkColetaLixo"));
+        boolean pavimentacao = Boolean.parseBoolean(request.getParameter("checkPavimentacao"));
         String localResidenciaFamiliar = request.getParameter("textLocalResidenciaFamiliar");
         String outroLocalResidenciaFamiliar = request.getParameter("textOutroLocalResidenciaFamiliar");
         String tipoResidenciaFamiliar = request.getParameter("textTipoResidenciaFamiliar");
@@ -112,7 +111,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         int quantidadeTelevisoes = Integer.parseInt(request.getParameter("textQuantidadeTelevisoes"));
         int quantidadeMaquinasDeLavar = Integer.parseInt(request.getParameter("textQuantidadeMaquinasDeLavar"));
         int quantidadeGeladeiras = Integer.parseInt(request.getParameter("textQuantidadeGeladeiras"));
-        int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTvsACabo"));
+        int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTVACabo"));
         int quantidadeComputadores = Integer.parseInt(request.getParameter("textQuantidadeComputadores"));
         boolean internet = Boolean.parseBoolean(request.getParameter("textInternet"));
         int quantidadeEmpregadasMensalistas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasMensalistas"));
@@ -216,7 +215,6 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String UFRepublica = request.getParameter("textUFRepublica");
         String candidato = request.getParameter("selectCandidato");
         int edital = Integer.parseInt(request.getParameter("selectEdital"));
-        int enredeco = Integer.parseInt(request.getParameter("textEnredeco"));
         String serieModuloPeriodo = request.getParameter("textSerieModuloPeriodo");
         boolean atendimentoAssistencia = Boolean.parseBoolean(request.getParameter("textAtendimentoAssistencia"));
         String atendido = request.getParameter("textAtendido");
@@ -360,7 +358,6 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String UFRepublica = request.getParameter("textUFRepublica");
         String candidato = request.getParameter("selectCandidato");
         int edital = Integer.parseInt(request.getParameter("selectEdital"));
-        int enredeco = Integer.parseInt(request.getParameter("textEnredeco"));
         String serieModuloPeriodo = request.getParameter("textSerieModuloPeriodo");
         boolean atendimentoAssistencia = Boolean.parseBoolean(request.getParameter("textAtendimentoAssistencia"));
         String atendido = request.getParameter("textAtendido");

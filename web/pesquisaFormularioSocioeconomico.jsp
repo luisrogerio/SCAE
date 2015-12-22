@@ -13,14 +13,14 @@
         <table border="1">
             <tr>
                 <th>Código Formulario Socioeconômico</th>
-                <th>Nome Formulario Socioeconômico</th>
+                <th>Nome Candidato</th>
                 <th colspan="2">Ação</th>
             </tr>
 
             <c:forEach items="${formulariosSocioeconomicos}" var="formularioSocioeconomico">
                 <tr>
                     <td><c:out value="${formularioSocioeconomico.id}"/></td>
-                    <td><c:out value="${formularioSocioeconomico.serieModuloPeriodo}"/></td>
+                    <td><c:out value="${formularioSocioeconomico.candidato.nome}"/></td>
                     <td><a href="ManterFormularioSocioeconomicoController?acao=prepararEditar&codigoFormularioSocioeconomico=<c:out value="${formularioSocioeconomico.id}"/>">Editar</a></td>
                     <td><a href="ManterFormularioSocioeconomicoController?acao=prepararExcluir&codigoFormularioSocioeconomico=<c:out value="${formularioSocioeconomico.id}"/>">Excluir</a></td>
                 </tr>

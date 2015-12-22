@@ -7,6 +7,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,8 @@ public class PesquisaFamiliarController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-            request.setAttribute("familiares", Familiar.obterFamiliares());
+            List<Familiar> familiares = Familiar.obterFamiliares();
+            request.setAttribute("familiares", familiares);
             RequestDispatcher view =request.getRequestDispatcher("/pesquisaFamiliar.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex){

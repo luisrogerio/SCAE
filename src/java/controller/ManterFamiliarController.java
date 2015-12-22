@@ -56,7 +56,7 @@ public class ManterFamiliarController extends HttpServlet {
     }
 
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        String codigo = request.getParameter("textCodigo");
+        String codigo = request.getParameter("textId");
         String nome = request.getParameter("textNome");
         String dataNascimento = request.getParameter("textDataNascimento");
         String estadoCivil = request.getParameter("textEstadoCivil");
@@ -88,7 +88,8 @@ public class ManterFamiliarController extends HttpServlet {
         try {
             request.setAttribute("operacao", "Editar");
             String codigo = request.getParameter("codigoFamiliar");
-            request.setAttribute("familiar", Familiar.obterFamiliar(codigo));
+            Familiar familiar = Familiar.obterFamiliar(codigo);
+            request.setAttribute("familiar", familiar);
             request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
             RequestDispatcher view = request.getRequestDispatcher("/manterFamiliar.jsp");
             view.forward(request, response);
@@ -102,7 +103,7 @@ public class ManterFamiliarController extends HttpServlet {
     }
 
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        String codigo = request.getParameter("textCodigo");
+        String codigo = request.getParameter("textId");
         String nome = request.getParameter("textNome");
         String dataNascimento = request.getParameter("textDataNascimento");
         String estadoCivil = request.getParameter("textEstadoCivil");
@@ -148,7 +149,7 @@ public class ManterFamiliarController extends HttpServlet {
     }
     
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        String codigo = request.getParameter("textCodigo");
+        String codigo = request.getParameter("textId");
         String nome = request.getParameter("textNome");
         String dataNascimento = request.getParameter("textDataNascimento");
         String estadoCivil = request.getParameter("textEstadoCivil");

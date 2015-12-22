@@ -46,7 +46,7 @@ public class PessoaDAO {
             conexao = BD.getConexao();
             String sql = "UPDATE pessoas SET "
                     + "nome = ?, dataNascimento = ?, "
-                    + "estadoCivil = ?, CPF = ?, identidade = ? WHERE id = ? ";
+                    + "estadoCivil = ?, CPF = ?, identidade = ? WHERE id LIKE ? ";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(6, pessoa.getId());
             comando.setString(1, pessoa.getNome());
@@ -123,7 +123,7 @@ public class PessoaDAO {
            try {
                conexao = BD.getConexao();
                comando = conexao.createStatement();
-               stringSQL = "delete from pessoas where id = "+pessoa.getId();
+               stringSQL = "delete from pessoas where id LIKE \""+pessoa.getId() + "\"";
                comando.execute(stringSQL);
                
            }catch (SQLException e){

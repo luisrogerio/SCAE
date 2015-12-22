@@ -8,6 +8,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +25,8 @@ public class PesquisaFormularioSocioeconomicoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-            request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
+            List<FormularioSocioeconomico> formulariosSocioeconomicos = FormularioSocioeconomico.obterFormulariosSocioeconomicos();
+            request.setAttribute("formulariosSocioeconomicos", formulariosSocioeconomicos);
             RequestDispatcher view =request.getRequestDispatcher("/pesquisaFormularioSocioeconomico.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex){

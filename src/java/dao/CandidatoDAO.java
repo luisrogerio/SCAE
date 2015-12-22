@@ -67,7 +67,7 @@ public class CandidatoDAO {
             String sql = "UPDATE candidatos SET curso = ?, pessoa = ?, "
                     + "genero = ?, telefoneResidencial = ?, telefoneCelular = ?, "
                     + "instituicaoFundamental = ?, instituicaoMedio = ? "
-                    + "WHERE matricula = ?" ;
+                    + "WHERE matricula LIKE ?" ;
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(8, candidato.getMatricula());
             if(candidato.getCurso() == null){
@@ -96,7 +96,7 @@ public class CandidatoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM candidatos, pessoas WHERE pessoas.id = candidatos.pessoa");
+            ResultSet rs = comando.executeQuery("SELECT * FROM candidatos, pessoas WHERE pessoas.id LIKE candidatos.pessoa");
             while (rs.next()) {
                 Candidato candidato = new Candidato(
                         rs.getString("id"),
@@ -170,7 +170,7 @@ public class CandidatoDAO {
            try {
                conexao = BD.getConexao();
                comando = conexao.createStatement();
-               stringSQL = "delete from candidatos where matricula = "+candidato.getMatricula();
+               stringSQL = "delete from candidatos where matricula LIKE \""+candidato.getMatricula() + "\"";
                comando.execute(stringSQL);
                
            }catch (SQLException e){

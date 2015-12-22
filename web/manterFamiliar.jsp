@@ -13,18 +13,17 @@
             <table>
                 <tr>
                     <td><label for='textId'>Código</label></td>
-                    <td><input type='text' value="${familiar.codigo}" name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td><input type='text' name='textId' <c:if test="${operacao != 'Incluir'}"> readonly</c:if> value="${familiar.codigo}" ></td>
                     </tr>
                     <tr>
                         <td>Formulário Socioecômico</td>
                         <td>
                             <select name="selectFormularioSocioeconomico" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                              <option value="0" <c:if test="${familiar.formularioSocioeconomico == null}">selected</c:if>></option>
+                              <option value="0" <c:if test="${familiar.formularioSocioeconomico.id == 0}">selected</c:if>></option>
                                 <c:forEach items="${formulariosSocioeconomicos}" var="formularioSocioeconomico">
-                                    
-                                    <option value="${formularioSocioeconomico.id}"
-                                            <c:if test="${familiar.formularioSocioeconomico.id = formularioSocioeconomico.id}">selected</c:if>
-                                                ${formularioSocioeconomico.id}>${formularioSocioeconomico.id}</option>
+                                    <option value="${formularioSocioeconomico.id}" <c:if test="${familiar.formularioSocioeconomico.id == formularioSocioeconomico.id}">selected</c:if>>
+                                        ${formularioSocioeconomico.id}
+                                    </option>
                                 </c:forEach>
                             </select>
                         </td>

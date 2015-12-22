@@ -93,7 +93,7 @@ public class QuadroFamiliarDAO {
                         null,
                         null
                 );
-                quadroFamiliar.setCodigoFormularioSocioeconomico(rs.getInt("formularioSocioeconomico"));
+                quadroFamiliar.setCodigoFormularioSocioeconomico(rs.getInt("formulario_socioeconomico"));
                 quadroFamiliar.setCodigoPessoa(rs.getString("pessoa"));
                 quadrosFamiliares.add(quadroFamiliar);
             }
@@ -123,7 +123,7 @@ public class QuadroFamiliarDAO {
                     null,
                     null
             );
-            quadroFamiliar.setCodigoFormularioSocioeconomico(rs.getInt("formularioSocioeconomico"));
+            quadroFamiliar.setCodigoFormularioSocioeconomico(rs.getInt("formulario_socioeconomico"));
             quadroFamiliar.setCodigoPessoa(rs.getString("pessoa"));
 
         } catch (SQLException e) {
@@ -142,7 +142,7 @@ public class QuadroFamiliarDAO {
            try {
                conexao = BD.getConexao();
                comando = conexao.createStatement();
-               stringSQL = "delete from quadrosFamiliares where id = "+quadroF.getId();
+               stringSQL = "delete from quadro_familiar where id = "+quadroF.getId();
                comando.execute(stringSQL);
                
            }catch (SQLException e){

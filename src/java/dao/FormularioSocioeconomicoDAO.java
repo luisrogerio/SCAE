@@ -455,7 +455,7 @@ public class FormularioSocioeconomicoDAO {
            try {
                conexao = BD.getConexao();
                comando = conexao.createStatement();
-               stringSQL = "delete from formulariosSocioeconomicos where id = "+formulario.getId();
+               stringSQL = "delete from formulario_socioeconomico where id = "+formulario.getId();
                comando.execute(stringSQL);
                
            }catch (SQLException e){
