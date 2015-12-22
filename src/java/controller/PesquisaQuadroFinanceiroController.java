@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,12 +31,13 @@ public class PesquisaQuadroFinanceiroController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            request.setAttribute("quadrosFinanceiros", QuadroFinanceiro.obterQuadrosFinanceiros());
-            RequestDispatcher view =request.getRequestDispatcher("/pesquisaQuadroFinanceiro.jsp");
+        try {
+            List<QuadroFinanceiro> quadrosFinanceiros = QuadroFinanceiro.obterQuadrosFinanceiros();
+            request.setAttribute("quadrosFinanceiros", quadrosFinanceiros);
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaQuadroFinanceiro.jsp");
             view.forward(request, response);
-        } catch (ClassNotFoundException ex){
-            
+        } catch (ClassNotFoundException ex) {
+
         }
     }
 

@@ -13,7 +13,7 @@
         <table border="1">
             <tr>
                 <th>Código Quadro Familiar</th>
-                <th>Nome Quadro Familiar</th>
+                <th>Doença do Familiar ou Candidato</th>
                 <th colspan="2">Ação</th>
             </tr>
 

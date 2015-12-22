@@ -6,8 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.Normalizer;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -63,9 +61,9 @@ public class ManterQuadroFamiliarController extends HttpServlet {
         int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
         String pessoa = request.getParameter("selectPessoa");
         String doenca = request.getParameter("textDoenca");
-        boolean capacidadeTrabalho = Boolean.parseBoolean(request.getParameter("textCapacidadeTrabalho"));
-        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("textDependenciaAtividade"));
-        float gastoMensal = Float.parseFloat(request.getParameter("textGastoMensal"));
+        boolean capacidadeTrabalho = Boolean.parseBoolean(request.getParameter("checkCapacidadeTrabalho"));
+        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("checkDependenciaAtividades"));
+        float gastoMensal = Float.parseFloat(request.getParameter("textGastosMensais"));
 
         try {
             QuadroFamiliar quadroFamiliar = new QuadroFamiliar(id, doenca, capacidadeTrabalho,
@@ -89,7 +87,8 @@ public class ManterQuadroFamiliarController extends HttpServlet {
         try {
             request.setAttribute("operacao", "Editar");
             int id = Integer.parseInt(request.getParameter("codigoQuadroFamiliar"));
-            request.setAttribute("quadroFamiliar", QuadroFamiliar.obterQuadroFamiliar(id));
+            QuadroFamiliar quadroFamiliar = QuadroFamiliar.obterQuadroFamiliar(id);
+            request.setAttribute("quadroFamiliar", quadroFamiliar);
             request.setAttribute("pessoas", Pessoa.obterPessoas());
             request.setAttribute("formulariosSocioeconomicos", FormularioSocioeconomico.obterFormulariosSocioeconomicos());
             RequestDispatcher view = request.getRequestDispatcher("/manterQuadroFamiliar.jsp");
@@ -108,9 +107,10 @@ public class ManterQuadroFamiliarController extends HttpServlet {
         int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
         String pessoa = request.getParameter("selectPessoa");
         String doenca = request.getParameter("textDoenca");
-        boolean capacidadeTrabalho = Boolean.parseBoolean(request.getParameter("textCapacidadeTrabalho"));
-        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("textDependenciaAtividade"));
-        float gastoMensal = Float.parseFloat(request.getParameter("textGastoMensal"));
+        String deixaEuVer = request.getParameter("checkCapacidadeTrabalho");
+        boolean capacidadeTrabalho = Boolean.parseBoolean(deixaEuVer);
+        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("checkDependenciaAtividades"));
+        float gastoMensal = Float.parseFloat(request.getParameter("textGastosMensais"));
 
         try {
             QuadroFamiliar quadroFamiliar = new QuadroFamiliar(id, doenca, capacidadeTrabalho,
@@ -153,9 +153,9 @@ public class ManterQuadroFamiliarController extends HttpServlet {
         int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
         String pessoa = request.getParameter("selectPessoa");
         String doenca = request.getParameter("textDoenca");
-        boolean capacidadeTrabalho = Boolean.parseBoolean(request.getParameter("textCapacidadeTrabalho"));
-        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("textDependenciaAtividade"));
-        float gastoMensal = Float.parseFloat(request.getParameter("textGastoMensal"));
+        boolean capacidadeTrabalho = Boolean.parseBoolean(request.getParameter("checkCapacidadeTrabalho"));
+        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("checkDependenciaAtividades"));
+        float gastoMensal = Float.parseFloat(request.getParameter("textGastosMensais"));
 
         try {
             QuadroFamiliar quadroFamiliar = new QuadroFamiliar(id, doenca, capacidadeTrabalho,

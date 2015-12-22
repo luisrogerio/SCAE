@@ -13,7 +13,7 @@
         <table border="1">
             <tr>
                 <th>Código Edital</th>
-                <th>Nome Edital</th>
+                <th>Ano do Edital</th>
                 <th colspan="2">Ação</th>
             </tr>
 

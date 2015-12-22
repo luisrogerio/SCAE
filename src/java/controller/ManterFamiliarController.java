@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -58,11 +57,11 @@ public class ManterFamiliarController extends HttpServlet {
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         String codigo = request.getParameter("textId");
         String nome = request.getParameter("textNome");
+        int formularioSocioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
         String dataNascimento = request.getParameter("textDataNascimento");
         String estadoCivil = request.getParameter("textEstadoCivil");
         String CPF = request.getParameter("textCPF");
         String identidade = request.getParameter("textIdentidade");
-        int formularioSocioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
         String nacionalidade = request.getParameter("textNacionalidade");
         String parentesco = request.getParameter("textParentesco");
 

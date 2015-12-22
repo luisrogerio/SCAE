@@ -1,6 +1,5 @@
 package model;
 
-import dao.CursoDAO;
 import dao.DeclaracoesDAO;
 import java.sql.SQLException;
 import java.util.List;

@@ -5,7 +5,6 @@
  */
 package dao;
 
-import static dao.CursoDAO.fecharConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +13,6 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import model.Curso;
 import model.Declaracoes;
 
 /**

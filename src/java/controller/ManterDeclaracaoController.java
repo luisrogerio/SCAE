@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -62,11 +61,11 @@ public class ManterDeclaracaoController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("textId"));
         int edital = Integer.parseInt(request.getParameter("selectEdital"));
         String pessoa = request.getParameter("selectPessoa");
-        boolean residenciaRepublica = Boolean.parseBoolean(request.getParameter("textResidenciaRepublica"));
-        boolean naoAtividade = Boolean.parseBoolean(request.getParameter("textNaoAtividade"));
-        boolean atividadeInformal = Boolean.parseBoolean(request.getParameter("textAtividadeInformal"));
-        boolean inexistenciaContaBancaria = Boolean.parseBoolean(request.getParameter("textInexistenciaContaBancaria"));
-        boolean inexistenciaContaBancariaJuridica = Boolean.parseBoolean(request.getParameter("textInexistenciaContaBancariaJuridica"));
+        boolean residenciaRepublica = Boolean.parseBoolean(request.getParameter("checkResidenciaRepublica"));
+        boolean naoAtividade = Boolean.parseBoolean(request.getParameter("checkNaoAtividade"));
+        boolean atividadeInformal = Boolean.parseBoolean(request.getParameter("checkAtividadeInformal"));
+        boolean inexistenciaContaBancaria = Boolean.parseBoolean(request.getParameter("checkInexistenciaContaBancaria"));
+        boolean inexistenciaContaBancariaJuridica = Boolean.parseBoolean(request.getParameter("checkInexistenciaContaBancariaJuridica"));
 
         try {
             Declaracoes declaracao = new Declaracoes(id, residenciaRepublica, 
@@ -108,11 +107,11 @@ public class ManterDeclaracaoController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("textId"));
         int edital = Integer.parseInt(request.getParameter("selectEdital"));
         String pessoa = request.getParameter("selectPessoa");
-        boolean residenciaRepublica = Boolean.parseBoolean(request.getParameter("textResidenciaRepublica"));
-        boolean naoAtividade = Boolean.parseBoolean(request.getParameter("textNaoAtividade"));
-        boolean atividadeInformal = Boolean.parseBoolean(request.getParameter("textAtividadeInformal"));
-        boolean inexistenciaContaBancaria = Boolean.parseBoolean(request.getParameter("textInexistenciaContaBancaria"));
-        boolean inexistenciaContaBancariaJuridica = Boolean.parseBoolean(request.getParameter("textInexistenciaContaBancariaJuridica"));
+        boolean residenciaRepublica = Boolean.parseBoolean(request.getParameter("checkResidenciaRepublica"));
+        boolean naoAtividade = Boolean.parseBoolean(request.getParameter("checkNaoAtividade"));
+        boolean atividadeInformal = Boolean.parseBoolean(request.getParameter("checkAtividadeInformal"));
+        boolean inexistenciaContaBancaria = Boolean.parseBoolean(request.getParameter("checkInexistenciaContaBancaria"));
+        boolean inexistenciaContaBancariaJuridica = Boolean.parseBoolean(request.getParameter("checkInexistenciaContaBancariaJuridica"));
 
         try {
             Declaracoes declaracao = new Declaracoes(id, residenciaRepublica, 
@@ -154,11 +153,11 @@ public class ManterDeclaracaoController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("textId"));
         int edital = Integer.parseInt(request.getParameter("selectEdital"));
         String pessoa = request.getParameter("selectPessoa");
-        boolean residenciaRepublica = Boolean.parseBoolean(request.getParameter("textResidenciaRepublica"));
-        boolean naoAtividade = Boolean.parseBoolean(request.getParameter("textNaoAtividade"));
-        boolean atividadeInformal = Boolean.parseBoolean(request.getParameter("textAtividadeInformal"));
-        boolean inexistenciaContaBancaria = Boolean.parseBoolean(request.getParameter("textInexistenciaContaBancaria"));
-        boolean inexistenciaContaBancariaJuridica = Boolean.parseBoolean(request.getParameter("textInexistenciaContaBancariaJuridica"));
+        boolean residenciaRepublica = Boolean.parseBoolean(request.getParameter("checkResidenciaRepublica"));
+        boolean naoAtividade = Boolean.parseBoolean(request.getParameter("checkNaoAtividade"));
+        boolean atividadeInformal = Boolean.parseBoolean(request.getParameter("checkAtividadeInformal"));
+        boolean inexistenciaContaBancaria = Boolean.parseBoolean(request.getParameter("checkInexistenciaContaBancaria"));
+        boolean inexistenciaContaBancariaJuridica = Boolean.parseBoolean(request.getParameter("checkInexistenciaContaBancariaJuridica"));
 
         try {
             Declaracoes declaracao = new Declaracoes(id, residenciaRepublica, 

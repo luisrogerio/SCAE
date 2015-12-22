@@ -13,14 +13,14 @@
         <table border="1">
             <tr>
                 <th>Código Quadro Financeiro</th>
-                <th>Nome Quadro Financeiro</th>
+                <th>Escolaridade do Familiar ou Candidato</th>
                 <th colspan="2">Ação</th>
             </tr>
 
             <c:forEach items="${quadrosFinanceiros}" var="quadroFinanceiro">
                 <tr>
                     <td><c:out value="${quadroFinanceiro.id}"/></td>
-                    <td><c:out value="${quadroFinanceiro.doenca}"/></td>
+                    <td><c:out value="${quadroFinanceiro.escolaridade}"/></td>
                     <td><a href="ManterQuadroFinanceiroController?acao=prepararEditar&codigoQuadroFinanceiro=<c:out value="${quadroFinanceiro.id}"/>">Editar</a></td>
                     <td><a href="ManterQuadroFinanceiroController?acao=prepararExcluir&codigoQuadroFinanceiro=<c:out value="${quadroFinanceiro.id}"/>">Excluir</a></td>
                 </tr>

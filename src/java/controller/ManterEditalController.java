@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +24,7 @@ public class ManterEditalController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        }
-        else if (acao.equals("confirmarIncluir")) {
+        } else if (acao.equals("confirmarIncluir")) {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
