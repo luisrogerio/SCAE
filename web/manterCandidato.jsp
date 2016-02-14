@@ -9,7 +9,7 @@
     </head>
     <body>
         <h2>Manter Candidato - ${operacao}</h2>
-        <form action="ManterCandidatoController?acao=confirmar${operacao}" method="POST">
+        <form action="ManterCandidatoController?acao=confirmar${operacao}" method="POST" onsubmit="return validarFormulario(this);">
             <table>
                 <tr>
                     <td><label for='textMatricula'>Matrícula</label></td>
@@ -86,5 +86,37 @@
                 </tr>
             </table>
         </form>
+        <script lang="JavaScript">
+            function campoNumerico(valor) {
+                var caracteresValidos = "0123456789";
+                var ehNumero = true;
+                var umCaracter;
+                for (i = 0; i < valor.lenght && ehNumero == true; i++) {
+                    umCaracter = valor.charAt(i);
+                    if (caracteresValidos.indexOf(umCaracter) == -1) {
+                        ehNumero = false;
+                    }
+                }
+                return ehNumero;
+            }
+
+            function validarFormulario(form) {
+                if (form.textMatricula.value == "") {
+                    mensagem = mensagem + "A matrícula não deve ser nula!";
+                }
+                if (form.textNome.value == "") {
+                    mensagem = mensagem + "O Nome não deve ficar vazio!";
+                }
+                if (form.textCPF.value == "") {
+                    mensagem = mensagem + "O CPF não deve ficar vazio!";
+                }
+                if (mensagem == "") {
+                    return true;
+                } else {
+                    alert(mensagem);
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>

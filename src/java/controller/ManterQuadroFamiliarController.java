@@ -61,8 +61,8 @@ public class ManterQuadroFamiliarController extends HttpServlet {
         int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
         String pessoa = request.getParameter("selectPessoa");
         String doenca = request.getParameter("textDoenca");
-        boolean capacidadeTrabalho = Boolean.parseBoolean(request.getParameter("checkCapacidadeTrabalho"));
-        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("checkDependenciaAtividades"));
+        boolean capacidadeTrabalho = null != request.getParameter("checkCapacidadeTrabalho");
+        boolean dependenciaAtividade = null != request.getParameter("checkDependenciaAtividades");
         float gastoMensal = Float.parseFloat(request.getParameter("textGastosMensais"));
 
         try {
@@ -107,9 +107,8 @@ public class ManterQuadroFamiliarController extends HttpServlet {
         int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
         String pessoa = request.getParameter("selectPessoa");
         String doenca = request.getParameter("textDoenca");
-        String deixaEuVer = request.getParameter("checkCapacidadeTrabalho");
-        boolean capacidadeTrabalho = Boolean.parseBoolean(deixaEuVer);
-        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("checkDependenciaAtividades"));
+        boolean capacidadeTrabalho = null != request.getParameter("checkCapacidadeTrabalho");
+        boolean dependenciaAtividade = null != request.getParameter("checkDependenciaAtividades");
         float gastoMensal = Float.parseFloat(request.getParameter("textGastosMensais"));
 
         try {
@@ -150,11 +149,11 @@ public class ManterQuadroFamiliarController extends HttpServlet {
     
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("textId"));
-        int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        int formulario_socioeconomico = 0;
         String pessoa = request.getParameter("selectPessoa");
         String doenca = request.getParameter("textDoenca");
-        boolean capacidadeTrabalho = Boolean.parseBoolean(request.getParameter("checkCapacidadeTrabalho"));
-        boolean dependenciaAtividade = Boolean.parseBoolean(request.getParameter("checkDependenciaAtividades"));
+        boolean capacidadeTrabalho = null != request.getParameter("checkCapacidadeTrabalho");
+        boolean dependenciaAtividade = null != request.getParameter("checkDependenciaAtividades");
         float gastoMensal = Float.parseFloat(request.getParameter("textGastosMensais"));
 
         try {

@@ -26,7 +26,7 @@ public class EnderecoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO enredecos (id, logradouro, rua, bairro, cidade, UF, logradouroRepublica, ruaRepublica, bairroRepublica, cidadeRepublica, UFRepublica) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+            String sql = "INSERT INTO enderecos (id, logradouro, rua, bairro, cidade, UF, logradouroRepublica, ruaRepublica, bairroRepublica, cidadeRepublica, UFRepublica) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, endereco.getId());
             comando.setString(2, endereco.getLogradouro());
@@ -51,7 +51,7 @@ public class EnderecoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE enredecos SET logradouro = ?, rua = ?, bairro = ?, "
+            String sql = "UPDATE enderecos SET logradouro = ?, rua = ?, bairro = ?, "
                     + "cidade = ?, UF = ?, logradouroRepublica = ?, "
                     + "ruaRepublica = ?, bairroRepublica = ?, cidadeRepublica = ?, "
                     + "UFRepublica = ? WHERE id = ?";

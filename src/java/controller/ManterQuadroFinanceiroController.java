@@ -62,7 +62,7 @@ public class ManterQuadroFinanceiroController extends HttpServlet {
         int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
         String pessoa = request.getParameter("selectPessoa");
         String escolaridade = request.getParameter("textEscolaridade");
-        String situacaoDeTrabalho = request.getParameter("textSituacaoDeTrabalho");
+        String situacaoDeTrabalho = request.getParameter("selectSituacaoDeTrabalho");
         String ocupacao = request.getParameter("textOcupacao");
         float rendaMensal = Float.parseFloat(request.getParameter("textRendaMensal"));
 
@@ -149,7 +149,7 @@ public class ManterQuadroFinanceiroController extends HttpServlet {
     
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("textId"));
-        int formulario_socioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        int formulario_socioeconomico = 0;
         String pessoa = request.getParameter("selectPessoa");
         String escolaridade = request.getParameter("textEscolaridade");
         String situacaoDeTrabalho = request.getParameter("textSituacaoDeTrabalho");

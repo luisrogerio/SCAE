@@ -6,6 +6,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ import model.Candidato;
 import model.Edital;
 import model.Endereco;
 import model.FormularioSocioeconomico;
+import model.Modalidade;
 
 /**
  *
@@ -46,14 +49,15 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("candidatos", Candidato.obterCandidatos());
             request.setAttribute("editais", Edital.obterEditais());
+            request.setAttribute("modalidades", Modalidade.obterModalidades());
             RequestDispatcher view = request.getRequestDispatcher("/manterFormularioSocioeconomico.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
 
         } catch (IOException ex) {
 
-        } catch (ClassNotFoundException ex){
-            
+        } catch (ClassNotFoundException ex) {
+
         }
     }
 
@@ -72,7 +76,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String candidato = request.getParameter("selectCandidato");
         int edital = Integer.parseInt(request.getParameter("selectEdital"));
         String serieModuloPeriodo = request.getParameter("textSerieModuloPeriodo");
-        boolean atendimentoAssistencia = Boolean.parseBoolean(request.getParameter("textAtendimentoAssistencia"));
+        boolean atendimentoAssistencia = null != request.getParameter("textAtendimentoAssistencia");
         String atendido = request.getParameter("textAtendido");
         String programaAtendimento = request.getParameter("textProgramaAtendimento");
         String anoAtendimento = request.getParameter("textAnoAtendimento");
@@ -82,7 +86,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String tipoAtividadeAcademica = request.getParameter("textTipoAtividadeAcademica");
         String nomeAtividadeAcademica = request.getParameter("textNomeAtividadeAcademica");
         float ganhoAtividadeAcademica = Float.parseFloat(request.getParameter("textGanhoAtividadeAcademica"));
-        boolean atividadeRemunerada = Boolean.parseBoolean(request.getParameter("textAtividadeRemunerada"));
+        boolean atividadeRemunerada = null != request.getParameter("textAtividadeRemunerada");
         int cargaHorariaRemunerada = Integer.parseInt(request.getParameter("textCargaHorariaRemunerada"));
         float salarioRemunerada = Float.parseFloat(request.getParameter("textSalarioRemunerada"));
         String condicaoManutencao = request.getParameter("textCondicaoManutencao");
@@ -91,18 +95,18 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String outraCondicaoMoradia = request.getParameter("textOutraCondicaoMoradia");
         String responsavelManutencao = request.getParameter("textResponsavelManutencao");
         String outroResponsavelManutencao = request.getParameter("textOutroResponsavelManutencao");
-        boolean esgoto = Boolean.parseBoolean(request.getParameter("checkEsgoto"));
-        boolean aguaTratada = Boolean.parseBoolean(request.getParameter("checkAguaTratada"));
-        boolean iluminacao = Boolean.parseBoolean(request.getParameter("checkIluminacao"));
-        boolean coletaLixo = Boolean.parseBoolean(request.getParameter("checkColetaLixo"));
-        boolean pavimentacao = Boolean.parseBoolean(request.getParameter("checkPavimentacao"));
+        boolean esgoto = null != request.getParameter("checkEsgoto");
+        boolean aguaTratada = null != request.getParameter("checkAguaTratada");
+        boolean iluminacao = null != request.getParameter("checkIluminacao");
+        boolean coletaLixo = null != request.getParameter("checkColetaLixo");
+        boolean pavimentacao = null != request.getParameter("checkPavimentacao");
         String localResidenciaFamiliar = request.getParameter("textLocalResidenciaFamiliar");
         String outroLocalResidenciaFamiliar = request.getParameter("textOutroLocalResidenciaFamiliar");
         String tipoResidenciaFamiliar = request.getParameter("textTipoResidenciaFamiliar");
         String outroTipoResidenciaFamiliar = request.getParameter("textOutroTipoResidenciaFamiliar");
         float precoResidenciaFamiliar = Float.parseFloat(request.getParameter("textPrecoResidenciaFamiliar"));
         String cedente = request.getParameter("textCedente");
-        boolean acabamentoResidenciaFamiliar = Boolean.parseBoolean(request.getParameter("textAcabamentoResidenciaFamiliar"));
+        boolean acabamentoResidenciaFamiliar = null != request.getParameter("textAcabamentoResidenciaFamiliar");
         String imoveisExtras = request.getParameter("textImoveisExtras");
         int quantidadeAutomoveis = Integer.parseInt(request.getParameter("textQuantidadeAutomoveis"));
         String anos = request.getParameter("textAnos");
@@ -112,7 +116,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         int quantidadeGeladeiras = Integer.parseInt(request.getParameter("textQuantidadeGeladeiras"));
         int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTVACabo"));
         int quantidadeComputadores = Integer.parseInt(request.getParameter("textQuantidadeComputadores"));
-        boolean internet = Boolean.parseBoolean(request.getParameter("textInternet"));
+        boolean internet = null != request.getParameter("textInternet");
         int quantidadeEmpregadasMensalistas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasMensalistas"));
         int quantidadeEmpregadasDiaristas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasDiaristas"));
         int quantidadeBanheiros = Integer.parseInt(request.getParameter("textQuantidadeBanheiros"));
@@ -145,6 +149,14 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String dadosExtras = request.getParameter("textDadosExtras");
         String data = request.getParameter("textData");
 
+        String[] modalidades = request.getParameterValues("selectModalidade");
+        List<Integer> codigosModalidades = new ArrayList<>();
+        for (String modalidade : modalidades) {
+            if (!modalidade.isEmpty()) {
+                codigosModalidades.add(Integer.parseInt(modalidade));
+            }
+        }
+
         try {
             FormularioSocioeconomico formularioSocioeconomico = new FormularioSocioeconomico(id, serieModuloPeriodo, atendimentoAssistencia,
                     atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica,
@@ -163,12 +175,13 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
                     despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia,
                     despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone,
                     despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras,
-                    data, null, null, null);
+                    data, null, null, null, null);
             Endereco endereco = new Endereco(id, logradouro, rua, bairro, cidade, UF,
                     logradouroRepublica, ruaRepublica, bairroRepublica, cidadeRepublica, UFRepublica);
             formularioSocioeconomico.setCodigoCandidato(candidato);
             formularioSocioeconomico.setCodigoEdital(edital);
             formularioSocioeconomico.setCodigoEndereco(id);
+            formularioSocioeconomico.setCodigosModalidades(codigosModalidades);
             FormularioSocioeconomico.gravar(formularioSocioeconomico, endereco);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFormularioSocioeconomicoController");
             view.forward(request, response);
@@ -187,19 +200,21 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
             request.setAttribute("operacao", "Editar");
             request.setAttribute("candidatos", Candidato.obterCandidatos());
             request.setAttribute("editais", Edital.obterEditais());
+            request.setAttribute("modalidades", Modalidade.obterModalidades());
             int id = Integer.parseInt(request.getParameter("codigoFormularioSocioeconomico"));
-            request.setAttribute("formularioSocioeconomico", FormularioSocioeconomico.obterFormularioSocioeconomico(id));
+            FormularioSocioeconomico form = FormularioSocioeconomico.obterFormularioSocioeconomico(id);
+            request.setAttribute("formularioSocioeconomico", form);
             RequestDispatcher view = request.getRequestDispatcher("/manterFormularioSocioeconomico.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
 
         } catch (IOException ex) {
 
-        } catch (ClassNotFoundException ex){
-            
+        } catch (ClassNotFoundException ex) {
+
         }
     }
-    
+
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("textId"));
         String logradouro = request.getParameter("textLogradouro");
@@ -213,9 +228,9 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String cidadeRepublica = request.getParameter("textCidadeRepublica");
         String UFRepublica = request.getParameter("textUFRepublica");
         String candidato = request.getParameter("selectCandidato");
-        int edital = Integer.parseInt(request.getParameter("selectEdital"));
+        int edital = 0;
         String serieModuloPeriodo = request.getParameter("textSerieModuloPeriodo");
-        boolean atendimentoAssistencia = Boolean.parseBoolean(request.getParameter("textAtendimentoAssistencia"));
+        boolean atendimentoAssistencia = null != request.getParameter("textAtendimentoAssistencia");
         String atendido = request.getParameter("textAtendido");
         String programaAtendimento = request.getParameter("textProgramaAtendimento");
         String anoAtendimento = request.getParameter("textAnoAtendimento");
@@ -225,7 +240,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String tipoAtividadeAcademica = request.getParameter("textTipoAtividadeAcademica");
         String nomeAtividadeAcademica = request.getParameter("textNomeAtividadeAcademica");
         float ganhoAtividadeAcademica = Float.parseFloat(request.getParameter("textGanhoAtividadeAcademica"));
-        boolean atividadeRemunerada = Boolean.parseBoolean(request.getParameter("textAtividadeRemunerada"));
+        boolean atividadeRemunerada = null != request.getParameter("textAtividadeRemunerada");
         int cargaHorariaRemunerada = Integer.parseInt(request.getParameter("textCargaHorariaRemunerada"));
         float salarioRemunerada = Float.parseFloat(request.getParameter("textSalarioRemunerada"));
         String condicaoManutencao = request.getParameter("textCondicaoManutencao");
@@ -234,18 +249,18 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String outraCondicaoMoradia = request.getParameter("textOutraCondicaoMoradia");
         String responsavelManutencao = request.getParameter("textResponsavelManutencao");
         String outroResponsavelManutencao = request.getParameter("textOutroResponsavelManutencao");
-        boolean esgoto = Boolean.parseBoolean(request.getParameter("textEsgoto"));
-        boolean aguaTratada = Boolean.parseBoolean(request.getParameter("textAguaTratada"));
-        boolean iluminacao = Boolean.parseBoolean(request.getParameter("textIluminacao"));
-        boolean coletaLixo = Boolean.parseBoolean(request.getParameter("textColetaLixo"));
-        boolean pavimentacao = Boolean.parseBoolean(request.getParameter("textPavimentacao"));
+        boolean esgoto = null != request.getParameter("checkEsgoto");
+        boolean aguaTratada = null != request.getParameter("checkAguaTratada");
+        boolean iluminacao = null != request.getParameter("checkIluminacao");
+        boolean coletaLixo = null != request.getParameter("checkColetaLixo");
+        boolean pavimentacao = null != request.getParameter("checkPavimentacao");
         String localResidenciaFamiliar = request.getParameter("textLocalResidenciaFamiliar");
         String outroLocalResidenciaFamiliar = request.getParameter("textOutroLocalResidenciaFamiliar");
         String tipoResidenciaFamiliar = request.getParameter("textTipoResidenciaFamiliar");
         String outroTipoResidenciaFamiliar = request.getParameter("textOutroTipoResidenciaFamiliar");
         float precoResidenciaFamiliar = Float.parseFloat(request.getParameter("textPrecoResidenciaFamiliar"));
         String cedente = request.getParameter("textCedente");
-        boolean acabamentoResidenciaFamiliar = Boolean.parseBoolean(request.getParameter("textAcabamentoResidenciaFamiliar"));
+        boolean acabamentoResidenciaFamiliar = null != request.getParameter("textAcabamentoResidenciaFamiliar");
         String imoveisExtras = request.getParameter("textImoveisExtras");
         int quantidadeAutomoveis = Integer.parseInt(request.getParameter("textQuantidadeAutomoveis"));
         String anos = request.getParameter("textAnos");
@@ -253,9 +268,9 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         int quantidadeTelevisoes = Integer.parseInt(request.getParameter("textQuantidadeTelevisoes"));
         int quantidadeMaquinasDeLavar = Integer.parseInt(request.getParameter("textQuantidadeMaquinasDeLavar"));
         int quantidadeGeladeiras = Integer.parseInt(request.getParameter("textQuantidadeGeladeiras"));
-        int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTvsACabo"));
+        int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTVACabo"));
         int quantidadeComputadores = Integer.parseInt(request.getParameter("textQuantidadeComputadores"));
-        boolean internet = Boolean.parseBoolean(request.getParameter("textInternet"));
+        boolean internet = null != request.getParameter("textInternet");
         int quantidadeEmpregadasMensalistas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasMensalistas"));
         int quantidadeEmpregadasDiaristas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasDiaristas"));
         int quantidadeBanheiros = Integer.parseInt(request.getParameter("textQuantidadeBanheiros"));
@@ -287,7 +302,13 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         float despesaRepublicaIPTU = Float.parseFloat(request.getParameter("textDespesaRepublicaIPTU"));
         String dadosExtras = request.getParameter("textDadosExtras");
         String data = request.getParameter("textData");
-
+        String[] modalidades = request.getParameterValues("selectModalidade");
+        List<Integer> codigosModalidades = new ArrayList<>();
+        for (String modalidade : modalidades) {
+            if (!modalidade.isEmpty()) {
+                codigosModalidades.add(Integer.parseInt(modalidade));
+            }
+        }
         try {
             FormularioSocioeconomico formularioSocioeconomico = new FormularioSocioeconomico(id, serieModuloPeriodo, atendimentoAssistencia,
                     atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica,
@@ -306,12 +327,13 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
                     despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia,
                     despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone,
                     despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras,
-                    data, null, null, null);
+                    data, null, null, null, null);
             Endereco endereco = new Endereco(id, logradouro, rua, bairro, cidade, UF,
                     logradouroRepublica, ruaRepublica, bairroRepublica, cidadeRepublica, UFRepublica);
             formularioSocioeconomico.setCodigoCandidato(candidato);
             formularioSocioeconomico.setCodigoEdital(edital);
             formularioSocioeconomico.setCodigoEndereco(id);
+            formularioSocioeconomico.setCodigosModalidades(codigosModalidades);
             FormularioSocioeconomico.alterar(formularioSocioeconomico, endereco);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFormularioSocioeconomicoController");
             view.forward(request, response);
@@ -330,6 +352,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
             request.setAttribute("operacao", "Excluir");
             request.setAttribute("candidatos", Candidato.obterCandidatos());
             request.setAttribute("editais", Edital.obterEditais());
+            request.setAttribute("modalidades", Modalidade.obterModalidades());
             int id = Integer.parseInt(request.getParameter("codigoFormularioSocioeconomico"));
             request.setAttribute("formularioSocioeconomico", FormularioSocioeconomico.obterFormularioSocioeconomico(id));
             RequestDispatcher view = request.getRequestDispatcher("/manterFormularioSocioeconomico.jsp");
@@ -338,11 +361,11 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
 
         } catch (IOException ex) {
 
-        } catch (ClassNotFoundException ex){
-            
+        } catch (ClassNotFoundException ex) {
+
         }
     }
-    
+
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("textId"));
         String logradouro = request.getParameter("textLogradouro");
@@ -356,9 +379,9 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String cidadeRepublica = request.getParameter("textCidadeRepublica");
         String UFRepublica = request.getParameter("textUFRepublica");
         String candidato = request.getParameter("selectCandidato");
-        int edital = Integer.parseInt(request.getParameter("selectEdital"));
+        int edital = 0;
         String serieModuloPeriodo = request.getParameter("textSerieModuloPeriodo");
-        boolean atendimentoAssistencia = Boolean.parseBoolean(request.getParameter("textAtendimentoAssistencia"));
+        boolean atendimentoAssistencia = null != request.getParameter("textAtendimentoAssistencia");
         String atendido = request.getParameter("textAtendido");
         String programaAtendimento = request.getParameter("textProgramaAtendimento");
         String anoAtendimento = request.getParameter("textAnoAtendimento");
@@ -368,7 +391,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String tipoAtividadeAcademica = request.getParameter("textTipoAtividadeAcademica");
         String nomeAtividadeAcademica = request.getParameter("textNomeAtividadeAcademica");
         float ganhoAtividadeAcademica = Float.parseFloat(request.getParameter("textGanhoAtividadeAcademica"));
-        boolean atividadeRemunerada = Boolean.parseBoolean(request.getParameter("textAtividadeRemunerada"));
+        boolean atividadeRemunerada = null != request.getParameter("textAtividadeRemunerada");
         int cargaHorariaRemunerada = Integer.parseInt(request.getParameter("textCargaHorariaRemunerada"));
         float salarioRemunerada = Float.parseFloat(request.getParameter("textSalarioRemunerada"));
         String condicaoManutencao = request.getParameter("textCondicaoManutencao");
@@ -377,18 +400,18 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String outraCondicaoMoradia = request.getParameter("textOutraCondicaoMoradia");
         String responsavelManutencao = request.getParameter("textResponsavelManutencao");
         String outroResponsavelManutencao = request.getParameter("textOutroResponsavelManutencao");
-        boolean esgoto = Boolean.parseBoolean(request.getParameter("textEsgoto"));
-        boolean aguaTratada = Boolean.parseBoolean(request.getParameter("textAguaTratada"));
-        boolean iluminacao = Boolean.parseBoolean(request.getParameter("textIluminacao"));
-        boolean coletaLixo = Boolean.parseBoolean(request.getParameter("textColetaLixo"));
-        boolean pavimentacao = Boolean.parseBoolean(request.getParameter("textPavimentacao"));
+        boolean esgoto = null != request.getParameter("checkEsgoto");
+        boolean aguaTratada = null != request.getParameter("checkAguaTratada");
+        boolean iluminacao = null != request.getParameter("checkIluminacao");
+        boolean coletaLixo = null != request.getParameter("checkColetaLixo");
+        boolean pavimentacao = null != request.getParameter("checkPavimentacao");
         String localResidenciaFamiliar = request.getParameter("textLocalResidenciaFamiliar");
         String outroLocalResidenciaFamiliar = request.getParameter("textOutroLocalResidenciaFamiliar");
         String tipoResidenciaFamiliar = request.getParameter("textTipoResidenciaFamiliar");
         String outroTipoResidenciaFamiliar = request.getParameter("textOutroTipoResidenciaFamiliar");
         float precoResidenciaFamiliar = Float.parseFloat(request.getParameter("textPrecoResidenciaFamiliar"));
         String cedente = request.getParameter("textCedente");
-        boolean acabamentoResidenciaFamiliar = Boolean.parseBoolean(request.getParameter("textAcabamentoResidenciaFamiliar"));
+        boolean acabamentoResidenciaFamiliar = null != request.getParameter("textAcabamentoResidenciaFamiliar");
         String imoveisExtras = request.getParameter("textImoveisExtras");
         int quantidadeAutomoveis = Integer.parseInt(request.getParameter("textQuantidadeAutomoveis"));
         String anos = request.getParameter("textAnos");
@@ -396,9 +419,9 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         int quantidadeTelevisoes = Integer.parseInt(request.getParameter("textQuantidadeTelevisoes"));
         int quantidadeMaquinasDeLavar = Integer.parseInt(request.getParameter("textQuantidadeMaquinasDeLavar"));
         int quantidadeGeladeiras = Integer.parseInt(request.getParameter("textQuantidadeGeladeiras"));
-        int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTvsACabo"));
+        int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTVACabo"));
         int quantidadeComputadores = Integer.parseInt(request.getParameter("textQuantidadeComputadores"));
-        boolean internet = Boolean.parseBoolean(request.getParameter("textInternet"));
+        boolean internet = null != request.getParameter("textInternet");
         int quantidadeEmpregadasMensalistas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasMensalistas"));
         int quantidadeEmpregadasDiaristas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasDiaristas"));
         int quantidadeBanheiros = Integer.parseInt(request.getParameter("textQuantidadeBanheiros"));
@@ -430,7 +453,13 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         float despesaRepublicaIPTU = Float.parseFloat(request.getParameter("textDespesaRepublicaIPTU"));
         String dadosExtras = request.getParameter("textDadosExtras");
         String data = request.getParameter("textData");
-
+        String[] modalidades = request.getParameterValues("selectModalidade");
+        List<Integer> codigosModalidades = new ArrayList<>();
+        for (String modalidade : modalidades) {
+            if (!modalidade.isEmpty()) {
+                codigosModalidades.add(Integer.parseInt(modalidade));
+            }
+        }
         try {
             FormularioSocioeconomico formularioSocioeconomico = new FormularioSocioeconomico(id, serieModuloPeriodo, atendimentoAssistencia,
                     atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica,
@@ -449,12 +478,13 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
                     despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia,
                     despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone,
                     despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras,
-                    data, null, null, null);
+                    data, null, null, null, null);
             Endereco endereco = new Endereco(id, logradouro, rua, bairro, cidade, UF,
                     logradouroRepublica, ruaRepublica, bairroRepublica, cidadeRepublica, UFRepublica);
             formularioSocioeconomico.setCodigoCandidato(candidato);
             formularioSocioeconomico.setCodigoEdital(edital);
             formularioSocioeconomico.setCodigoEndereco(id);
+            formularioSocioeconomico.setCodigosModalidades(codigosModalidades);
             FormularioSocioeconomico.excluir(formularioSocioeconomico, endereco);
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFormularioSocioeconomicoController");
             view.forward(request, response);
@@ -466,7 +496,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
 
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

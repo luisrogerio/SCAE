@@ -74,6 +74,25 @@ public class ModalidadeDAO {
         }
         return modalidades;
     }
+    
+    public static List<Integer> obterCodigosModalidadesDoFormularioSocioeconomico(int formularioSocioeconomicoId) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Integer> modalidades = new ArrayList<>();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM modalidades_formulario_economico WHERE formulario_socioeconomico_id = " + formularioSocioeconomicoId);
+            while (rs.next()) {
+                modalidades.add(rs.getInt("modalidade"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return modalidades;
+    }
 
     public static Modalidade obterModalidade(int id) throws ClassNotFoundException {
         Connection conexao = null;

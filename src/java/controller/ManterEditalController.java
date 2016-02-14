@@ -19,8 +19,7 @@ import model.Edital;
  */
 public class ManterEditalController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
@@ -62,11 +61,8 @@ public class ManterEditalController extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("PesquisaEditalController");
             view.forward(request, response);
         } catch (IOException ex) {
-
         } catch (ClassNotFoundException ex) {
-
         } catch (Exception ex) {
-
         }
     }
     

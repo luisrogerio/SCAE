@@ -53,5 +53,8 @@ public class Modalidade {
     public static void excluir(Modalidade modalidade) throws SQLException,ClassNotFoundException{
         ModalidadeDAO.excluir(modalidade);
     }
+    public static List<Integer> obterCodigosModalidadesDoFormularioSocioeconomico(int formularioSocioeconomicoId) throws ClassNotFoundException {
+        return ModalidadeDAO.obterCodigosModalidadesDoFormularioSocioeconomico(formularioSocioeconomicoId);
+    }
 
 }

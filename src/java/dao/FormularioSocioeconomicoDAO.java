@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Endereco;
 import model.FormularioSocioeconomico;
+import model.Modalidade;
 
 /**
  *
@@ -24,6 +25,7 @@ public class FormularioSocioeconomicoDAO {
 
     public static void gravar(FormularioSocioeconomico formularioSocioeconomico, Endereco endereco) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
+        PreparedStatement comando = null;
         try {
             Endereco.gravar(endereco);
         } catch (SQLException e) {
@@ -31,8 +33,8 @@ public class FormularioSocioeconomicoDAO {
         }
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO formulario_socioeconomico (id, candidato, edital, enredeco, serieModuloPeriodo, atendimentoAssistencia, atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica, nomeAtividadeAcademica, ganhoAtividadeAcademica, atividadeRemunerada, cargaHorariaRemunerada, salarioRemunerada, condicaoManutencao, outraCondicaoManutencao, condicaoMoradia, outraCondicaoMoradia, responsavelManutencao, outroResponsavelManutencao, esgoto, aguaTratada, iluminacao, coletaLixo, pavimentacao, localResidenciaFamiliar, outroLocalResidenciaFamiliar, tipoResidenciaFamiliar, outroTipoResidenciaFamiliar, precoResidenciaFamiliar, cedente, acabamentoResidenciaFamiliar, imoveisExtras, quantidadeAutomoveis, anos, modelos, quantidadeTelevisoes, quantidadeMaquinasDeLavar, quantidadeGeladeiras, quantidadeTvsACabo, quantidadeComputadores, internet, quantidadeEmpregadasMensalistas, quantidadeEmpregadasDiaristas, quantidadeBanheiros, quantidadeQuartos, aluguelImoveis, pensaoMorte, pensaoAlimenticia, ajudaTerceiros, beneficiosSociais, outraRenda, numeroResidentes, despesaFamiliarAgua, despesaFamiliarLuz, despesaFamiliarTelefone, despesaFamiliarCondominio, despesaFamiliarMensalidadeEscolar, despesaFamiliarAlimentacao, despesaFamiliarSaude, despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia, despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone, despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
-            PreparedStatement comando = conexao.prepareStatement(sql);
+            String sql = "INSERT INTO formulario_socioeconomico (id, candidato, edital, endereco, serieModuloPeriodo, atendimentoAssistencia, atendido, programaAtendimento, anoAtendimento, meioTransporte, outroMeio, gastoMensal, tipoAtividadeAcademica, nomeAtividadeAcademica, ganhoAtividadeAcademica, atividadeRemunerada, cargaHorariaRemunerada, salarioRemunerada, condicaoManutencao, outraCondicaoManutencao, condicaoMoradia, outraCondicaoMoradia, responsavelManutencao, outroResponsavelManutencao, esgoto, aguaTratada, iluminacao, coletaLixo, pavimentacao, localResidenciaFamiliar, outroLocalResidenciaFamiliar, tipoResidenciaFamiliar, outroTipoResidenciaFamiliar, precoResidenciaFamiliar, cedente, acabamentoResidenciaFamiliar, imoveisExtras, quantidadeAutomoveis, anos, modelos, quantidadeTelevisoes, quantidadeMaquinasDeLavar, quantidadeGeladeiras, quantidadeTvsACabo, quantidadeComputadores, internet, quantidadeEmpregadasMensalistas, quantidadeEmpregadasDiaristas, quantidadeBanheiros, quantidadeQuartos, aluguelImoveis, pensaoMorte, pensaoAlimenticia, ajudaTerceiros, beneficiosSociais, outraRenda, numeroResidentes, despesaFamiliarAgua, despesaFamiliarLuz, despesaFamiliarTelefone, despesaFamiliarCondominio, despesaFamiliarMensalidadeEscolar, despesaFamiliarAlimentacao, despesaFamiliarSaude, despesaFamiliarTransporte, despesaFamiliarIPTU, despesaFamiliarAluguel, despesaFamiliarPensaoAlimenticia, despesaFamiliarOutros, despesaRepublicaAgua, despesaRepublicaLuz, despesaRepublicaTelefone, despesaRepublicaCondominio, despesaRepublicaAluguel, despesaRepublicaIPTU, dadosExtras, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+            comando = conexao.prepareStatement(sql);
             comando.setInt(1, formularioSocioeconomico.getId());
             comando.setString(2, formularioSocioeconomico.getCodigoCandidato());
             comando.setInt(3, formularioSocioeconomico.getCodigoEdital());
@@ -111,15 +113,27 @@ public class FormularioSocioeconomicoDAO {
             comando.setString(76, formularioSocioeconomico.getDadosExtras());
             comando.setString(77, formularioSocioeconomico.getData());
             comando.execute();
-            comando.close();
-            conexao.close();
         } catch (SQLException e) {
             throw e;
+        }
+        try {
+            for (Integer codigoModalidade : formularioSocioeconomico.getCodigosModalidades()) {
+                String sql = "INSERT INTO modalidades_formulario_economico (modalidade, formulario_socioeconomico_id) VALUES (?, ?)";
+                comando = conexao.prepareStatement(sql);
+                comando.setInt(1, codigoModalidade);
+                comando.setInt(2, formularioSocioeconomico.getId());
+                comando.execute();
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            fecharConexao(conexao, comando);
         }
     }
 
     public static void alterar(FormularioSocioeconomico formularioSocioeconomico, Endereco endereco) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
+        PreparedStatement comando = null;
         try {
             Endereco.alterar(endereco);
         } catch (SQLException e) {
@@ -127,7 +141,7 @@ public class FormularioSocioeconomicoDAO {
         }
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE formulario_socioeconomico SET candidato = ?, edital = ?, enredeco = ?, "
+            String sql = "UPDATE formulario_socioeconomico SET candidato = ?, edital = ?, endereco = ?, "
                     + "serieModuloPeriodo = ?, atendimentoAssistencia = ?, atendido = ?, "
                     + "programaAtendimento = ?, anoAtendimento = ?, meioTransporte = ?, "
                     + "outroMeio = ?, gastoMensal = ?, tipoAtividadeAcademica = ?, "
@@ -151,14 +165,14 @@ public class FormularioSocioeconomicoDAO {
                     + "despesaFamiliarOutros = ?, despesaRepublicaAgua = ?, despesaRepublicaLuz = ?, "
                     + "despesaRepublicaTelefone = ?, despesaRepublicaCondominio = ?, despesaRepublicaAluguel = ?, "
                     + "despesaRepublicaIPTU = ?, dadosExtras = ?, data = ? WHERE id = ?";
-            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando = conexao.prepareStatement(sql);
             comando.setInt(77, formularioSocioeconomico.getId());
-            if(formularioSocioeconomico.getCandidato() == null) {
+            if (formularioSocioeconomico.getCandidato() == null) {
                 comando.setNull(1, Types.NULL);
             } else {
                 comando.setString(1, formularioSocioeconomico.getCodigoCandidato());
             }
-            if(formularioSocioeconomico.getEdital()== null) {
+            if (formularioSocioeconomico.getEdital() == null) {
                 comando.setNull(2, Types.NULL);
             } else {
                 comando.setInt(2, formularioSocioeconomico.getCodigoEdital());
@@ -238,11 +252,25 @@ public class FormularioSocioeconomicoDAO {
             comando.setString(75, formularioSocioeconomico.getDadosExtras());
             comando.setString(76, formularioSocioeconomico.getData());
             comando.execute();
-            comando.close();
-            conexao.close();
 
         } catch (SQLException e) {
             throw e;
+        }
+        try {
+            String sql = "DELETE FROM modalidades_formulario_economico WHERE formulario_socioeconomico_id = " + formularioSocioeconomico.getId();
+            comando = conexao.prepareStatement(sql);
+            comando.execute();
+            for (Integer codigoModalidade : formularioSocioeconomico.getCodigosModalidades()) {
+                sql = "INSERT INTO modalidades_formulario_economico (modalidade, formulario_socioeconomico_id) VALUES (?, ?)";
+                comando = conexao.prepareStatement(sql);
+                comando.setInt(1, codigoModalidade);
+                comando.setInt(2, formularioSocioeconomico.getId());
+                comando.execute();
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            fecharConexao(conexao, comando);
         }
     }
 
@@ -330,6 +358,7 @@ public class FormularioSocioeconomicoDAO {
                         rs.getFloat("despesaRepublicaIPTU"),
                         rs.getString("dadosExtras"),
                         rs.getString("data"),
+                        null,
                         null,
                         null,
                         null
@@ -433,11 +462,13 @@ public class FormularioSocioeconomicoDAO {
                         rs.getString("data"),
                         null,
                         null,
+                        null,
                         null
                 );
                 formularioSocioeconomico.setCodigoCandidato(rs.getString("candidato"));
                 formularioSocioeconomico.setCodigoEndereco(rs.getInt("endereco"));
                 formularioSocioeconomico.setCodigoEdital(rs.getInt("edital"));
+                formularioSocioeconomico.setCodigosModalidades(Modalidade.obterCodigosModalidadesDoFormularioSocioeconomico(id));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -446,24 +477,31 @@ public class FormularioSocioeconomicoDAO {
         }
         return formularioSocioeconomico;
     }
-    
-    public static void excluir(FormularioSocioeconomico formulario, Endereco endereco) throws SQLException, ClassNotFoundException{
-           Connection conexao = null;
-           Statement comando = null;
-           String stringSQL;
-           
-           try {
-               conexao = BD.getConexao();
-               comando = conexao.createStatement();
-               stringSQL = "delete from formulario_socioeconomico where id = "+formulario.getId();
-               comando.execute(stringSQL);
-               
-           }catch (SQLException e){
-               throw e;
-           }finally{
-               fecharConexao(conexao, comando);
-           }
-       }
+
+    public static void excluir(FormularioSocioeconomico formulario, Endereco endereco) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        String stringSQL;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            stringSQL = "delete from modalidades_formulario_economico where formulario_socioeconomico_id = " + formulario.getId();
+            comando.execute(stringSQL);
+            comando = conexao.createStatement();
+            stringSQL = "delete from formulario_socioeconomico where id = " + formulario.getId();
+            comando.execute(stringSQL);
+
+        } catch (SQLException e) {
+            throw e;
+        } 
+        try {
+            Endereco.excluir(endereco);
+        }catch (SQLException e) {
+            throw e;
+        }finally {
+            fecharConexao(conexao, comando);
+        }
+    }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {

@@ -92,6 +92,7 @@ public class FormularioSocioeconomico {
     private String codigoCandidato;
     private int codigoEdital;
     private int codigoEndereco;
+    private List<Integer> codigosModalidades;
 
     public FormularioSocioeconomico(int id, String serieModuloPeriodo, boolean atendimentoAssistencia, String atendido,
             String programaAtendimento, String anoAtendimento, String meioTransporte, String outroMeio, float gastoMensal,
@@ -114,7 +115,7 @@ public class FormularioSocioeconomico {
             float despesaFamiliarOutros, float despesaRepublicaAgua, float despesaRepublicaLuz,
             float despesaRepublicaTelefone, float despesaRepublicaCondominio, float despesaRepublicaAluguel,
             float despesaRepublicaIPTU, String dadosExtras, String data, Candidato candidato, Edital edital,
-            Endereco enredeco) {
+            Endereco enredeco, List<Modalidade> modalidades) {
         this.id = id;
         this.serieModuloPeriodo = serieModuloPeriodo;
         this.atendimentoAssistencia = atendimentoAssistencia;
@@ -192,6 +193,7 @@ public class FormularioSocioeconomico {
         this.candidato = candidato;
         this.edital = edital;
         this.endereco = enredeco;
+        this.modalidades = modalidades;
     }
 
     public int getId() {
@@ -861,6 +863,14 @@ public class FormularioSocioeconomico {
 
     public void setModalidades(List<Modalidade> modalidades) {
         this.modalidades = modalidades;
+    }
+    
+    public List<Integer> getCodigosModalidades() {
+        return codigosModalidades;
+    }
+
+    public void setCodigosModalidades(List<Integer> codigosModalidades) {
+        this.codigosModalidades = codigosModalidades;
     }
 
     public static List<FormularioSocioeconomico> obterFormulariosSocioeconomicos() throws ClassNotFoundException {
