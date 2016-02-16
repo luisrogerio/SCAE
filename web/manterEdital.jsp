@@ -56,6 +56,9 @@
                 if (!campoNumerico(form.textId.value)) {
                     mensagem = mensagem + "O Código não deve ser nulo ou não-numérico!";
                 }
+                if (form.textAno.value == "") {
+                    mensagem = mensagem + "O ano não deve ficar vazio!";
+                }
                 if (form.textDescricao.value == "") {
                     mensagem = mensagem + "A descrição não deve ficar vazio!";
                 }

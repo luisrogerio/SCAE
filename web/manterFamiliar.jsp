@@ -81,6 +81,9 @@
                 if (form.textCPF.value == "") {
                     mensagem = mensagem + "O CPF não deve ficar vazio!";
                 }
+                if (form.textParentesco.value == "") {
+                    mensagem = mensagem + "O parentesco não deve ficar vazio!";
+                }
                 if (mensagem == "") {
                     return true;
                 } else {
