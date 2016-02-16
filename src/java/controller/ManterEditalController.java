@@ -123,7 +123,7 @@ public class ManterEditalController extends HttpServlet {
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("textId"));
         String ano = request.getParameter("textAno");
-        int semestre = Integer.parseInt(request.getParameter("selectSemestre"));
+        int semestre = 0;
         String descricao = request.getParameter("textDescricao");
 
         try {

@@ -14,10 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Curso;
 
-/**
- *
- * @author luisr
- */
+
 public class ManterCursoController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -29,8 +26,7 @@ public class ManterCursoController extends HttpServlet {
             confirmarIncluir(request, response);
         } else if (acao.equals("prepararEditar")) {
             prepararEditar(request, response);
-        }
-        else if (acao.equals("confirmarEditar")) {
+        } else if (acao.equals("confirmarEditar")) {
             confirmarEditar(request, response);
         } else if (acao.equals("prepararExcluir")) {
             prepararExcluir(request, response);
@@ -74,18 +70,18 @@ public class ManterCursoController extends HttpServlet {
         }
     }
 
-    public void prepararEditar(HttpServletRequest request,
+    public void prepararEditar(HttpServletRequest request, 
             HttpServletResponse response) {
         try {
-            request.setAttribute("operacao", "Editar");
             int id = Integer.parseInt(request.getParameter("codigoCurso"));
+            request.setAttribute("operacao", "Editar");
             request.setAttribute("curso", Curso.obterCurso(id));
             RequestDispatcher view = request.getRequestDispatcher("/manterCurso.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
-
+            
         } catch (IOException ex) {
-
+            
         } catch (ClassNotFoundException ex) {
 
         }

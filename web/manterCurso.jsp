@@ -22,7 +22,7 @@
                     <tr>
                         <td><label for='selectTurno'>Turno</label></td>
                         <td>
-                            <select name="selectTurno" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <select name="selectTurno" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="integral" <c:if test="${curso.turno == 'integral'}">selected</c:if> >Integral</option>
                             <option value="diurno" <c:if test="${curso.turno == 'diurno'}">selected</c:if> >Diurno</option>
                             <option value="vespertino" <c:if test="${curso.turno == 'vespertino'}">selected</c:if> >Vespertino</option>
@@ -33,7 +33,7 @@
                     <tr>
                         <td><label for='selectTipo'>Tipo</label></td>
                         <td>
-                            <select name="selectTipo" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <select name="selectTipo" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="integrado" <c:if test="${curso.tipo == 'integrado'}">selected</c:if> >Integrado</option>
                             <option value="superior" <c:if test="${curso.tipo == 'superior'}">selected</c:if> >Superior</option>
                             <option value="posGraduacao" <c:if test="${curso.tipo == 'posGraduacao'}">selected</c:if> >Pós-Graduação</option>

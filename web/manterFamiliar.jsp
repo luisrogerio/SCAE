@@ -18,7 +18,7 @@
                     <tr>
                         <td>Formulário Socioecômico</td>
                         <td>
-                            <select name="selectFormularioSocioeconomico" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <select name="selectFormularioSocioeconomico" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="0" <c:if test="${familiar.formularioSocioeconomico.id == 0}">selected</c:if>></option>
                             <c:forEach items="${formulariosSocioeconomicos}" var="formularioSocioeconomico">
                                 <option value="${formularioSocioeconomico.id}" <c:if test="${familiar.formularioSocioeconomico.id == formularioSocioeconomico.id}">selected</c:if>>

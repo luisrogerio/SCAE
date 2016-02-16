@@ -154,7 +154,7 @@ public class ManterFamiliarController extends HttpServlet {
         String estadoCivil = request.getParameter("textEstadoCivil");
         String CPF = request.getParameter("textCPF");
         String identidade = request.getParameter("textIdentidade");
-        int formularioSocioeconomico = Integer.parseInt(request.getParameter("selectFormularioSocioeconomico"));
+        int formularioSocioeconomico = 0;
         String nacionalidade = request.getParameter("textNacionalidade");
         String parentesco = request.getParameter("textParentesco");
 

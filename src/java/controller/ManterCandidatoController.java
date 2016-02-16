@@ -166,7 +166,7 @@ public class ManterCandidatoController extends HttpServlet {
         String estadoCivil = request.getParameter("textEstadoCivil");
         String CPF = request.getParameter("textCPF");
         String identidade = request.getParameter("textIdentidade");
-        int curso = Integer.parseInt(request.getParameter("selectCurso"));
+        int curso = 0;
         String genero = request.getParameter("textGenero");
         String telefoneResidencial = request.getParameter("textTelefoneResidencial");
         String telefoneCelular = request.getParameter("textTelefoneCelular");

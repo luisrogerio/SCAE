@@ -34,7 +34,7 @@
                     <tr>
                         <td><label for='selectCurso'>Curso</label></td>
                         <td>
-                            <select name="selectCurso" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <select name="selectCurso" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                 <option value="0"></option>
                             <c:forEach items="${cursos}" var="curso">
                                 <option value="${curso.id}" <c:if test="${candidato.curso.id == curso.id}">selected</c:if>>${curso.nome}</option>
@@ -45,8 +45,8 @@
                 <tr>
                     <td><label for='textGenero'>Gênero</label></td>
                     <td>		
-                        <input type='radio' name='textGenero' value="Masculino" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${candidato.genero == 'Masculino'}"> checked</c:if>>Masculino
-                        <input type='radio' name='textGenero' value="Feminino" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${candidato.genero == 'Feminino'}"> checked</c:if>>Feminino
+                        <input type='radio' name='textGenero' value="Masculino" <c:if test="${operacao == 'Excluir'}"> disabled</c:if> <c:if test="${candidato.genero == 'Masculino'}"> checked</c:if>>Masculino
+                        <input type='radio' name='textGenero' value="Feminino" <c:if test="${operacao == 'Excluir'}"> disabled</c:if> <c:if test="${candidato.genero == 'Feminino'}"> checked</c:if>>Feminino
                         </td>				
                     </tr>
                     <tr>
@@ -60,7 +60,7 @@
                     <tr>
                         <td><label for='textInstituicaoFundamental'>Instituição Fundamental</label></td>
                         <td>
-                            <select name="textInstituicaoFundamental" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <select name="textInstituicaoFundamental" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="publica" <c:if test="${candidato.instituicaoFundamental == 'publica'}">selected</c:if>>Pública</option>
                             <option value="particular" <c:if test="${candidato.instituicaoFundamental == 'particular'}">selected</c:if>>Particular</option>
                             <option value="publicaEParticular" <c:if test="${candidato.instituicaoFundamental == 'publicaEParticular'}">selected</c:if>>Parte em pública e depois em particular</option>
@@ -72,7 +72,7 @@
                     <tr>
                         <td><label for='textInstituicaoMedio'>Instituição Médio</label></td>
                         <td>
-                            <select name="textInstituicaoMedio" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <select name="textInstituicaoMedio" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="publica" <c:if test="${candidato.instituicaoMedio == 'publica'}">selected</c:if>>Pública</option>
                             <option value="particular" <c:if test="${candidato.instituicaoMedio == 'particular'}">selected</c:if>>Particular</option>
                             <option value="publicaEParticular" <c:if test="${candidato.instituicaoMedio == 'publicaEParticular'}">selected</c:if>>Parte em pública e depois em particular</option>

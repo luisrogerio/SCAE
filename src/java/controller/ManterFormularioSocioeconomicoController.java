@@ -116,7 +116,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         int quantidadeGeladeiras = Integer.parseInt(request.getParameter("textQuantidadeGeladeiras"));
         int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTVACabo"));
         int quantidadeComputadores = Integer.parseInt(request.getParameter("textQuantidadeComputadores"));
-        boolean internet = null != request.getParameter("textInternet");
+        boolean internet = Integer.parseInt(request.getParameter("textInternet")) != 0;
         int quantidadeEmpregadasMensalistas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasMensalistas"));
         int quantidadeEmpregadasDiaristas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasDiaristas"));
         int quantidadeBanheiros = Integer.parseInt(request.getParameter("textQuantidadeBanheiros"));
@@ -228,7 +228,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         String cidadeRepublica = request.getParameter("textCidadeRepublica");
         String UFRepublica = request.getParameter("textUFRepublica");
         String candidato = request.getParameter("selectCandidato");
-        int edital = 0;
+        int edital = Integer.parseInt(request.getParameter("selectEdital"));
         String serieModuloPeriodo = request.getParameter("textSerieModuloPeriodo");
         boolean atendimentoAssistencia = null != request.getParameter("textAtendimentoAssistencia");
         String atendido = request.getParameter("textAtendido");
@@ -270,7 +270,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         int quantidadeGeladeiras = Integer.parseInt(request.getParameter("textQuantidadeGeladeiras"));
         int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTVACabo"));
         int quantidadeComputadores = Integer.parseInt(request.getParameter("textQuantidadeComputadores"));
-        boolean internet = null != request.getParameter("textInternet");
+        boolean internet = Integer.parseInt(request.getParameter("textInternet")) != 0;
         int quantidadeEmpregadasMensalistas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasMensalistas"));
         int quantidadeEmpregadasDiaristas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasDiaristas"));
         int quantidadeBanheiros = Integer.parseInt(request.getParameter("textQuantidadeBanheiros"));
@@ -421,7 +421,7 @@ public class ManterFormularioSocioeconomicoController extends HttpServlet {
         int quantidadeGeladeiras = Integer.parseInt(request.getParameter("textQuantidadeGeladeiras"));
         int quantidadeTvsACabo = Integer.parseInt(request.getParameter("textQuantidadeTVACabo"));
         int quantidadeComputadores = Integer.parseInt(request.getParameter("textQuantidadeComputadores"));
-        boolean internet = null != request.getParameter("textInternet");
+        boolean internet = Integer.parseInt(request.getParameter("textInternet")) != 0;
         int quantidadeEmpregadasMensalistas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasMensalistas"));
         int quantidadeEmpregadasDiaristas = Integer.parseInt(request.getParameter("textQuantidadeEmpregadasDiaristas"));
         int quantidadeBanheiros = Integer.parseInt(request.getParameter("textQuantidadeBanheiros"));
